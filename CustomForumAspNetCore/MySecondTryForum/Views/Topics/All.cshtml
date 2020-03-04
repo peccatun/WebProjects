@@ -1,0 +1,25 @@
+﻿@model MySecondTryForum.ViewModels.Topics.AllTopicsViewModel
+@{
+    ViewData["Title"] = "All";
+}
+<head>
+    <style>
+        ul#menu li {
+            display: inline;
+        }
+    </style>
+</head>
+<h1>All topics</h1>
+
+@foreach (var topic in @Model.Topics)
+{
+    <div>
+        <ul id="menu">
+            <li>Topic: @topic.TopicName |</li>
+            <li>Created on: @topic.CreateOn |</li>
+            <li>Comments: @topic.Comments |</li>
+            <li>Posters: @topic.Posters |</li>
+        </ul>
+    </div>
+}
+

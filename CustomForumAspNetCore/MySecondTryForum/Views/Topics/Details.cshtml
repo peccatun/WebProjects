@@ -1,0 +1,18 @@
+﻿@model MySecondTryForum.ViewModels.Topics.TopicDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Model.TopicName</h1>
+<div>
+    <ul>
+        <li>Creator: @Model.CreatorName</li>
+        <li>Created On: @Model.CreateOn</li>
+        <li>Comments: @Model.Comments</li>
+        <li>Posters: @Model.Posters</li>
+    </ul>
+</div>
+
+
+

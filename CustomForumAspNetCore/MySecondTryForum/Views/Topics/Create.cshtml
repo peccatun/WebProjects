@@ -1,0 +1,18 @@
+﻿@model MySecondTryForum.ViewModels.Topics.OpenTopicViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center bg-success text-white">Open Topic</h1>
+<hr class="" style="height:2px"/>
+
+<form class="w-50 mx-auto" action="/Topics/Create" method="post">
+    <div class="form-group">
+        <label asp-for="Header" class=""></label>
+        <input asp-for="Header" class=""/>
+        <span asp-validation-for="Header"></span>
+    </div>
+
+    <button type="submit" class="btn bg-secondary text-white">Open</button>
+</form>
+
