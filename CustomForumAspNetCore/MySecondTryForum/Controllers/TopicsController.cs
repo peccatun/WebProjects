@@ -19,16 +19,23 @@ namespace MySecondTryForum.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            return this.View();
+            OpenTopicViewModel model = new OpenTopicViewModel();
+            return this.View(model);
         }
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(OpenTopicViewModel input)
         {
             if (topicsService.HasOpenedTopic(input.Header))
             {
                 return this.View("Error","There is an open topic with that header");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return this.View(input);
             }
 
             string applicationUserName = this.User.Identity.Name;

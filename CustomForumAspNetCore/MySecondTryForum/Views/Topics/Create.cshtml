@@ -4,15 +4,16 @@
 }
 
 <h1 class="text-center bg-success text-white">Open Topic</h1>
-<hr class="" style="height:2px"/>
+<hr class="" style="height:2px" />
 
-<form class="w-50 mx-auto" action="/Topics/Create" method="post">
+<form class="" id="topicHeader" action="/Topics/Create" method="post">
     <div class="form-group">
-        <label asp-for="Header" class=""></label>
-        <input asp-for="Header" class=""/>
-        <span asp-validation-for="Header"></span>
+        <label for="Header" class=""><b>What are you going to discuss</b></label>
     </div>
-
     <button type="submit" class="btn bg-secondary text-white">Open</button>
 </form>
+
+<textarea asp-for="Header" form="topicHeader" rows="4" cols="50" class="" placeholder="What are you going to discuss..." ></textarea>
+<span asp-validation-for="Header"></span>
+
 
