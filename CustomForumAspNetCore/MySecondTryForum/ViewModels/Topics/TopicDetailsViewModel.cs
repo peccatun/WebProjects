@@ -4,6 +4,8 @@ namespace MySecondTryForum.ViewModels.Topics
 {
     public class TopicDetailsViewModel
     {
+        public int TopicId { get; set; }
+
         public string TopicName { get; set; }
 
         public string CreatorName { get; set; }

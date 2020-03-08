@@ -70,6 +70,7 @@ namespace MySecondTryForum.Services
             IEnumerable<TopicDetailsViewModel> topics = db.Topics
                 .Select(t => new TopicDetailsViewModel
                 {
+                    TopicId = t.Id,
                     TopicName = t.Header,
                     CreatorName = t.ApplicatuinUser.UserName,
                     CreateOn = t.OpenedOn,
@@ -79,6 +80,9 @@ namespace MySecondTryForum.Services
                     .Distinct()
                     .Count(),
                 })
+                .OrderByDescending(t => t.CreateOn.Date)
+                .ThenByDescending(t => t.Comments)
+                .ThenByDescending(t => t.Posters)
                 .ToList();
 
 

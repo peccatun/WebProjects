@@ -9,17 +9,22 @@
         }
     </style>
 </head>
-<h1>All topics</h1>
+<h1 align="center">All topics</h1>
+<hr />
+<h2 align="center"><a href="/Topics/Create">[Open a topic]</a></h2>
 
 @foreach (var topic in @Model.Topics)
 {
-    <div>
-        <ul id="menu">
-            <li>Topic: @topic.TopicName |</li>
-            <li>Created on: @topic.CreateOn |</li>
-            <li>Comments: @topic.Comments |</li>
-            <li>Posters: @topic.Posters |</li>
-        </ul>
+    <div class="card">
+        <div class="card-header">
+            @topic.CreateOn
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@topic.TopicName</h5>
+            <p class="card-text">Comments: @topic.Comments</p>
+            <p class="card-text">Posters: @topic.Posters</p>
+            <a href="/Topics/Details?id=@topic.TopicId" class="btn btn-primary">Details</a>
+            <a href="#" class="btn btn-primary">Post a reply</a>
+        </div>
     </div>
 }
-

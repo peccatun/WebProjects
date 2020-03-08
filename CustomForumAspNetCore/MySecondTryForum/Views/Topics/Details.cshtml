@@ -3,16 +3,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>@Model.TopicName</h1>
-<div>
-    <ul>
-        <li>Creator: @Model.CreatorName</li>
-        <li>Created On: @Model.CreateOn</li>
-        <li>Comments: @Model.Comments</li>
-        <li>Posters: @Model.Posters</li>
-    </ul>
+<div class="jumbotron">
+    <h1 class="display-4">@Model.TopicName</h1>
+    <p class="lead">@Model.CreatorName</p>
+    <hr class="my-4">
+    <p>Created On: @Model.CreateOn</p>
+    <p>Comments: @Model.Comments</p>
+    <p>Posters: @Model.Posters</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
 </div>
-
-
-
