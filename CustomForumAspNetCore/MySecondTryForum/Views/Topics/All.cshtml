@@ -10,8 +10,8 @@
     </style>
 </head>
 <h1 align="center">All topics</h1>
-<hr />
 <h2 align="center"><a href="/Topics/Create">[Open a topic]</a></h2>
+<hr />
 
 @foreach (var topic in @Model.Topics)
 {
@@ -24,7 +24,7 @@
             <p class="card-text">Comments: @topic.Comments</p>
             <p class="card-text">Posters: @topic.Posters</p>
             <a href="/Topics/Details?id=@topic.TopicId" class="btn btn-primary">Details</a>
-            <a href="#" class="btn btn-primary">Post a reply</a>
+            <a href="/Comments/Reply" class="btn btn-primary">Post a reply</a>
         </div>
     </div>
 }

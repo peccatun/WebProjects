@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\Comments\" />
-    <Folder Include="Views\Comments\" />
   </ItemGroup>
 
 </Project>
