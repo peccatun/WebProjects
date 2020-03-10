@@ -50,6 +50,7 @@ namespace MySecondTryForum.Services
                 .Where(t => t.Id == id)
                 .Select(t => new TopicDetailsViewModel
                 {
+                    TopicId = t.Id,
                     TopicName = t.Header,
                     CreatorName = t.ApplicatuinUser.UserName,
                     CreateOn = t.OpenedOn,

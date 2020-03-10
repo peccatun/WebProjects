@@ -47,6 +47,7 @@ namespace MySecondTryForum
             services.AddRazorPages();
 
             services.AddTransient<ITopicsService, TopicsService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

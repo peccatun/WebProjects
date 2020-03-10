@@ -24,7 +24,7 @@
             <p class="card-text">Comments: @topic.Comments</p>
             <p class="card-text">Posters: @topic.Posters</p>
             <a href="/Topics/Details?id=@topic.TopicId" class="btn btn-primary">Details</a>
-            <a href="/Comments/Reply" class="btn btn-primary">Post a reply</a>
+            <a href="/Comments/Reply?id=@topic.TopicId" class="btn btn-primary">Post a reply</a>
         </div>
     </div>
 }
