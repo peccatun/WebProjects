@@ -1,0 +1,18 @@
+﻿@model MySecondTryForum.ViewModels.Comments.CommentReplyViewModel
+
+@{
+    ViewData["Title"] = "Reply";
+}
+
+    <form method="post" id="replyForm" asp-controller="Comments" asp-action="Reply" enctype="multipart/form-data">
+        <div class="form-group">
+            <h3>topic header goes here</h3>
+        </div>
+        <button type="submit">Comment</button>
+        <input type="file" asp-for="Image" value="" />
+        <input type="hidden" name="TopicId" value="@Model.TopicId" />
+    </form>
+
+    <textarea asp-for="Content" form="replyForm" rows="5" cols="50" placeholder="Enter your comment here"></textarea>
+    <span asp-validation-for="Content"></span>
+

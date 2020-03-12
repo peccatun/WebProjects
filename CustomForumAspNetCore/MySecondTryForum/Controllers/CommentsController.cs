@@ -18,7 +18,8 @@ namespace MySecondTryForum.Controllers
         public IActionResult AllComents(int id)
         {
             //TODO Implement View and Create ViewModel for AllComments
-            return this.View();
+            TopicCommentsViewModel model = commentsService.TopicAllComents(id);
+            return this.View(model);
         }
 
         [HttpGet]

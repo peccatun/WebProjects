@@ -1,0 +1,16 @@
+﻿@model MySecondTryForum.ViewModels.Comments.TopicCommentsViewModel
+
+@{
+    ViewData["Title"] = "AllComents";
+}
+
+<h1>@Model.Header</h1>
+<h2>@Model.CreatedOn</h2>
+<h3>@Model.Creator</h3>
+@foreach (var comment in @Model.Comments)
+{
+    <span>@comment.Username</span> <span>@comment.PostedOn</span>
+                                   <img src=@comment.ImagePath alt="@comment.ImagePath" width="300" height="300" />
+                                   <p>@comment.Content</p>
+}
+
