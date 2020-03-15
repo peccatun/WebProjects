@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MySecondTryForum.Services;
 using MySecondTryForum.ViewModels.Comments;
-using System;
+using System.Threading.Tasks;
 
 namespace MySecondTryForum.Controllers
 {
@@ -18,12 +18,11 @@ namespace MySecondTryForum.Controllers
         [HttpGet]
         public IActionResult AllComents(int id)
         {
-            //TODO Implement View and Create ViewModel for AllComments
             AllCommentsViewModel model = commentsService.TopicAllComents(id);
+
             return this.View(model);
         }
 
-        //TODO: authorize your actions!
         [Authorize]
         [HttpGet]
         public IActionResult Reply(int id)
@@ -37,7 +36,7 @@ namespace MySecondTryForum.Controllers
         }
 
         [HttpPost]
-        public IActionResult Reply(CommentReplyViewModel input)
+        public async Task<IActionResult> Reply(CommentReplyViewModel input)
         {
             string userName = this.User.Identity.Name;
 
@@ -45,7 +44,7 @@ namespace MySecondTryForum.Controllers
             {
                 return this.View(input);
             }
-            commentsService.CreateComment(userName, input);
+            await commentsService.CreateCommentAsync(userName, input);
 
             return this.Redirect($"/Comments/AllComents?id={input.TopicId}");
         }

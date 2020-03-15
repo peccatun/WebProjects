@@ -9,7 +9,7 @@
             <h3>topic header goes here</h3>
         </div>
         <button type="submit">Comment</button>
-        <input type="file" asp-for="Image" value="" />
+        <input type="file" asp-for="Image" value="" accept="image/x-png,image/gif/image/jpeg" />
         <input type="hidden" name="TopicId" value="@Model.TopicId" />
     </form>
 

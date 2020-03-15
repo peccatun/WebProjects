@@ -22,6 +22,8 @@
 
 
     <p>@comment.Content</p>
+
+    <a class="btn btn-primary btn-lg" href="/Comments/Delete?id=@comment.CommentId" role="button">Delete comment</a>
 }
 <hr />
 <a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>

@@ -5,7 +5,7 @@ namespace MySecondTryForum.Services
 {
     public interface ICommentsService
     {
-        void CreateComment(string name, CommentReplyViewModel model);
+        Task CreateCommentAsync(string name, CommentReplyViewModel model);
 
         AllCommentsViewModel TopicAllComents(int topicId);
     }

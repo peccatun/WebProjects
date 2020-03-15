@@ -4,6 +4,7 @@ using MySecondTryForum.ViewModels.Comments;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MySecondTryForum.Services
 {
@@ -21,7 +22,7 @@ namespace MySecondTryForum.Services
         /// </summary>
         /// <param name="name"></param>
         /// <param name="model"></param>
-        public void CreateComment(string name,CommentReplyViewModel model)
+        public async Task CreateCommentAsync(string name,CommentReplyViewModel model)
         {
             string userId = this.GetUserId(name);
 
@@ -31,7 +32,7 @@ namespace MySecondTryForum.Services
             {
                 using (var stream = new MemoryStream())
                 {
-                    model.Image.CopyTo(stream);
+                    await model.Image.CopyToAsync(stream);
                     image = stream.ToArray();
                 }
             }
@@ -46,23 +47,12 @@ namespace MySecondTryForum.Services
                 PostedOn = DateTime.Now,
             };
             
-            db.Comments.Add(comment);
-            db.SaveChanges();
-
-            //TODO: Validate images
-            
-            
-            
-            
-            
-            
-            
+            await db.Comments.AddAsync(comment);
+            await db.SaveChangesAsync();
         }
 
         public AllCommentsViewModel TopicAllComents(int topicId)
         {
-
-            //string imgPath = @"~D:/ImagesFromMyForum/";
             AllCommentsViewModel model = db.Topics
                 .Where(t => t.Id == topicId)
                 .Select(t => new AllCommentsViewModel
@@ -86,6 +76,8 @@ namespace MySecondTryForum.Services
 
             return model;
         }
+
+        //TODO: Delete Action
 
         private string GetUserId(string name)
         {
