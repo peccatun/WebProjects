@@ -37,7 +37,11 @@ namespace MySecondTryForum.Controllers
         public IActionResult Reply(CommentReplyViewModel input)
         {
             string userName = this.User.Identity.Name;
-            //TODO:Validate the input!!!!
+
+            if (!ModelState.IsValid)
+            {
+                return this.View(input);
+            }
             commentsService.CreateComment(userName, input);
 
             return this.Redirect($"/Comments/AllComents?id={input.TopicId}");

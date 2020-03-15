@@ -19,45 +19,56 @@ namespace MySecondTryForum.Services
         public void CreateComment(string name,CommentReplyViewModel model)
         {
             string userId = this.GetUserId(name);
+
+            byte[] image = null;
+            if (model.Image != null)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    model.Image.CopyTo(stream);
+                    image = stream.ToArray();
+                }
+            }
+
             Comment comment = new Comment()
             {
                 ApplicationUserId = userId,
                 TopicId = model.TopicId,
-                Image = model.Image,
+                Image = image,
                 Content = model.Content,
                 IsDeleted = false,
                 PostedOn = DateTime.UtcNow,
             };
-
+            
             db.Comments.Add(comment);
             db.SaveChanges();
 
             //TODO: Validate images
-            if (model.Image != null)
-            {
-                using (var stream = new FileStream(@$"D:\ImagesFromMyForum\{comment.Id}.jpeg", FileMode.Create))
-                {
-                    model.Image.CopyTo(stream);
-                }
-            }
+            
+            
+            
+            
+            
+            
+            
         }
 
         public TopicCommentsViewModel TopicAllComents(int topicId)
         {
-            //TODO: Display the fking image
-            string imgPath = @"./../../../ImagesFromMyForum/";
 
+            //string imgPath = @"~D:/ImagesFromMyForum/";
             TopicCommentsViewModel model = db.Topics
                 .Where(t => t.Id == topicId)
                 .Select(t => new TopicCommentsViewModel
                 {
+                    TopicId = topicId,
                     Creator = t.ApplicatuinUser.UserName,
                     CreatedOn = t.OpenedOn,
                     Header = t.Header,
                     Comments = t.Comments.Where(c => c.TopicId == topicId)
                                 .Select(c => new CommentViewModel
                                 {
-                                    ImagePath = imgPath + c.Id + ".jpeg",
+                                    ImagePath = c.Image == null ? null : "data:image/png;base64," + Convert.ToBase64String(c.Image),
                                     CommentId = c.Id,
                                     PostedOn = c.PostedOn,
                                     Content = c.Content,

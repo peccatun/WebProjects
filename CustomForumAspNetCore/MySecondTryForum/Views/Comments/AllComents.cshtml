@@ -10,7 +10,16 @@
 @foreach (var comment in @Model.Comments)
 {
     <span>@comment.Username</span> <span>@comment.PostedOn</span>
-                                   <img src=@comment.ImagePath alt="@comment.ImagePath" width="300" height="300" />
-                                   <p>@comment.Content</p>
+    @if (comment.ImagePath != null)
+    {
+        <div>
+            <img src="@comment.ImagePath" runat="server" id="ImagePath" alt="@comment.ImagePath" width="600" height="600" />
+        </div>
+    }
+
+
+    <p>@comment.Content</p>
 }
+<a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
+<a class="btn btn-primary btn-lg" href="/Topics/Details?id=@Model.TopicId" class="btn btn-primary">Details</a>
 

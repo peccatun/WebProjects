@@ -18,8 +18,7 @@ namespace MySecondTryForum.Models
         [MaxLength(500)]
         public string Content { get; set; }
 
-        [NotMapped]
-        public IFormFile Image { get; set; }
+        public byte[] Image { get; set; }
 
         public bool IsDeleted { get; set; }
 
