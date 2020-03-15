@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MySecondTryForum.Services;
 using MySecondTryForum.ViewModels.Comments;
 using System;
@@ -18,10 +19,12 @@ namespace MySecondTryForum.Controllers
         public IActionResult AllComents(int id)
         {
             //TODO Implement View and Create ViewModel for AllComments
-            TopicCommentsViewModel model = commentsService.TopicAllComents(id);
+            AllCommentsViewModel model = commentsService.TopicAllComents(id);
             return this.View(model);
         }
 
+        //TODO: authorize your actions!
+        [Authorize]
         [HttpGet]
         public IActionResult Reply(int id)
         {

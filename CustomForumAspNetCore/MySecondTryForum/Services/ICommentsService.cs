@@ -1,4 +1,5 @@
 ﻿using MySecondTryForum.ViewModels.Comments;
+using System.Threading.Tasks;
 
 namespace MySecondTryForum.Services
 {
@@ -6,6 +7,6 @@ namespace MySecondTryForum.Services
     {
         void CreateComment(string name, CommentReplyViewModel model);
 
-        TopicCommentsViewModel TopicAllComents(int topicId);
+        AllCommentsViewModel TopicAllComents(int topicId);
     }
 }

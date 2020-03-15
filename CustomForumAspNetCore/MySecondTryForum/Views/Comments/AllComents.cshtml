@@ -1,8 +1,11 @@
-﻿@model MySecondTryForum.ViewModels.Comments.TopicCommentsViewModel
+﻿@model MySecondTryForum.ViewModels.Comments.AllCommentsViewModel
 
 @{
     ViewData["Title"] = "AllComents";
 }
+
+<a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
+<a class="btn btn-primary btn-lg" href="/Topics/Details?id=@Model.TopicId" role="button">Details</a>
 
 <h1>@Model.Header</h1>
 <h2>@Model.CreatedOn</h2>
@@ -20,6 +23,7 @@
 
     <p>@comment.Content</p>
 }
+<hr />
 <a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
-<a class="btn btn-primary btn-lg" href="/Topics/Details?id=@Model.TopicId" class="btn btn-primary">Details</a>
+<a class="btn btn-primary btn-lg" href="/Topics/Details?id=@Model.TopicId" role="button">Details</a>
 

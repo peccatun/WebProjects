@@ -23,7 +23,6 @@ namespace MySecondTryForum.Controllers
             return this.View(model);
         }
 
-
         [HttpPost]
         [Authorize]
         public IActionResult Create(OpenTopicViewModel input)
@@ -50,7 +49,6 @@ namespace MySecondTryForum.Controllers
             return this.Redirect($"/Topics/Details?id={topicId}");
         }
 
-        //TODO: Create Go to topic Details 
         [HttpGet]
         public IActionResult All()
         {

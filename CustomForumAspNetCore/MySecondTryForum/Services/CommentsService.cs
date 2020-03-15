@@ -16,11 +16,17 @@ namespace MySecondTryForum.Services
             this.db = db;
         }
 
+        /// <summary>
+        /// Maps a comment to a user and topic
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="model"></param>
         public void CreateComment(string name,CommentReplyViewModel model)
         {
             string userId = this.GetUserId(name);
 
             byte[] image = null;
+
             if (model.Image != null)
             {
                 using (var stream = new MemoryStream())
@@ -37,7 +43,7 @@ namespace MySecondTryForum.Services
                 Image = image,
                 Content = model.Content,
                 IsDeleted = false,
-                PostedOn = DateTime.UtcNow,
+                PostedOn = DateTime.Now,
             };
             
             db.Comments.Add(comment);
@@ -53,13 +59,13 @@ namespace MySecondTryForum.Services
             
         }
 
-        public TopicCommentsViewModel TopicAllComents(int topicId)
+        public AllCommentsViewModel TopicAllComents(int topicId)
         {
 
             //string imgPath = @"~D:/ImagesFromMyForum/";
-            TopicCommentsViewModel model = db.Topics
+            AllCommentsViewModel model = db.Topics
                 .Where(t => t.Id == topicId)
-                .Select(t => new TopicCommentsViewModel
+                .Select(t => new AllCommentsViewModel
                 {
                     TopicId = topicId,
                     Creator = t.ApplicatuinUser.UserName,
