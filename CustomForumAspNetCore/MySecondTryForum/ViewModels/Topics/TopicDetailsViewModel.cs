@@ -15,5 +15,7 @@ namespace MySecondTryForum.ViewModels.Topics
         public int Comments { get; set; }
 
         public int Posters { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

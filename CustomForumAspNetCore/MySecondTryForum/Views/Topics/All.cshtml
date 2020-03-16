@@ -15,16 +15,21 @@
 
 @foreach (var topic in @Model.Topics)
 {
-    <div class="card">
-        <div class="card-header">
-            @topic.CreateOn
+    if (!topic.IsDeleted)
+    {
+        <div class="card">
+            <div class="card-header">
+                @topic.CreateOn
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@topic.TopicName</h5>
+                <p class="card-text">Comments: @topic.Comments</p>
+                <p class="card-text">Posters: @topic.Posters</p>
+                <a href="/Topics/Details?id=@topic.TopicId" class="btn btn-primary">Details</a>
+                <a href="/Comments/Reply?id=@topic.TopicId" class="btn btn-primary">Post a reply</a>
+                <a href="/Comments/AllComments?topicId=@topic.TopicId" class="btn btn-primary" role="button">Enter topic</a>
+                <a href="/Topics/Delete?topicId=@topic.TopicId" class="btn btn-danger" role="button">Delete</a>
+            </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">@topic.TopicName</h5>
-            <p class="card-text">Comments: @topic.Comments</p>
-            <p class="card-text">Posters: @topic.Posters</p>
-            <a href="/Topics/Details?id=@topic.TopicId" class="btn btn-primary">Details</a>
-            <a href="/Comments/Reply?id=@topic.TopicId" class="btn btn-primary">Post a reply</a>
-        </div>
-    </div>
+    }
 }

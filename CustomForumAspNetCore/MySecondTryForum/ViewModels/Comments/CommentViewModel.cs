@@ -13,5 +13,7 @@ namespace MySecondTryForum.ViewModels.Comments
         public string ImagePath { get; set; }
 
         public string Content { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

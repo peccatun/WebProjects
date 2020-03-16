@@ -14,6 +14,8 @@ namespace MySecondTryForum.Services
 
         IEnumerable<TopicDetailsViewModel> AllTopics();
 
+        bool Delete(string userId, int topicId);
+
         bool HasOpenedTopic(string header);
 
         bool HasTopic(int id);

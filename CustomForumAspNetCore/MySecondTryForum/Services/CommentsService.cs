@@ -27,7 +27,7 @@ namespace MySecondTryForum.Services
             string userId = this.GetUserId(name);
 
             byte[] image = null;
-
+            //TODO: Validate image formats for upload
             if (model.Image != null)
             {
                 using (var stream = new MemoryStream())
@@ -51,6 +51,35 @@ namespace MySecondTryForum.Services
             await db.SaveChangesAsync();
         }
 
+        public bool Delete(string userId, int commentId)
+        {
+            string applicationUserId = db.Comments
+                .Where(c => c.Id == commentId)
+                .Select(c => c.ApplicationUserId)
+                .FirstOrDefault();
+
+            if (applicationUserId == null)
+            {
+                return false;
+            }
+
+            if (applicationUserId != userId)
+            {
+                return false;
+            }
+
+            if (!db.Comments.Any(c => c.Id == commentId))
+            {
+                return false;
+            }
+
+            var comment = db.Comments.FirstOrDefault(c => c.Id == commentId);
+            comment.IsDeleted = true;
+            db.SaveChanges();
+
+            return true;
+        }
+
         public AllCommentsViewModel TopicAllComents(int topicId)
         {
             AllCommentsViewModel model = db.Topics
@@ -69,6 +98,7 @@ namespace MySecondTryForum.Services
                                     PostedOn = c.PostedOn,
                                     Content = c.Content,
                                     Username = c.ApplicationUser.UserName,
+                                    IsDeleted = c.IsDeleted,
                                 })
                                 .ToList()
                 })
@@ -76,8 +106,6 @@ namespace MySecondTryForum.Services
 
             return model;
         }
-
-        //TODO: Delete Action
 
         private string GetUserId(string name)
         {

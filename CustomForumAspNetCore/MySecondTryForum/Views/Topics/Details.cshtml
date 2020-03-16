@@ -3,15 +3,16 @@
 @{
     ViewData["Title"] = "Details";
 }
-<div class="jumbotron">
-    <h1 class="display-4">@Model.TopicName</h1>
-    <p class="lead">@Model.CreatorName</p>
-    <hr class="my-4">
-    <p>Created On: @Model.CreateOn</p>
-    <p>Comments: @Model.Comments</p>
-    <p>Posters: @Model.Posters</p>
+    <div class="jumbotron">
+        <h1 class="display-4">@Model.TopicName</h1>
+        <p class="lead">@Model.CreatorName</p>
+        <hr class="my-4">
+        <p>Created On: @Model.CreateOn</p>
+        <p>Comments: @Model.Comments</p>
+        <p>Posters: @Model.Posters</p>
 
-    <a class="btn btn-primary btn-lg" href="/Comments/AllComents?id=@Model.TopicId" role="button">Enter topic</a>
-    <a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
-    <a class="btn btn-primary btn-lg" href="/Topics/All" role="button">Back to all</a>
-</div>
+        <a class="btn btn-primary btn-lg" href="/Comments/AllComments?topicId=@Model.TopicId" role="button">Enter topic</a>
+        <a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
+        <a class="btn btn-primary btn-lg" href="/Topics/All" role="button">Back to all</a>
+        <a class="btn btn-danger btn-lg" href="/Topics/Delete?topicId=@Model.TopicId" role="button">Delete</a>
+    </div>

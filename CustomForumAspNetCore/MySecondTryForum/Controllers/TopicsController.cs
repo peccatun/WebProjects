@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MySecondTryForum.Services;
 using MySecondTryForum.ViewModels.Topics;
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace MySecondTryForum.Controllers
 {
@@ -61,9 +63,6 @@ namespace MySecondTryForum.Controllers
             return this.View(model);
         }
 
-        //TODO: Create Comments/All 
-        //TODO: Create: Post a comment
-        //TODO: Find a way to send the topic Id to the query!!!
         [HttpGet]
         public IActionResult Details(int id)
         {
@@ -77,7 +76,19 @@ namespace MySecondTryForum.Controllers
             return this.View(model);
         }
 
-        //TODO: Implement user open a topic, post comments ,etc...
+        [Authorize]
+        [HttpGet]
+        public IActionResult Delete(int topicId)
+        {
+            string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!topicsService.Delete(userId,topicId))
+            {
+                return this.View("/Views/Comments/DeleteErrorView.cshtml", "You can't delete this topic!!!");
+            }
+
+            return this.RedirectToAction("All");
+        }
 
     }
 }

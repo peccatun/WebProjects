@@ -48,6 +48,7 @@ namespace MySecondTryForum.Services
         {
             TopicDetailsViewModel topic = db.Topics
                 .Where(t => t.Id == id)
+                .Where(t => t.IsClosed == false)
                 .Select(t => new TopicDetailsViewModel
                 {
                     TopicId = t.Id,
@@ -59,7 +60,8 @@ namespace MySecondTryForum.Services
                     .Select(c => c.ApplicationUserId)
                     .Distinct()
                     .Count(),
-                    Comments = t.Comments.Where(t => t.TopicId == id).Count()
+                    Comments = t.Comments.Where(t => t.TopicId == id).Count(),
+                    IsDeleted = t.IsClosed,
                 })
                 .FirstOrDefault();
 
@@ -69,6 +71,7 @@ namespace MySecondTryForum.Services
         public IEnumerable<TopicDetailsViewModel> AllTopics()
         {
             IEnumerable<TopicDetailsViewModel> topics = db.Topics
+                .Where(t => t.IsClosed == false)
                 .Select(t => new TopicDetailsViewModel
                 {
                     TopicId = t.Id,
@@ -80,6 +83,7 @@ namespace MySecondTryForum.Services
                     .Select(c => c.ApplicationUserId)
                     .Distinct()
                     .Count(),
+                    IsDeleted = t.IsClosed,
                 })
                 .OrderByDescending(t => t.CreateOn.Date)
                 .ThenByDescending(t => t.Comments)
@@ -99,6 +103,36 @@ namespace MySecondTryForum.Services
         public bool HasTopic(int id)
         {
             return db.Topics.Any(t => t.Id == id);
+        }
+
+        public bool Delete(string userId, int topicId)
+        {
+            string applicationUserId = db.Topics
+                .Where(t => t.Id == topicId)
+                .Select(t => t.ApplicationUserId)
+                .FirstOrDefault();
+
+            if (applicationUserId == null)
+            {
+                return false;
+            }
+
+            if (userId != applicationUserId)
+            {
+                return false;
+            }
+
+            if (!db.Topics.Any(t => t.Id == topicId))
+            {
+                return false;
+            }
+
+            var topic = db.Topics.FirstOrDefault(t => t.Id == topicId);
+            topic.IsClosed = true;
+            topic.ClosedOn = DateTime.Now;
+            db.SaveChanges();
+
+            return true;
         }
     }
 }

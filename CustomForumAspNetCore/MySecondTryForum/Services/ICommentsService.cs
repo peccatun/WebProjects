@@ -8,5 +8,7 @@ namespace MySecondTryForum.Services
         Task CreateCommentAsync(string name, CommentReplyViewModel model);
 
         AllCommentsViewModel TopicAllComents(int topicId);
+
+        bool Delete(string userId, int commentId);
     }
 }

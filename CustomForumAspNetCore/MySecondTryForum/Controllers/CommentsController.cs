@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MySecondTryForum.Services;
 using MySecondTryForum.ViewModels.Comments;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MySecondTryForum.Controllers
@@ -16,9 +18,9 @@ namespace MySecondTryForum.Controllers
         }
 
         [HttpGet]
-        public IActionResult AllComents(int id)
+        public IActionResult AllComments(int topicId)
         {
-            AllCommentsViewModel model = commentsService.TopicAllComents(id);
+            AllCommentsViewModel model = commentsService.TopicAllComents(topicId);
 
             return this.View(model);
         }
@@ -35,6 +37,7 @@ namespace MySecondTryForum.Controllers
             return this.View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Reply(CommentReplyViewModel input)
         {
@@ -47,6 +50,21 @@ namespace MySecondTryForum.Controllers
             await commentsService.CreateCommentAsync(userName, input);
 
             return this.Redirect($"/Comments/AllComents?id={input.TopicId}");
+        }
+
+        //TODO: Implement Delete action!!!
+        [Authorize]
+        [HttpGet]
+        public IActionResult Delete(DeleteCommentViewModel model)
+        {
+            string currentUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!commentsService.Delete(currentUserId,model.CommentId))
+            {
+                return this.View("DeleteErrorView", "You can't delete this comment");
+            }
+
+            return this.RedirectToAction($"AllComments", new { @topicId = model.TopicId });
         }
     }
 }

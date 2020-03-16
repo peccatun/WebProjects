@@ -1,0 +1,52 @@
+﻿@model MySecondTryForum.ViewModels.Comments.AllCommentsViewModel
+
+@{
+    ViewData["Title"] = "AllComents";
+}
+
+<a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
+<a class="btn btn-primary btn-lg" href="/Topics/Details?id=@Model.TopicId" role="button">Details</a>
+<a class="btn btn-primary btn-lg" href="/Topics/All" role="button">Back to all</a>
+
+<div class="alert alert-light" role="alert">
+    <h1>@Model.Header</h1>
+</div>
+<div class="alert alert-success" role="alert">
+    <h2>Posted on: @Model.CreatedOn</h2>
+</div>
+<div class="alert alert-danger" role="alert">
+    <h3>Creator: @Model.Creator</h3>
+</div>
+<hr />
+@foreach (var comment in @Model.Comments)
+{
+    @if (comment.IsDeleted)
+    {
+        <p>deleted content</p>
+    }
+    else
+    {
+
+
+        <h5 class="mt-0">@comment.Username @comment.PostedOn</h5>
+        <div class="media">
+            @if (comment.ImagePath != null)
+            {
+                <img src="@comment.ImagePath" class="align-self-start mr-3" alt="..." width="600" height="600">
+            }
+            <div class="media-body">
+            </div>
+
+            <a class="btn btn-danger" href="/Comments/Delete?topicId=@Model.TopicId&commentId=@comment.CommentId" role="button">Delete comment</a>
+        </div>
+        <p>@comment.Content</p>
+    }
+    <hr />
+}
+
+
+<hr />
+<a class="btn btn-primary btn-lg" href="/Comments/Reply?id=@Model.TopicId" role="button">Post a reply</a>
+<a class="btn btn-primary btn-lg" href="/Topics/Details?id=@Model.TopicId" role="button">Details</a>
+<a class="btn btn-primary btn-lg" href="/Topics/All" role="button">Back to all</a>
+
