@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthyEnvironment.Models
 {
@@ -11,14 +12,22 @@ namespace HealthyEnvironment.Models
 
         public string Id { get; set; }
 
+        [Required]
+        [Display(Name = "Product Name")]
+        [StringLength(50, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 3)]
         public string Name { get; set; }
 
+        [Required]
         public byte[] Image { get; set; }
 
-        public string InformationId { get; set; }
+        [Required]
+        [Display(Name = "Discription")]
+        [StringLength(500, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 10)]
+        public string Discription { get; set; }
 
-        public Information Information { get; set; }
+        //TODO: Decide what will you do with ProductCategory
 
+        [Required]
         public string CategoryId { get; set; }
 
         public Category Category { get; set; }
