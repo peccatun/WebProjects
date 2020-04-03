@@ -34,13 +34,15 @@ namespace HealthyEnvironment.Models
 
         public bool IsApproved { get; set; }
 
+        [Required]
+        public string CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
+        [Required]
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
-
-        //TODO: Decide what will you do with DiscussionCategory
-
-        public IEnumerable<DiscussionCategory> DiscussionCategories { get; set; }
 
         public IEnumerable<Solution> Solutions { get; set; } = new HashSet<Solution>();
     }

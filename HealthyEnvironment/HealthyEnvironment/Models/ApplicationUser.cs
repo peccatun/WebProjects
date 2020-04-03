@@ -11,5 +11,9 @@ namespace HealthyEnvironment.Models
         public IEnumerable<Discussion> Discussions { get; set; } = new HashSet<Discussion>();
 
         public IEnumerable<Solution> Solutions { get; set; } = new HashSet<Solution>();
+
+        public IEnumerable<Information> Information { get; set; } = new HashSet<Information>();
+
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

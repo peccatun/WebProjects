@@ -24,8 +24,10 @@ namespace HealthyEnvironment.Models
 
         public bool IsApproved { get; set; }
 
-        public IEnumerable<Information> Informations { get; set; } = new HashSet<Information>();
+        public IEnumerable<Information> Information { get; set; } = new HashSet<Information>();
 
         public IEnumerable<Discussion> Discussions { get; set; } = new HashSet<Discussion>();
+
+        public IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
     }
 }

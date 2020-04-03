@@ -25,10 +25,14 @@ namespace HealthyEnvironment.Models
         [StringLength(5000, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 20)]
         public string Content { get; set; }
 
-        //TODO: Decide what will you do with InformationCategory
-
+        [Required]
         public string CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        [Required]
+        public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

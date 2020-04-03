@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace HealthyEnvironment.Models
 {
@@ -11,6 +12,8 @@ namespace HealthyEnvironment.Models
 
         public string Id { get; set; }
 
+        [Required]
+        [Display(Name = "Reply")]
         public string Content { get; set; }
 
         public byte[] Image { get; set; }
@@ -21,10 +24,12 @@ namespace HealthyEnvironment.Models
 
         public bool IsDeleted { get; set; }
 
+        [Required]
         public string DiscussionId { get; set; }
 
         public Discussion Discussion { get; set; }
 
+        [Required]
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthyEnvironment.Models
@@ -25,12 +26,14 @@ namespace HealthyEnvironment.Models
         [StringLength(500, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 10)]
         public string Discription { get; set; }
 
-        //TODO: Decide what will you do with ProductCategory
-
         [Required]
         public string CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        public int? OrderId { get; set; }
+
+        public Order Order { get; set; }
 
         public decimal Price { get; set; }
 
