@@ -2,10 +2,10 @@
 
 namespace HealthyEnvironment.Controllers
 {
-    public class ProductsController : Controller
+    public class InformationController : Controller
     {
-        [HttpGet("/Products")]
-        public IActionResult ProductsHome()
+        [HttpGet("/Information")]
+        public IActionResult InformationHome()
         {
             return this.View();
         }
