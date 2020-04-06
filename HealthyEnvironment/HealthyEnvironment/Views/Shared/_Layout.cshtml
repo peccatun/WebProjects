@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="~/css/flexslider.css">
     <link rel="stylesheet" href="~/css/font-awesome.css">
     <link rel="stylesheet" href="~/css/overwrite.css">
+    <link rel="stylesheet" href="~/css/dropdown.css">
 
 
 </head>
@@ -69,14 +70,23 @@
                         <li><a href="/Products">Shop</a></li>
                         <li><a href="/Discussions">Forum</a></li>
                         <li><a href="/Information">Information</a></li>
-                        @if(this.User.Identity.Name != null)
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">Categories</button>
+                                <div class="dropdown-content">
+                                    <a href="/Products">Products</a>
+                                    <a href="/Discussions">Forum</a>
+                                    <a href="/Information">Information</a>
+                                </div>
+                            </div>
+                        </li>
+                        @if (this.User.Identity.Name != null)
                         {
-                    <li>
-                        <form asp-area="Identity" asp-page="/Account/Manage/Index">
-                            <button type="submit" class="nav-link btn btn-link text-dark">Hello @User.Identity.Name!</button>
-                        </form>
-                        @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>*@
-                    </li>
+                            <li>
+                                <form asp-area="Identity" asp-page="/Account/Manage/Index">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Hello @User.Identity.Name!</button>
+                                </form>
+                            </li>
                             <li>
                                 <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                     <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>

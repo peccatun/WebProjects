@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HealthyEnvironment.Models;
+using HealthyEnvironment.SeedData;
 
 namespace HealthyEnvironment
 {
@@ -31,6 +32,7 @@ namespace HealthyEnvironment
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<ApplicationUser>(
                 options =>
                 { 
@@ -39,8 +41,10 @@ namespace HealthyEnvironment
                     options.Password.RequiredUniqueChars = 0;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 5;
 
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -49,6 +53,21 @@ namespace HealthyEnvironment
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var scopedService = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = scopedService.ServiceProvider.GetService<ApplicationDbContext>();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
+                //new ApplicationDbContextSeeder(scopedService.ServiceProvider, dbContext)
+                //    .SeedDataAsync()
+                //    .GetAwaiter()
+                //    .GetResult();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -73,6 +92,12 @@ namespace HealthyEnvironment
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "areaRoute",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
                 endpoints.MapRazorPages();
             });
         }
