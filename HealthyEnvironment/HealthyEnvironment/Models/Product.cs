@@ -18,8 +18,11 @@ namespace HealthyEnvironment.Models
         [StringLength(50, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 3)]
         public string Name { get; set; }
 
-        [Required]
+        [Display(Name = "Upload Image")]
         public byte[] Image { get; set; }
+
+        [Display(Name = "ImageUrl")]
+        public string ImageUrl { get; set; }
 
         [Required]
         [Display(Name = "Discription")]
@@ -29,11 +32,11 @@ namespace HealthyEnvironment.Models
         [Required]
         public string CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public int? OrderId { get; set; }
 
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
 
         public decimal Price { get; set; }
 

@@ -13,9 +13,9 @@ namespace HealthyEnvironment.Models
         [Required]
         public string ApplicationUserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
+        public virtual IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
 
         public DateTime OrderDate { get; set; }
 

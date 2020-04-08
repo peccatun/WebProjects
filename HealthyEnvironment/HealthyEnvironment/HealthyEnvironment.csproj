@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\Categories\" />
     <Folder Include="ViewModels\Discussions\" />
     <Folder Include="ViewModels\Informations\" />
     <Folder Include="ViewModels\Solutions\" />

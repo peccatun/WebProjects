@@ -8,12 +8,12 @@ namespace HealthyEnvironment.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public IEnumerable<Discussion> Discussions { get; set; } = new HashSet<Discussion>();
+        public virtual IEnumerable<Discussion> Discussions { get; set; } = new HashSet<Discussion>();
 
-        public IEnumerable<Solution> Solutions { get; set; } = new HashSet<Solution>();
+        public virtual IEnumerable<Solution> Solutions { get; set; } = new HashSet<Solution>();
 
-        public IEnumerable<Information> Information { get; set; } = new HashSet<Information>();
+        public virtual IEnumerable<Information> Information { get; set; } = new HashSet<Information>();
 
-        public IEnumerable<Order> Orders { get; set; }
+        public virtual IEnumerable<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }

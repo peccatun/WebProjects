@@ -16,7 +16,11 @@ namespace HealthyEnvironment.Models
         [Display(Name = "Reply")]
         public string Content { get; set; }
 
+        [Display(Name = "Upload Image")]
         public byte[] Image { get; set; }
+
+        [Display(Name = "ImageUrl")]
+        public string ImageUrl { get; set; }
 
         public DateTime PostedOn { get; set; }
 
@@ -27,11 +31,11 @@ namespace HealthyEnvironment.Models
         [Required]
         public string DiscussionId { get; set; }
 
-        public Discussion Discussion { get; set; }
+        public virtual Discussion Discussion { get; set; }
 
         [Required]
         public string ApplicationUserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

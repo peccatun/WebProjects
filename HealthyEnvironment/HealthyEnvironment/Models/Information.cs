@@ -12,8 +12,11 @@ namespace HealthyEnvironment.Models
 
         public string Id { get; set; }
 
-        [Required]
+        [Display(Name = "Upload Image")]
         public byte[] Image { get; set; }
+
+        [Display(Name = "ImageUrl")]
+        public string ImageUrl { get; set; }
 
         [Required]
         [Display(Name = "About")]
@@ -28,11 +31,11 @@ namespace HealthyEnvironment.Models
         [Required]
         public string CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required]
         public string ApplicationUserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

@@ -23,8 +23,11 @@ namespace HealthyEnvironment.Models
         [StringLength(500, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 1)]
         public string AdditionalInfo { get; set; }
 
-        [Required]
+        [Display(Name = "Upload Image")]
         public byte[] Image { get; set; }
+
+        [Display(Name ="ImageUrl")]
+        public string ImageUrl { get; set; }
 
         public DateTime OpenedOn { get; set; }
 
@@ -37,13 +40,13 @@ namespace HealthyEnvironment.Models
         [Required]
         public string CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required]
         public string ApplicationUserId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public IEnumerable<Solution> Solutions { get; set; } = new HashSet<Solution>();
+        public virtual IEnumerable<Solution> Solutions { get; set; } = new HashSet<Solution>();
     }
 }

@@ -1,8 +1,63 @@
-﻿
+﻿@model  HealthyEnvironment.ViewModels.Categories.AllCategoriesViewModel
+
 @{
     ViewData["Title"] = "CategoriesHome";
 }
 
-<h2>Categories</h2>
-<div class="position-absolute"> <a href="/Categories/Create">Create new category</a></div>
+<section id="team" class="team-section appear clearfix">
+    <div class="container">
+
+        <div class="row mar-bot10">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="section-header">
+                    <div class="wow bounceIn">
+
+                        <h2 class="section-heading animated" data-animation="bounceInUp">Categories</h2>
+                        <p>
+                            <a asp-controller="Categories" asp-action="Create">Create new category</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-center mar-bot45">
+
+            @foreach (var category in @Model.Categories)
+            {
+                <div class="col-md-4">
+                    <div class="wow bounceIn" data-animation-delay="4.8s">
+                        <div class="team-member">
+                            <div class="profile-picture">
+                                <figure><img src="@category.ImageUrl" alt=""></figure>
+                                <div class="profile-overlay"></div>
+                                <div class="profile-social">
+                                    <div class="icons-wrapper">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="team-detail">
+                                <h4>@category.Name</h4>
+                                <span>User experiences</span>
+                            </div>
+                            <div class="team-bio">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, fugiat, harum, adipisci
+                                    accusantium minus asperiores.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HealthyEnvironment.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace HealthyEnvironment.SeedData
 {
@@ -28,6 +29,7 @@ namespace HealthyEnvironment.SeedData
             await SeedUserAsync();
             await SeedRoleAsync();
             await SeedUserToRoleAsync();
+            await SeedCategoriesAsync();
         }
 
         private async Task SeedUserToRoleAsync()
@@ -55,7 +57,7 @@ namespace HealthyEnvironment.SeedData
         {
             var role = roleManager.FindByNameAsync("Admin");
 
-            if (role != null)
+            if (role.Result != null)
             {
                 return;
             }
@@ -85,6 +87,50 @@ namespace HealthyEnvironment.SeedData
                 Email = "HealthyEnviromentAdmin@abv.bg"
             },
             "admin");
+        }
+
+        private async Task SeedCategoriesAsync()
+        {
+            if (dbContext.Categories.Any())
+            {
+                return;
+            }
+
+            List<string> categories = new List<string>
+            {
+                "Fruit-Trees",
+                "Fertiliser",
+                "GlobalProblems",
+                "HealthyLife",
+                "Environment",
+                "Science % Math",
+                "Random",
+            };
+
+            List<string> imageUrl = new List<string>
+            {
+                "https://previews.123rf.com/images/genestro/genestro1808/genestro180800043/111635070-fruit-trees-set-cartoon-images-of-garden-berries-vector-illustration.jpg",
+                "https://www.fertilizer-machine.net/wp-content/uploads/2018/06/types-of-fertilizer.jpg",
+                "https://c8.alamy.com/comp/WXYJBD/earth-with-deforestation-and-global-warming-problems-illustration-WXYJBD.jpg",
+                "https://healthsourcechiro.azureedge.net/media/2079/healthy-life.jpg?v636320193720000000",
+                "https://pbs.twimg.com/media/ESLn_4oXYAA3vCz.jpg",
+                "https://thumbs.dreamstime.com/z/open-book-has-various-math-science-space-concepts-coming-out-school-learning-concept-29798040.jpg",
+                "https://miro.medium.com/max/5000/1*1BUIofZgqVuR6nj8LbrRtQ.jpeg",
+            };
+
+            for (int i = 0; i < 7; i++)
+            {
+                Category category = new Category
+                {
+                    Name = categories[i],
+                    IsApproved = true,
+                    ImageUrl = imageUrl[i],
+                };
+
+                await dbContext.Categories.AddAsync(category);
+            }
+
+            await dbContext.SaveChangesAsync();
         }
     }
 }

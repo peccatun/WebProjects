@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HealthyEnvironment.Models;
 using HealthyEnvironment.SeedData;
+using HealthyEnvironment.Services.Categories;
 
 namespace HealthyEnvironment
 {
@@ -32,6 +33,8 @@ namespace HealthyEnvironment
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ICategoriesService, CategoriesService>();
 
             services.AddDefaultIdentity<ApplicationUser>(
                 options =>
@@ -62,10 +65,10 @@ namespace HealthyEnvironment
                     dbContext.Database.Migrate();
                 }
 
-                //new ApplicationDbContextSeeder(scopedService.ServiceProvider, dbContext)
-                //    .SeedDataAsync()
-                //    .GetAwaiter()
-                //    .GetResult();
+                new ApplicationDbContextSeeder(scopedService.ServiceProvider, dbContext)
+                    .SeedDataAsync()
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             if (env.IsDevelopment())

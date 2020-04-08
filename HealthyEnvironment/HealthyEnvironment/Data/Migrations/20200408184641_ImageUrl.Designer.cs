@@ -4,14 +4,16 @@ using HealthyEnvironment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthyEnvironment.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200408184641_ImageUrl")]
+    partial class ImageUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,6 +92,7 @@ namespace HealthyEnvironment.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageUrl")
@@ -135,6 +138,7 @@ namespace HealthyEnvironment.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageUrl")
@@ -182,6 +186,7 @@ namespace HealthyEnvironment.Data.Migrations
                         .HasMaxLength(5000);
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageUrl")
@@ -238,6 +243,7 @@ namespace HealthyEnvironment.Data.Migrations
                         .HasMaxLength(500);
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageUrl")
