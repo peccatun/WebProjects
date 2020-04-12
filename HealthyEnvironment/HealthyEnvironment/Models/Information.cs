@@ -12,9 +12,6 @@ namespace HealthyEnvironment.Models
 
         public string Id { get; set; }
 
-        [Display(Name = "Upload Image")]
-        public byte[] Image { get; set; }
-
         [Display(Name = "ImageUrl")]
         public string ImageUrl { get; set; }
 

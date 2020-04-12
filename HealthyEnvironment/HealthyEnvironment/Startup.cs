@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using HealthyEnvironment.Models;
 using HealthyEnvironment.SeedData;
 using HealthyEnvironment.Services.Categories;
+using CloudinaryDotNet;
+using HealthyEnvironment.Services.Media;
 
 namespace HealthyEnvironment
 {
@@ -35,10 +37,11 @@ namespace HealthyEnvironment
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IMediaService, MediaService>();
 
             services.AddDefaultIdentity<ApplicationUser>(
                 options =>
-                { 
+                {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireDigit = false;
                     options.Password.RequiredUniqueChars = 0;
@@ -51,6 +54,15 @@ namespace HealthyEnvironment
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            Account account = new Account(
+                        this.Configuration["Cloudinary:AppName"],
+                        this.Configuration["Cloudinary:AppKey"],
+                        this.Configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

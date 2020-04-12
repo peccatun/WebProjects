@@ -23,9 +23,7 @@ namespace HealthyEnvironment.Models
         [StringLength(500, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 1)]
         public string AdditionalInfo { get; set; }
 
-        [Display(Name = "Upload Image")]
-        public byte[] Image { get; set; }
-
+        [Required]
         [Display(Name ="ImageUrl")]
         public string ImageUrl { get; set; }
 
