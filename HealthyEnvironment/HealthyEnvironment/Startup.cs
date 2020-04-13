@@ -17,6 +17,7 @@ using HealthyEnvironment.SeedData;
 using HealthyEnvironment.Services.Categories;
 using CloudinaryDotNet;
 using HealthyEnvironment.Services.Media;
+using HealthyEnvironment.Areas.Administration.Services;
 
 namespace HealthyEnvironment
 {
@@ -36,7 +37,8 @@ namespace HealthyEnvironment
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<Areas.Administration.Services.ICategoriesService, Areas.Administration.Services.CategoriesService>();
+            services.AddTransient<Services.Categories.ICategoriesService, Services.Categories.CategoriesService>();
             services.AddTransient<IMediaService, MediaService>();
 
             services.AddDefaultIdentity<ApplicationUser>(

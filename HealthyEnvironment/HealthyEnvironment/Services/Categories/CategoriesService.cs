@@ -28,6 +28,7 @@ namespace HealthyEnvironment.Services.Categories
                 Name = model.Name,
                 ImageUrl = path,
                 IsApproved = false,
+                IsDeleted = false,
             };
 
             await dbContext.AddAsync(category);
@@ -38,7 +39,7 @@ namespace HealthyEnvironment.Services.Categories
         {
             IEnumerable<CategoryViewModel> categories = dbContext
                 .Categories
-                .Where(c => c.IsApproved)
+                .Where(c => c.IsApproved && !c.IsDeleted)
                 .Select(c => new CategoryViewModel
                 {
                     Name = c.Name,

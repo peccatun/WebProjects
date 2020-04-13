@@ -24,6 +24,8 @@ namespace HealthyEnvironment.Models
 
         public bool IsApproved { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public IEnumerable<Information> Information { get; set; } = new HashSet<Information>();
 
         public IEnumerable<Discussion> Discussions { get; set; } = new HashSet<Discussion>();

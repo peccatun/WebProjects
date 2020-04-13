@@ -1,0 +1,25 @@
+﻿@model  HealthyEnvironment.Areas.Administration.ViewModels.Categories.CategoryDetailsViewModel
+@{
+    ViewData["Title"] = "CategoryDetails";
+}
+
+<h2>CategoryDetails</h2>
+
+<div class="text-center">
+    <div class="card" style="width: 18rem;">
+        <img src=@Model.ImageUrl class="card-img-top" alt="...">
+        <div class="card-body">
+            <h3 class="card-title">@Model.Name</h3>
+            <form action="/Administration/Categories/UpdateCategory" method="post">
+                <label asp-for=@Model.IsDeleted>IsDeleted</label>
+                <input type="checkbox" name="IsDeleted" value="true" />
+                <label asp-for=@Model.IsApproved>IsApproved</label>
+                <input type="checkbox" name="IsApproved" value="true" />
+                <input type="hidden" name="categoryId" value=@Model.CategoryId />
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

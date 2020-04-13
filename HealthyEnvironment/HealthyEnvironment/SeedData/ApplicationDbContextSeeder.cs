@@ -125,6 +125,7 @@ namespace HealthyEnvironment.SeedData
                     Name = categories[i],
                     IsApproved = true,
                     ImageUrl = imageUrl[i],
+                    IsDeleted = false,
                 };
 
                 await dbContext.Categories.AddAsync(category);

@@ -25,6 +25,8 @@ namespace HealthyEnvironment.Models
         [StringLength(5000, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 20)]
         public string Content { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         [Required]
         public string CategoryId { get; set; }
 

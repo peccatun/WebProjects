@@ -1,0 +1,20 @@
+﻿@model HealthyEnvironment.Areas.Administration.ViewModels.Categories.AllNotApprovedCategoriesViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>All Categories</h2>
+
+@foreach (var category in Model.Categories)
+{
+    <div class="media">
+        <img src=@category.ImageUrl class="mr-3" alt="..." width="100">
+        <div class="media-body">
+            <h4 class="mt-0">
+                <a href="/Administration/Categories/CategoryDetails?categoryId=@category.CategoryId">@category.Name</a>
+            </h4>
+        </div>
+    </div>
+    <hr />
+}
+
