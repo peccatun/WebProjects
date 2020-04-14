@@ -41,5 +41,7 @@ namespace HealthyEnvironment.Models
         public int Count { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

@@ -27,6 +27,8 @@ namespace HealthyEnvironment.Models
 
         public bool IsDeleted { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         [Required]
         public string CategoryId { get; set; }
 

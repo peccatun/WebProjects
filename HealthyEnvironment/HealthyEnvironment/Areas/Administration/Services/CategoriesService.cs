@@ -19,12 +19,12 @@ namespace HealthyEnvironment.Areas.Administration.Services
         {
             IEnumerable<CategoryViewModel> categories = dbContext
                 .Categories
+                .OrderBy(c => c.CreateOn)
                 .Select(c => new CategoryViewModel
                 {
                     CategoryId = c.Id,
                     Name = c.Name,
                     ImageUrl = c.ImageUrl,
-                    
                 })
                 .ToList();
 

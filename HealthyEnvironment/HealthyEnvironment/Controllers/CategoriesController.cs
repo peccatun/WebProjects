@@ -1,6 +1,7 @@
 ﻿using HealthyEnvironment.Services.Categories;
 using HealthyEnvironment.Services.Media;
 using HealthyEnvironment.ViewModels.Categories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -28,12 +29,14 @@ namespace HealthyEnvironment.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateCategoryViewModel model)
         {
             if (!ModelState.IsValid)

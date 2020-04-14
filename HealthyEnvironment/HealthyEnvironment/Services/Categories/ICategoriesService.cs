@@ -9,5 +9,7 @@ namespace HealthyEnvironment.Services.Categories
         IEnumerable<CategoryViewModel> GetAllCategories();
 
         Task CreateCategoryAsync(CreateCategoryViewModel model);
+
+        IEnumerable<CategoryDropDownViewModel> GetCategoryNameInfo();
     }
 }

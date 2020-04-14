@@ -2,6 +2,7 @@
 using HealthyEnvironment.Models;
 using HealthyEnvironment.Services.Media;
 using HealthyEnvironment.ViewModels.Categories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,9 +20,29 @@ namespace HealthyEnvironment.Services.Categories
             this.mediaService = mediaService;
         }
 
+        public IEnumerable<CategoryDropDownViewModel> GetCategoryNameInfo()
+        {
+            var categories = dbContext
+                .Categories
+                .Where(c => c.IsApproved && !c.IsDeleted)
+                .Select(c => new CategoryDropDownViewModel
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.Name,
+                })
+                .ToList();
+
+            return categories;
+        }
+
         public async Task CreateCategoryAsync(CreateCategoryViewModel model)
         {
             string path = await this.mediaService.UploadPictureAsync(model.Image);
+
+            if (path == null)
+            {
+                return;
+            }
 
             Category category = new Category
             {
@@ -29,6 +50,7 @@ namespace HealthyEnvironment.Services.Categories
                 ImageUrl = path,
                 IsApproved = false,
                 IsDeleted = false,
+                CreateOn = DateTime.UtcNow,
             };
 
             await dbContext.AddAsync(category);

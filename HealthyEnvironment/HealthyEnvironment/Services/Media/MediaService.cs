@@ -20,6 +20,11 @@ namespace HealthyEnvironment.Services.Media
         }
         public async Task<string> UploadPictureAsync(IFormFile file)
         {
+            if (!IsValidFormat(file.FileName))
+            {
+                return null;
+            }
+
             byte[] destinationImage;
             string path = string.Empty;
 
@@ -40,6 +45,25 @@ namespace HealthyEnvironment.Services.Media
             }
 
             return path;
+        }
+
+        private bool IsValidFormat(string fileName)
+        {
+            List<string> validFormats = new List<string>
+            {
+                ".png",".bmp",".dib",".jpg",".jpeg",".jpe",
+                ".jfif",".tif",".tiff",".heic,"
+            };
+
+            foreach (var format in validFormats)
+            {
+                if (fileName.EndsWith(format))
+                {
+                    return true;
+                }
+            }
+
+            return false; ;
         }
     }
 }

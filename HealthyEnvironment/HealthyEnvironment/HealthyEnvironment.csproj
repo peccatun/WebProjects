@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\Discussions\" />
-    <Folder Include="ViewModels\Informations\" />
     <Folder Include="ViewModels\Solutions\" />
     <Folder Include="ViewModels\Products\" />
     <Folder Include="ViewModels\Orders\" />
