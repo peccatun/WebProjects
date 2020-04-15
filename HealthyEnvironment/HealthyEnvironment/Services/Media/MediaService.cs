@@ -20,6 +20,11 @@ namespace HealthyEnvironment.Services.Media
         }
         public async Task<string> UploadPictureAsync(IFormFile file)
         {
+            if (file == null)
+            {
+                return null;
+            }
+
             if (!IsValidFormat(file.FileName))
             {
                 return null;

@@ -27,6 +27,8 @@ namespace HealthyEnvironment.Models
 
         public bool IsDeleted { get; set; }
 
+        public bool IsApproved { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         [Required]
