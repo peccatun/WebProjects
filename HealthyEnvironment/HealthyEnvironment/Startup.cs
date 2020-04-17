@@ -40,9 +40,12 @@ namespace HealthyEnvironment
 
             
             services.AddTransient<IMediaService, MediaService>();
-            services.AddTransient<IInformationService, InformationService>();
+            services.AddTransient<Areas.Administration.Services.IInformationService,
+                Areas.Administration.Services.InformationService>();
+            services.AddTransient<Services.Information.IInformationService, Services.Information.InformationService>();
             services.AddTransient<Areas.Administration.Services.ICategoriesService, Areas.Administration.Services.CategoriesService>();
-            services.AddTransient<Services.Categories.ICategoriesService, Services.Categories.CategoriesService>();
+            services.AddTransient<Services.Categories.ICategoriesService,
+                Services.Categories.CategoriesService>();
 
             services.AddDefaultIdentity<ApplicationUser>(
                 options =>

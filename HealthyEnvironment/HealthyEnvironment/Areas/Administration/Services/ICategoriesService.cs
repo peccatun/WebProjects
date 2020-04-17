@@ -10,6 +10,6 @@ namespace HealthyEnvironment.Areas.Administration.Services
 
         CategoryDetailsViewModel GetCategoryDetails(string categoryId);
 
-        Task UpdateCategoryAsync(UpdateCategoryViewModel model);
+        Task UpdateCategoryAsync(CategoryDetailsViewModel model);
     }
 }

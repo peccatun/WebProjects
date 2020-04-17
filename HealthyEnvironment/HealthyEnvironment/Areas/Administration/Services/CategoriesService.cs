@@ -48,7 +48,7 @@ namespace HealthyEnvironment.Areas.Administration.Services
             return category;
         }
 
-        public async Task UpdateCategoryAsync(UpdateCategoryViewModel model)
+        public async Task UpdateCategoryAsync(CategoryDetailsViewModel model)
         {
             var category = this.dbContext
                 .Categories

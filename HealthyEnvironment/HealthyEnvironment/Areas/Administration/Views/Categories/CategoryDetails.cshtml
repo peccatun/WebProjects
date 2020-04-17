@@ -11,11 +11,22 @@
         <div class="card-body">
             <h3 class="card-title">@Model.Name</h3>
             <form action="/Administration/Categories/UpdateCategory" method="post">
+                <label>Deleted:@Model.IsDeleted</label>
                 <label asp-for=@Model.IsDeleted>IsDeleted</label>
-                <input type="checkbox" name="IsDeleted" value="true" />
+                <select id="@Model.IsDeleted">
+                    <option value="False">False</option>
+                    <option value="True">True</option>
+                </select>
+                @*<input type="checkbox" name="IsDeleted" value="true" />*@
+                <label>Approved:@Model.IsApproved</label>
                 <label asp-for=@Model.IsApproved>IsApproved</label>
-                <input type="checkbox" name="IsApproved" value="true" />
+                @*<input type="checkbox" name="IsApproved" value="true" />*@
+                <select asp-for="@Model.IsApproved" name="IsApproved">
+                    <option value="false">False</option>
+                    <option value="true">True</option>
+                </select>
                 <input type="hidden" name="categoryId" value=@Model.CategoryId />
+                <label asp-for="@Model.IsApproved"></label>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>

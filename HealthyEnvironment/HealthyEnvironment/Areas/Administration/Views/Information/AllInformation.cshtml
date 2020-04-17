@@ -1,0 +1,20 @@
+﻿@model HealthyEnvironment.Areas.Administration.ViewModels.Information.AllInformationViewModel
+@{
+    ViewData["Title"] = "AllInformation";
+}
+
+<h2>All Information</h2>
+
+@foreach (var information in @Model.Information)
+{
+    <div class="media">
+        <img src=@information.ImageUrl class="mr-3" alt="..." width="100">
+        <div class="media-body">
+            <h4 class="mt-0">
+                <a href="/Administration/Information/InformationDetails?informationId=@information.InformationId">@information.About</a>
+            </h4>
+        </div>
+    </div>
+    <hr />
+}
+
