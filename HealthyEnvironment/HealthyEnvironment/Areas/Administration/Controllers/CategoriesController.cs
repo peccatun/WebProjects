@@ -37,7 +37,7 @@ namespace HealthyEnvironment.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateCategory(CategoryDetailsViewModel model)
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryViewModel model)
         {
             await categoriesService.UpdateCategoryAsync(model);
 

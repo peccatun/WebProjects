@@ -1,7 +1,44 @@
-﻿
+﻿@model HealthyEnvironment.Areas.Administration.ViewModels.Information.InformationDetailsViewModel
 @{
     ViewData["Title"] = "InformationDetails";
 }
 
 <h2>InformationDetails</h2>
+
+<div class="single-post-details-area">
+    <div class="post-content">
+        <h4 class="post-title">@Model.About</h4>
+        <div class="post-meta mb-30">
+            <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>@Model.CreatedOn</a>
+            <a href="#"><i class="fa fa-user" aria-hidden="true"></i>@Model.CreatorUserName</a>
+            <a href="#"><i class="fa fa-chain" aria-hidden="true"></i>@Model.CategoryName</a>
+        </div>
+        <div class="post-thumbnail mb-30">
+            <img src=@Model.ImageUrl alt="" style="width:100%">
+        </div>
+        <div class="bg-white">
+            <p>@Model.Content</p>
+        </div>
+    </div>
+</div>
+<hr />
+<form action="/Administration/Information/InformationDetails" method="post">
+    <h4>Deleted:@Model.IsDeleted</h4>
+    <label asp-for=@Model.IsDeleted>IsDeleted</label>
+    <select asp-for="@Model.IsDeleted" name="IsDeleted">
+        <option value="false">False</option>
+        <option value="true">True</option>
+    </select>
+    <hr />
+    <h4>Approved:@Model.IsApproved</h4>
+    <label asp-for=@Model.IsApproved>IsApproved</label>
+    <select asp-for="@Model.IsApproved" name="IsApproved">
+        <option value="false">False</option>
+        <option value="true">True</option>
+    </select>
+    <input type="hidden" name="informationId" value=@Model.InformationId />
+    <label asp-for="@Model.IsApproved"></label>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
 

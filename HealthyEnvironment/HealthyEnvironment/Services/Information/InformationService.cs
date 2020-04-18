@@ -4,6 +4,8 @@ using HealthyEnvironment.ViewModels.Informations;
 using System.Threading.Tasks;
 using System;
 using HealthyEnvironment.Services.Media;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthyEnvironment.Services.Information
 {
@@ -38,6 +40,22 @@ namespace HealthyEnvironment.Services.Information
 
             await dbContext.AddAsync(information);
             await dbContext.SaveChangesAsync();
+        }
+
+        public IEnumerable<InformationCategoryDetailsViewModel> GetInformationCategories()
+        {
+            IEnumerable<InformationCategoryDetailsViewModel> informationCategories = dbContext
+                .Categories
+                .Where(c => c.Information.Any(i => i.IsApproved && !i.IsDeleted))
+                .Select(c => new InformationCategoryDetailsViewModel
+                {
+                    CategoryName = c.Name,
+                    ImageUrl = c.ImageUrl,
+                    InformationCount = c.Information.Count(i => i.IsApproved && !i.IsDeleted)
+                })
+                .ToList();
+
+            return informationCategories;
         }
     }
 }

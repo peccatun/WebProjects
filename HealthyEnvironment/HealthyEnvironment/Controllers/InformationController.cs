@@ -26,7 +26,12 @@ namespace HealthyEnvironment.Controllers
         [HttpGet("/Information")]
         public IActionResult InformationHome()
         {
-            return this.View();
+            InformationCategoriesViewModel model = new InformationCategoriesViewModel
+            {
+                informationCategories = informationService.GetInformationCategories(),
+            };
+
+            return this.View(model);
         }
 
         [Authorize]

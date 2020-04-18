@@ -1,9 +1,54 @@
-﻿
+﻿@model HealthyEnvironment.ViewModels.Informations.InformationCategoriesViewModel
 @{
     ViewData["Title"] = "InformationHome";
 }
 
-<h2>InformationHome</h2>
+<h2>Information</h2>
 
-<a asp-controller="Information" asp-action="Create">Add new Information</a>
+<div class="text-center">
+    <a asp-controller="Information" asp-action="Create">Add new Information</a>
+</div>
+
+<div class="text-center">
+    <h3>Categories with information</h3>
+</div>
+
+<div class="row align-center mar-bot45">
+
+    @foreach (var category in @Model.informationCategories)
+    {
+        <div class="col-md-4">
+            <div class="wow bounceIn" data-animation-delay="4.8s">
+                <div class="team-member">
+                    <div class="profile-picture">
+                        <figure><img src="@category.ImageUrl" alt=""></figure>
+                        @*<div class="profile-overlay"></div>
+                            <div class="profile-social">
+                                <div class="icons-wrapper">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="team-detail">
+                        <h4>@category.CategoryName</h4>
+                        <span>Information post:@category.InformationCount</span>
+                    </div>
+                    @*<div class="team-bio">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, fugiat, harum, adipisci
+                                accusantium minus asperiores.
+                            </p>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
 

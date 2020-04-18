@@ -2,6 +2,7 @@
 using HealthyEnvironment.Areas.Administration.ViewModels.Information;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HealthyEnvironment.Areas.Administration.Controllers
 {
@@ -28,7 +29,15 @@ namespace HealthyEnvironment.Areas.Administration.Controllers
 
         public IActionResult InformationDetails(string informationId)
         {
-            return this.View();
+            InformationDetailsViewModel model = this.informationService.GetInformationById(informationId);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InformationDetails(UpdateInformationViewModel model)
+        {
+            await this.informationService.UpdateInformation(model);
+            return this.Redirect("/Information");
         }
     }
 }

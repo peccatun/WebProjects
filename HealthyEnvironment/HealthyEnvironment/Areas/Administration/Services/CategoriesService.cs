@@ -48,12 +48,11 @@ namespace HealthyEnvironment.Areas.Administration.Services
             return category;
         }
 
-        public async Task UpdateCategoryAsync(CategoryDetailsViewModel model)
+        public async Task UpdateCategoryAsync(UpdateCategoryViewModel model)
         {
             var category = this.dbContext
                 .Categories
-                .Where(c => c.Id == model.CategoryId)
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.Id == model.CategoryId);
 
             category.IsApproved = model.IsApproved;
             category.IsDeleted = model.IsDeleted;

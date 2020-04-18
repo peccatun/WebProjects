@@ -2,6 +2,7 @@
 using HealthyEnvironment.Data;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthyEnvironment.Areas.Administration.Services
 {
@@ -28,6 +29,38 @@ namespace HealthyEnvironment.Areas.Administration.Services
                 .ToList();
 
             return information;
+        }
+
+        public InformationDetailsViewModel GetInformationById(string informationId)
+        {
+            InformationDetailsViewModel information = this.dbContext
+                .Information
+                .Where(i => i.Id == informationId)
+                .Select(i => new InformationDetailsViewModel
+                {
+                    InformationId = i.Id,
+                    CreatorUserName = i.ApplicationUser.UserName,
+                    About = i.About,
+                    Content = i.Content,
+                    ImageUrl = i.ImageUrl,
+                    CreatedOn = i.CreatedOn,
+                    CategoryName = i.Category.Name,
+                    IsApproved = i.IsApproved,
+                    IsDeleted = i.IsDeleted,
+                })
+                .FirstOrDefault();
+
+            return information;
+        }
+
+        public async Task UpdateInformation(UpdateInformationViewModel model)
+        {
+            var information = dbContext.Information.FirstOrDefault(i => i.Id == model.InformationId);
+
+            information.IsApproved = model.IsApproved;
+            information.IsDeleted = model.IsDeleted;
+
+            await dbContext.SaveChangesAsync();
         }
     }
 }
