@@ -1,0 +1,70 @@
+﻿@model HealthyEnvironment.ViewModels.Discussions.CreateDiscussionViewModel
+@{
+    ViewData["Title"] = "CreateDiscussion";
+}
+
+<h2>CreateDiscussion</h2>
+
+<section id="section-contact" class="section appear clearfix">
+    <div class="container">
+
+        <div class="row mar-bot40">
+            <div class="col-md-offset-3 col-md-6">
+                <div class="section-header">
+                    <h2 class="section-heading animated" data-animation="bounceInUp">@ViewData["Title"]</h2>
+                    <div class="text-danger">
+                        <p>
+                            You are about to make a request for posting new information!
+                            The new information have to be aproved by administrator first.
+                            Your request will be sended imediatly and you be informed in a few minutis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div id="errormessage"></div>
+                <form action="" method="post" role="form" class="contactForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.About"></label>
+                        <input asp-for="@Model.About" type="text" class="form-control" id="name" placeholder="Discussion topic" data-rule="minlen:4"
+                               data-msg="Please enter at least 4 chars" />
+                        <div class="validation">
+                            <span asp-validation-for="@Model.About"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CategoryId"></label>
+                            <select class="form-control" asp-for="@Model.CategoryId" asp-items="@Model.Categories.Select(c => new SelectListItem(c.CategoryName,c.CategoryId))">
+                            </select>
+                            <div class="validation">
+                                <span asp-validation-for="@Model.About"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.AdditionalInfo"></label>
+                            <textarea asp-for="@Model.AdditionalInfo" class="form-control" rows="5" data-rule="required" data-msg="Please write something for us"
+                                      placeholder="Additional info"></textarea>
+                            <div class="validation">
+                                <span asp-validation-for="@Model.AdditionalInfo"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Image"></label>
+                            <input asp-for="@Model.Image" type="file" value="" />
+                            <div class="validation">
+                                <span asp-validation-for="@Model.Image"></span>
+                            </div>
+                        </div>
+
+                        <div class="text-center"><button type="submit" class="line-btn green">Send Message</button></div>
+                    </div>
+                </form>
+            </div>
+            <!-- ./span12 -->
+        </div>
+
+    </div>
+</section>
+

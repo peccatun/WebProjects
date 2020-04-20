@@ -20,7 +20,7 @@ namespace HealthyEnvironment.Services.Categories
             this.mediaService = mediaService;
         }
 
-        public IEnumerable<CategoryDropDownViewModel> GetCategoryNameInfo()
+        public IEnumerable<CategoryDropDownViewModel> GetCategoryNameAndId()
         {
             var categories = dbContext
                 .Categories

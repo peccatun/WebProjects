@@ -40,9 +40,9 @@ namespace HealthyEnvironment.Controllers
         }
 
         [Authorize]
-        public IActionResult Create()
+        public IActionResult CreateInformation()
         {
-            var categories = categoriesService.GetCategoryNameInfo();
+            var categories = categoriesService.GetCategoryNameAndId();
             CreateInfomationViewModel model = new CreateInfomationViewModel
             {
                 Categories = categories,
@@ -53,9 +53,14 @@ namespace HealthyEnvironment.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateInfomationViewModel model)
+        public async Task<IActionResult> CreateInformation(CreateInfomationViewModel model)
         {
             string applicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!ModelState.IsValid)
+            {
+                model.Categories = this.categoriesService.GetCategoryNameAndId();
+                return this.View(model);
+            }
             await this.informationService.Create(model, applicationUserId);
 
             return this.Redirect("/Information");

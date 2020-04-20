@@ -23,6 +23,7 @@ namespace HealthyEnvironment.ViewModels.Informations
         [Display(Name = "Upload image")]
         public IFormFile Image { get; set; }
 
+        [Required]
         [Display(Name = "Add in category")]
         public string CategoryId { get; set; }
 

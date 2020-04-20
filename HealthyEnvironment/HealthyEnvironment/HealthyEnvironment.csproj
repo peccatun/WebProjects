@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Discussions\" />
     <Folder Include="ViewModels\Solutions\" />
     <Folder Include="ViewModels\Products\" />
     <Folder Include="ViewModels\Orders\" />

@@ -10,6 +10,6 @@ namespace HealthyEnvironment.Services.Categories
 
         Task CreateCategoryAsync(CreateCategoryViewModel model);
 
-        IEnumerable<CategoryDropDownViewModel> GetCategoryNameInfo();
+        IEnumerable<CategoryDropDownViewModel> GetCategoryNameAndId();
     }
 }
