@@ -15,5 +15,7 @@ namespace HealthyEnvironment.Models
         public virtual IEnumerable<Information> Information { get; set; } = new HashSet<Information>();
 
         public virtual IEnumerable<Order> Orders { get; set; } = new HashSet<Order>();
+
+        public virtual IEnumerable<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

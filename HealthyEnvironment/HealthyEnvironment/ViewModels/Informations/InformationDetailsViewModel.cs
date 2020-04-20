@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthyEnvironment.ViewModels.Comments;
+using System;
+using System.Collections.Generic;
 
 namespace HealthyEnvironment.ViewModels.Informations
 {
@@ -17,5 +19,7 @@ namespace HealthyEnvironment.ViewModels.Informations
         public DateTime CreatedOn { get; set; }
 
         public string Content { get; set; }
+
+        public IEnumerable<CommentDetailsViewModel> Comments { get; set; } = new HashSet<CommentDetailsViewModel>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthyEnvironment.Models
@@ -40,5 +41,7 @@ namespace HealthyEnvironment.Models
         public string ApplicationUserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public virtual IEnumerable<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

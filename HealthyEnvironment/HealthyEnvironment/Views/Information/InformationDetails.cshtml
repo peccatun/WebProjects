@@ -20,3 +20,46 @@
         </div>
     </div>
 </div>
+<hr />
+
+<!-- Comment Area Start -->
+<div class="list-group bg-white">
+    <h4 class="headline">@Model.Comments.Count() Comments</h4>
+    @foreach (var comment in Model.Comments)
+    {
+        <a href="" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">@comment.CreatorUserName</h5>
+                <small>@comment.CreatedOn</small>
+            </div>
+            <p class="mb-1">@comment.Content</p>
+            <small></small>
+        </a>
+        <hr/>
+    }
+
+</div>
+
+<hr />
+<div class="leave-comment-area clearfix">
+    <div class="comment-form">
+        <h4 class="headline">Leave A Comment</h4>
+
+        <div class="contact-form-area">
+            <!-- Comment Form -->
+            <form asp-controller="Information" asp-action="CreateComment" method="post">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea class="form-control" name="content" id="content" cols="30" rows="10" placeholder="Comment" required minlength="0" maxlength="1000"></textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" name="informationId" value="@Model.InformationId" />
+                    <div class="col-12">
+                        <button type="submit" class="btn alazea-btn">Post Comment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

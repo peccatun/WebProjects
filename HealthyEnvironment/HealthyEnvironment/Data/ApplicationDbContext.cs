@@ -10,11 +10,19 @@ namespace HealthyEnvironment.Data
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Category> Categories { get; set; }
+
         public DbSet<Discussion> Discussions { get; set; }
+
         public DbSet<Information> Information { get; set; }
+
         public DbSet<Order> Orders { get; set; }
+
         public DbSet<Product> Products { get; set; }
+
         public DbSet<Solution> Solutions { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -69,6 +77,16 @@ namespace HealthyEnvironment.Data
                 .HasOne(s => s.ApplicationUser)
                 .WithMany(a => a.Solutions)
                 .HasForeignKey(s => s.ApplicationUserId);
+
+            builder.Entity<Comment>()
+                .HasOne(c => c.ApplicationUser)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(c => c.ApplicationUserId);
+
+            builder.Entity<Information>()
+                .HasMany(i => i.Comments)
+                .WithOne(c => c.Information)
+                .HasForeignKey(c => c.InformationId);
         }
     }
 }

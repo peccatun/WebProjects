@@ -6,6 +6,7 @@ using System;
 using HealthyEnvironment.Services.Media;
 using System.Collections.Generic;
 using System.Linq;
+using HealthyEnvironment.Services.Comments;
 
 namespace HealthyEnvironment.Services.Information
 {
@@ -13,13 +14,16 @@ namespace HealthyEnvironment.Services.Information
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMediaService mediaService;
+        private readonly ICommentsService commentsService;
 
         public InformationService(
             ApplicationDbContext dbContext,
-            IMediaService mediaService)
+            IMediaService mediaService,
+            ICommentsService commentsService)
         {
             this.dbContext = dbContext;
             this.mediaService = mediaService;
+            this.commentsService = commentsService;
         }
 
         public async Task Create(CreateInfomationViewModel model, string applicationUserId)
@@ -75,6 +79,8 @@ namespace HealthyEnvironment.Services.Information
                     ImageUrl = i.ImageUrl,
                 })
                 .FirstOrDefault();
+
+            information.Comments = this.commentsService.GetCommentDetails(informationId);
 
             if (information.ImageUrl == null)
             {

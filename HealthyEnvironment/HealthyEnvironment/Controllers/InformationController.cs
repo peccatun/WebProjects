@@ -1,6 +1,8 @@
 ﻿using HealthyEnvironment.Services.Categories;
+using HealthyEnvironment.Services.Comments;
 using HealthyEnvironment.Services.Information;
 using HealthyEnvironment.Services.Media;
+using HealthyEnvironment.ViewModels.Comments;
 using HealthyEnvironment.ViewModels.Informations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +16,16 @@ namespace HealthyEnvironment.Controllers
     {
         private readonly ICategoriesService categoriesService;
         private readonly IInformationService informationService;
+        private readonly ICommentsService commentsService;
 
         public InformationController(
             ICategoriesService categoriesService,
-            IInformationService informationService)
+            IInformationService informationService,
+            ICommentsService commentsService)
         {
             this.categoriesService = categoriesService;
             this.informationService = informationService;
+            this.commentsService = commentsService;
         }
 
         [HttpGet("/Information")]
@@ -77,6 +82,26 @@ namespace HealthyEnvironment.Controllers
             InformationDetailsViewModel model = this.informationService.GetInformationDetails(informationId);
 
             return this.View(model);
+        }
+
+        [Authorize]
+        [HttpPost("/Information")]
+        public async Task<IActionResult> CreateComment(CreateComentViewModel model)
+        {
+            string applicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            model.ApplicationUserId = applicationUserId;
+
+            if (!ModelState.IsValid)
+            {
+                return this.View("InformationDetails", new { informationId = model.InformationId });
+            }
+            if (!await this.commentsService.CreateCommentAsync(model))
+            {
+                return this.StatusCode(404);
+            }
+
+
+            return this.RedirectToAction("InformationDetails","Information",new { informationId = model.InformationId });
         }
     }
 }
