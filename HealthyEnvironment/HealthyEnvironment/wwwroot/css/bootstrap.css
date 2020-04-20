@@ -1311,16 +1311,16 @@ blockquote.pull-right {
   border-right: 5px solid #eee;
   border-left: 0;
 }
-.blockquote-reverse footer:before,
-blockquote.pull-right footer:before,
+/*.blockquote-reverse footer:before,
+blockquote.pull-right footer:before,*/
 .blockquote-reverse small:before,
 blockquote.pull-right small:before,
 .blockquote-reverse .small:before,
 blockquote.pull-right .small:before {
   content: '';
 }
-.blockquote-reverse footer:after,
-blockquote.pull-right footer:after,
+/*.blockquote-reverse footer:after,
+blockquote.pull-right footer:after,*/
 .blockquote-reverse small:after,
 blockquote.pull-right small:after,
 .blockquote-reverse .small:after,

@@ -46,6 +46,7 @@ namespace HealthyEnvironment.Controllers
             return this.View(model);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateInfomationViewModel model)
         {
@@ -53,6 +54,29 @@ namespace HealthyEnvironment.Controllers
             await this.informationService.Create(model, applicationUserId);
 
             return this.Redirect("/Information");
+        }
+
+        public IActionResult InformationInCategory(string categoryId)
+        {
+            InformationInCategoryListViewModel model = new InformationInCategoryListViewModel
+            {
+                InformationInCategory = this.informationService.GetInformationInCategory(categoryId)
+            };
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult InformationDetails(string informationId)
+        {
+            if (!this.informationService.IsValidInformationId(informationId))
+            {
+                return StatusCode(404);
+            }
+
+            InformationDetailsViewModel model = this.informationService.GetInformationDetails(informationId);
+
+            return this.View(model);
         }
     }
 }

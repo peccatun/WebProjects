@@ -1,0 +1,22 @@
+﻿@model HealthyEnvironment.ViewModels.Informations.InformationDetailsViewModel
+@{
+    ViewData["Title"] = "InformationDetails";
+}
+
+<h2>InformationDetails</h2>
+
+<div class="single-post-details-area">
+    <div class="post-content">
+        <h4 class="post-title">@Model.About</h4>
+        <div class="post-meta mb-30">
+            <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>@Model.CreatedOn</a>
+            <a href="#"><i class="fa fa-user" aria-hidden="true"></i>@Model.CreatorUserName</a>
+        </div>
+        <div class="post-thumbnail mb-30">
+            <img src=@Model.ImageUrl alt="" style="width:100%">
+        </div>
+        <div class="bg-white">
+            <p>@Model.Content</p>
+        </div>
+    </div>
+</div>

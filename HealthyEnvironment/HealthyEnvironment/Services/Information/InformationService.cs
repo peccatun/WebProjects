@@ -49,6 +49,7 @@ namespace HealthyEnvironment.Services.Information
                 .Where(c => c.Information.Any(i => i.IsApproved && !i.IsDeleted))
                 .Select(c => new InformationCategoryDetailsViewModel
                 {
+                    CategoryId = c.Id,
                     CategoryName = c.Name,
                     ImageUrl = c.ImageUrl,
                     InformationCount = c.Information.Count(i => i.IsApproved && !i.IsDeleted)
@@ -56,6 +57,63 @@ namespace HealthyEnvironment.Services.Information
                 .ToList();
 
             return informationCategories;
+        }
+
+        public InformationDetailsViewModel GetInformationDetails(string informationId)
+        {
+            InformationDetailsViewModel information = dbContext
+                .Information
+                .Where(i => i.Id == informationId)
+                .Select(i => new InformationDetailsViewModel
+                {
+                    InformationId = i.Id,
+                    About = i.About,
+                    Content = i.Content,
+                    CreatedOn = i.CreatedOn,
+                    CreatorId = i.ApplicationUserId,
+                    CreatorUserName = i.ApplicationUser.UserName,
+                    ImageUrl = i.ImageUrl,
+                })
+                .FirstOrDefault();
+
+            if (information.ImageUrl == null)
+            {
+                information.ImageUrl = this.SetDefouldImage();
+            }
+
+            return information;
+        }
+
+        public IEnumerable<InformationInCategoryResumeViewModel> GetInformationInCategory(string categoryId)
+        {
+            IEnumerable<InformationInCategoryResumeViewModel> informationInCategory = this.dbContext
+                .Information
+                .Where(i => i.CategoryId == categoryId)
+                .Where(i => i.IsApproved && !i.IsDeleted)
+                .OrderByDescending(i => i.CreatedOn)
+                .Select(i => new InformationInCategoryResumeViewModel
+                {
+                    InformationId = i.Id,
+                    ImageUrl = i.ImageUrl == null ? this.SetDefouldImage() : i.ImageUrl,
+                    About = i.About,
+                    CreatedOn = i.CreatedOn,
+                    CreatorUserName = i.ApplicationUser.UserName,
+                    ContentResume = i.Content.Substring(0,50) + "...",
+                })
+                
+                .ToList();
+
+            return informationInCategory;
+        }
+
+        public bool IsValidInformationId(string informationId)
+        {
+            return this.dbContext.Information.Any(i => i.Id == informationId);
+        }
+
+        private string SetDefouldImage()
+        {
+            return "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-stock-vector-no-image-available-icon-flat-vector.jpg?ver=6";
         }
     }
 }

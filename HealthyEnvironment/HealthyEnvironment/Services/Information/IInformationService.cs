@@ -9,5 +9,11 @@ namespace HealthyEnvironment.Services.Information
         Task Create(CreateInfomationViewModel model, string applicationUserId);
 
         IEnumerable<InformationCategoryDetailsViewModel> GetInformationCategories();
+
+        IEnumerable<InformationInCategoryResumeViewModel> GetInformationInCategory(string categoryId);
+
+        InformationDetailsViewModel GetInformationDetails(string informationId);
+
+        bool IsValidInformationId(string informationId);
     }
 }

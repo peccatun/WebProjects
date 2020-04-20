@@ -1,0 +1,51 @@
+﻿@model  HealthyEnvironment.ViewModels.Informations.InformationInCategoryListViewModel
+@{
+    ViewData["Title"] = "InformationInCategory";
+}
+
+<h2>InformationInCategory</h2>
+
+<section class="alazea-blog-area mb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col col-sm">
+                <div class="row">
+                    @foreach (var information in Model.InformationInCategory)
+                    {
+                        <div class="col col-sm-4">
+                            <div class="single-blog-post mb-50">
+                                <div class="post-thumbnail mb-30">
+                                    <a href="/Information/InformationDetails?informationId=@information.InformationId"><img src="@information.ImageUrl" alt="" width="170"></a>
+                                </div>
+                                <div class="post-content">
+                                    <a href="/Information/InformationDetails?informationId=@information.InformationId" class="post-title">
+                                        <h5>@information.About</h5>
+                                    </a>
+                                    <div class="post-meta">
+                                        <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>@information.CreatedOn</a>
+                                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i>@information.CreatorUserName</a>
+                                    </div>
+                                    <p class="post-excerpt" style="width:50%">@information.ContentResume</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- Single Blog Post Area -->
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

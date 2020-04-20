@@ -116,7 +116,7 @@ aside,
 details,
 figcaption,
 figure,
-footer,
+/*footer,*/
 header,
 hgroup,
 menu,
@@ -1971,42 +1971,42 @@ div.cform-response-output {
   Footer
  ================= */
 
-section#footer {
+/*section#footer {
   background: #242424;
   margin: 0;
-}
+}*/
 
-section#footer .copyright {
+/*section#footer .copyright {
   text-align: center;
-}
+}*/
 
 /* footer social icons */
-ul.social-network {
+/*ul.social-network {
   list-style: none;
   display: inline;
   margin-left: 0 !important;
   padding: 0;
-}
+}*/
 
-ul.social-network li {
+/*ul.social-network li {
   display: inline;
   margin: 0 5px;
-}
+}*/
 
 /* footer menu */
-ul.footer-menu {
+/*ul.footer-menu {
   list-style: none;
   display: inline;
   margin-left: 0 !important;
   padding: 0;
-}
+}*/
 
-ul.footer-menu li {
+/*ul.footer-menu li {
   display: inline;
   margin: 0 5px;
-}
+}*/
 
-a.scrollup {
+/*a.scrollup {
   height: 40px;
   width: 40px;
   color: #fff;
@@ -2019,27 +2019,27 @@ a.scrollup {
   right: 10px;
   z-index: 9999;
   opacity: 0.5;
-}
+}*/
 
-a.scrollup:hover {
+/*a.scrollup:hover {
   opacity: 1;
   color: #fff;
   font-size: 18px;
   line-height: 30px;
 
-}
+}*/
 
 /*===========================
   --- Template Components ----
 =========================== */
 
 /* footer social icons */
-.social-network a.icoRss:hover {
+/*.social-network a.icoRss:hover {
   background-color: #F56505;
 
-}
+}*/
 
-.social-network a.icoFacebook:hover {
+/*.social-network a.icoFacebook:hover {
   background-color: #3B5998;
 
 }
@@ -2117,8 +2117,7 @@ a.socialIcon:hover,
   -o-transition: all 0.8s;
   -ms-transition: all 0.8s;
   transition: all 0.8s;
-}
-
+}*/
 
 /* stats */
 .stats .icon {

@@ -30,6 +30,7 @@ namespace HealthyEnvironment.SeedData
             await SeedRoleAsync();
             await SeedUserToRoleAsync();
             await SeedCategoriesAsync();
+            await SeedInformationAsync();
         }
 
         private async Task SeedUserToRoleAsync()
@@ -130,6 +131,52 @@ namespace HealthyEnvironment.SeedData
                 };
 
                 await dbContext.Categories.AddAsync(category);
+            }
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        private async Task SeedInformationAsync()
+        {
+            if (dbContext.Information.Any())
+            {
+                return;
+            }
+
+            List<string> seedCategories = new List<string>
+            {
+               "Science % Math",
+                "Random",
+            };
+
+            var user = await userManager.FindByNameAsync("Admin");
+            string imageUrl = "https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-stock-vector-no-image-available-icon-flat-vector.jpg?ver=6";
+
+            foreach (var category in seedCategories)
+            {
+                string categoryId = this.dbContext
+                    .Categories
+                    .Where(c => c.Name == category)
+                    .Select(c => c.Id)
+                    .FirstOrDefault();
+
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Information information = new Information
+                    {
+                        About = $"TestInformationCategory {category} {i}",
+                        ApplicationUserId = user.Id,
+                        CategoryId = categoryId,
+                        ImageUrl = imageUrl,
+                        CreatedOn = DateTime.UtcNow,
+                        IsApproved = true,
+                        IsDeleted = false,
+                        Content = $"TestInformationCategory {category} {i} TestInformationCategory{category} {i} TestInformationCategory {category} {i}",
+                    };
+
+                    await dbContext.Information.AddAsync(information);
+                }
             }
 
             await dbContext.SaveChangesAsync();
