@@ -21,7 +21,7 @@ namespace HealthyEnvironment.ViewModels.Discussions
         public string CategoryId { get; set; }
 
         [Required]
-        [Display(Name = "UploadImage")]
+        [Display(Name = "Upload Image")]
         public IFormFile Image { get; set; }
 
         public IEnumerable<CategoryDropDownViewModel> Categories { get; set; }

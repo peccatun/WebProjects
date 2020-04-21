@@ -14,8 +14,8 @@
                     <h2 class="section-heading animated" data-animation="bounceInUp">@ViewData["Title"]</h2>
                     <div class="text-danger">
                         <p>
-                            You are about to make a request for posting new information!
-                            The new information have to be aproved by administrator first.
+                            You are about to make a request for starting a Discussion!
+                            The discussion have to be aproved by administrator first.
                             Your request will be sended imediatly and you be informed in a few minutis.
                         </p>
                     </div>
@@ -26,6 +26,8 @@
             <div class="col-md-8 col-md-offset-2">
                 <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>
+                <div asp-validation-summary="All" class="text-danger">
+                </div>
                 <form action="" method="post" role="form" class="contactForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label asp-for="@Model.About"></label>
@@ -58,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div class="text-center"><button type="submit" class="line-btn green">Send Message</button></div>
+                        <div class="text-center"><button type="submit" class="line-btn green">Start Discussion</button></div>
                     </div>
                 </form>
             </div>

@@ -1,9 +1,33 @@
-﻿
+﻿@model HealthyEnvironment.ViewModels.Discussions.DisplayDiscussionCategoriesViewModel
 @{
     ViewData["Title"] = "DiscussionsHome";
 }
 
 <h2>DiscussionsHome</h2>
 
-<a asp-controller="Discussions" asp-action="CreateDiscussion">Create new forum post</a>
+<a asp-controller="Discussions" asp-action="CreateDiscussion">Start new discussion</a>
+
+<div class="text-center">
+    <h3>Categories with discussions</h3>
+</div>
+
+<div class="row align-center mar-bot45">
+
+    @foreach (var discussion in @Model.Discussions)
+    {
+        <div class="col-md-4" onclick="location.href='/Discussions/DiscussionsInCategory?categoryId=@discussion.CategoryId'">
+            <div class="wow bounceIn" data-animation-delay="4.8s">
+                <div class="team-member">
+                    <div class="profile-picture">
+                        <figure><img src="@discussion.ImageUrl" alt=""></figure>
+                    </div>
+                    <div class="team-detail">
+                        <h4>@discussion.CategoryName</h4>
+                        <span>Active discussions:@discussion.DiscussionsCount</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
