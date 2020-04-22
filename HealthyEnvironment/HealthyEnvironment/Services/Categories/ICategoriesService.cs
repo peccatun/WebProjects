@@ -11,5 +11,7 @@ namespace HealthyEnvironment.Services.Categories
         Task CreateCategoryAsync(CreateCategoryViewModel model);
 
         IEnumerable<CategoryDropDownViewModel> GetCategoryNameAndId();
+
+        string GetCategoryName(string categoryId);
     }
 }

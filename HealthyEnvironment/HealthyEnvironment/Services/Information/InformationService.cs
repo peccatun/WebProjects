@@ -104,7 +104,7 @@ namespace HealthyEnvironment.Services.Information
                     About = i.About,
                     CreatedOn = i.CreatedOn,
                     CreatorUserName = i.ApplicationUser.UserName,
-                    ContentResume = i.Content.Substring(0,50) + "...",
+                    ContentResume = i.Content.Length > 50 ? i.Content.Substring(0,50) + "..." : i.Content,
                 })
                 
                 .ToList();

@@ -49,16 +49,33 @@ namespace HealthyEnvironment.Services.Discussion
                     CategoryId = c.Id,
                     CategoryName = c.Name,
                     ImageUrl = c.ImageUrl,
-                    DiscussionsCount = c.Discussions.Count(d => d.CategoryId == c.Id)
+                    DiscussionsCount = c.Discussions.Count(d => d.CategoryId == c.Id && d.IsApproved)
                 })
                 .ToList();
 
                 return discussionCategories;
         }
 
-        public IEnumerable<DiscussionDetailViewModel> GetDiscussionsInCategory(string categoryId)
+        public IEnumerable<DiscussionsInCategoryDetailViewModel> GetDiscussionsInCategory(string categoryId)
         {
-            throw new NotImplementedException();
+            IEnumerable<DiscussionsInCategoryDetailViewModel> discussionsInCategory = this.dbContext
+                .Discussions
+                .Where(d => d.CategoryId == categoryId)
+                .Where(d => d.IsApproved && !d.IsDeleted)
+                .OrderByDescending(d => d.OpenedOn)
+                .Select(d => new DiscussionsInCategoryDetailViewModel
+                {
+                    About = d.About,
+                    AdditionalInfo = d.AdditionalInfo.Length > 50 ? d.AdditionalInfo.Substring(0,50) + "..." : d.AdditionalInfo,
+                    CategoryName = d.Category.Name,
+                    CreatedOn = d.OpenedOn,
+                    DiscussionId = d.Id,
+                    ImageUrl = d.ImageUrl,
+                    SolutionsCount = d.Solutions.Count(s => s.DiscussionId == d.Id)
+                })
+                .ToList();
+
+            return discussionsInCategory;
         }
     }
 }

@@ -71,5 +71,16 @@ namespace HealthyEnvironment.Services.Categories
 
             return categories;
         }
+
+        public string GetCategoryName(string categoryId)
+        {
+            string categoryName = this.dbContext
+                .Categories
+                .Where(c => c.Id == categoryId)
+                .Select(c => c.Name)
+                .FirstOrDefault();
+
+            return categoryName;
+        }
     }
 }

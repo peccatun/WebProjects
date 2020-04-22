@@ -62,6 +62,17 @@ namespace HealthyEnvironment.Controllers
 
         public IActionResult DiscussionsInCategory(string categoryId)
         {
+            DiscussionsInCategoryListViewModel model = new DiscussionsInCategoryListViewModel
+            {
+                Discussions = this.discussionsService.GetDiscussionsInCategory(categoryId),
+                CategoryName = this.categoriesService.GetCategoryName(categoryId),
+            };
+
+            return this.View(model);
+        }
+
+        public IActionResult DiscussionDetails(string discussionId)
+        {
             return this.View();
         }
     }

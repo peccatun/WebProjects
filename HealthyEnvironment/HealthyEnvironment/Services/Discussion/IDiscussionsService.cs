@@ -8,7 +8,7 @@ namespace HealthyEnvironment.Services.Discussion
     {
         Task CreateDiscussionAsync(CreateDiscussionViewModel model, string applicationUserId);
 
-        IEnumerable<DiscussionDetailViewModel> GetDiscussionsInCategory(string categoryId);
+        IEnumerable<DiscussionsInCategoryDetailViewModel> GetDiscussionsInCategory(string categoryId);
 
         IEnumerable<DiscussionCategoryDetailsViewModel> GetDiscussionCategories();
     }
