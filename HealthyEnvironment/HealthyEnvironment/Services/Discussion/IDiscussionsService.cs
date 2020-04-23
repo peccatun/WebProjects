@@ -11,5 +11,7 @@ namespace HealthyEnvironment.Services.Discussion
         IEnumerable<DiscussionsInCategoryDetailViewModel> GetDiscussionsInCategory(string categoryId);
 
         IEnumerable<DiscussionCategoryDetailsViewModel> GetDiscussionCategories();
+
+        DiscussionDetailsViewModel GetDiscussionDetails(string discussionId);
     }
 }

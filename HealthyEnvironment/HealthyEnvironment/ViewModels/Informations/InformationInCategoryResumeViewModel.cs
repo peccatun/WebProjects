@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace HealthyEnvironment.ViewModels.Informations
 {
@@ -15,5 +17,15 @@ namespace HealthyEnvironment.ViewModels.Informations
         public string CreatorUserName { get; set; }
 
         public string ContentResume { get; set; }
+
+        public string EscapeContentResume
+        { 
+            get
+            {
+                var content = WebUtility.HtmlDecode(Regex.Replace(this.ContentResume, @"<[^>]+>", string.Empty));
+
+                return content;
+            }
+        }
     }
 }

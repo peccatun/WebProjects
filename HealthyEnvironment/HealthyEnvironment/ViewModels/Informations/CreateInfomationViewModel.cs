@@ -17,7 +17,7 @@ namespace HealthyEnvironment.ViewModels.Informations
 
         [Required]
         [Display(Name = "Information content")]
-        [StringLength(5000, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 20)]
+        [StringLength(10000, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 20)]
         public string Content { get; set; }
 
         [Display(Name = "Upload image")]

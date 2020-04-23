@@ -20,7 +20,7 @@ namespace HealthyEnvironment.Models
 
         [Required]
         [Display(Name = "Additional Info")]
-        [StringLength(500, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 1)]
+        [StringLength(10000, ErrorMessage = "The {0} must be between {2} and {1} characters.", MinimumLength = 1)]
         public string AdditionalInfo { get; set; }
 
         [Required]

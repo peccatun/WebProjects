@@ -30,7 +30,7 @@ namespace HealthyEnvironment.Services.Discussion
                 ApplicationUserId = applicationUserId,
                 CategoryId = model.CategoryId,
                 ImageUrl = imageUrl,
-                IsApproved = false,
+                IsApproved = true,
                 IsDeleted = false,
                 OpenedOn = DateTime.UtcNow,
             };
@@ -56,6 +56,25 @@ namespace HealthyEnvironment.Services.Discussion
                 return discussionCategories;
         }
 
+        public DiscussionDetailsViewModel GetDiscussionDetails(string discussionId)
+        {
+            DiscussionDetailsViewModel discussion = this.dbContext
+                .Discussions
+                .Where(d => d.Id == discussionId)
+                .Select(d => new DiscussionDetailsViewModel
+                {
+                    DiscussionId = d.Id,
+                    About = d.About,
+                    AdditionalInfo = d.AdditionalInfo,
+                    CreatedOn = d.OpenedOn,
+                    CreatorName = d.ApplicationUser.UserName,
+                    ImageUrl = d.ImageUrl,
+                })
+                .FirstOrDefault();
+
+            return discussion;
+        }
+
         public IEnumerable<DiscussionsInCategoryDetailViewModel> GetDiscussionsInCategory(string categoryId)
         {
             IEnumerable<DiscussionsInCategoryDetailViewModel> discussionsInCategory = this.dbContext
@@ -66,8 +85,9 @@ namespace HealthyEnvironment.Services.Discussion
                 .Select(d => new DiscussionsInCategoryDetailViewModel
                 {
                     About = d.About,
-                    AdditionalInfo = d.AdditionalInfo.Length > 50 ? d.AdditionalInfo.Substring(0,50) + "..." : d.AdditionalInfo,
+                    AdditionalInfo = d.AdditionalInfo.Length > 500 ? d.AdditionalInfo.Substring(0,500) + " ..." : d.AdditionalInfo,
                     CategoryName = d.Category.Name,
+                    CreatorName = d.ApplicationUser.UserName,
                     CreatedOn = d.OpenedOn,
                     DiscussionId = d.Id,
                     ImageUrl = d.ImageUrl,

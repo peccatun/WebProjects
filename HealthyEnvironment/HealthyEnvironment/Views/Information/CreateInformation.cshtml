@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Create";
 }
-
 <section id="section-contact" class="section appear clearfix">
     <div class="container">
 
@@ -26,6 +25,16 @@
                 <div id="errormessage"></div>
                 <div asp-validation-summary="All" class="text-danger">
                 </div>
+
+                <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    tinymce.init({
+                        selector: "textarea",
+                        plugins: [
+                            "image paste table link code media"
+                        ]
+                    });
+                </script>
                 <form action="" method="post" role="form" class="contactForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label asp-for="@Model.About"></label>

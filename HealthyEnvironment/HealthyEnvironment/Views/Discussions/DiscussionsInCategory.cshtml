@@ -5,7 +5,7 @@
 
 <h2>Discussions in @Model.CategoryName</h2>
 
-<div class="container">
+@*<div class="container">
     <div class="row">
         @foreach (var discussion in Model.Discussions)
         {
@@ -23,5 +23,32 @@
 
         }
     </div>
+</div>*@
+<div class="container">
+    @foreach (var discussion in Model.Discussions)
+    {
+
+        <div class="well">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="@discussion.ImageUrl" height="100" width="100">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">@discussion.About</h4>
+                    <p class="text-right">@discussion.CreatorName</p>
+                    <p>
+                        @discussion.AdditionalInfoEscape
+                    </p>
+                    <ul class="list-inline list-unstyled">
+                        <li><span><i class="glyphicon glyphicon-calendar"></i>@discussion.CreatedOn</span></li>
+                        <li>|</li>
+                        <li><span>@discussion.SolutionsCount solutions</span></li>
+                        <li>|</li>
+                        <li><a asp-controller="Discussions" asp-action="DiscussionDetails" asp-route-discussionId="@discussion.DiscussionId" class="btn btn-medium btn-success">Enter discussion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 

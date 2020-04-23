@@ -1,7 +1,28 @@
-﻿
+﻿@model HealthyEnvironment.ViewModels.Discussions.DiscussionDetailsViewModel
 @{
     ViewData["Title"] = "DiscussionDetails";
 }
 
 <h2>DiscussionDetails</h2>
 
+<div class="container">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row hidden-md hidden-lg"><h1 class="text-center">@Model.About</h1></div>
+
+                <div class="pull-left col-md-4 col-xs-12 thumb-contenido"><img class="center-block img-responsive" src='@Model.ImageUrl' /></div>
+                <div class="">
+                    <h1 class="hidden-xs hidden-sm">@Model.About</h1>
+                    <hr>
+                    <mediun class="text-primary">@Model.CreatedOn</mediun><br>
+                    <medium><strong>@Model.CreatorName</strong></medium>
+                    <hr>
+                    <p class="text-justify">
+                        @Html.Raw(Model.SanitizedAdditionalInfo)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

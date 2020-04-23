@@ -16,7 +16,7 @@
             <img src=@Model.ImageUrl alt="" style="width:100%">
         </div>
         <div class="bg-white">
-            <p>@Model.Content</p>
+            <p>@Html.Raw(Model.SanitizedContent)</p>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
-﻿using HealthyEnvironment.ViewModels.Comments;
+﻿using Ganss.XSS;
+using HealthyEnvironment.ViewModels.Comments;
 using System;
 using System.Collections.Generic;
 
@@ -19,6 +20,8 @@ namespace HealthyEnvironment.ViewModels.Informations
         public DateTime CreatedOn { get; set; }
 
         public string Content { get; set; }
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(Content);
 
         public IEnumerable<CommentDetailsViewModel> Comments { get; set; } = new HashSet<CommentDetailsViewModel>();
     }

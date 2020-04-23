@@ -73,7 +73,9 @@ namespace HealthyEnvironment.Controllers
 
         public IActionResult DiscussionDetails(string discussionId)
         {
-            return this.View();
+            DiscussionDetailsViewModel model = this.discussionsService.GetDiscussionDetails(discussionId);
+
+            return this.View(model);
         }
     }
 }
