@@ -13,7 +13,7 @@
             <a href="#"><i class="fa fa-user" aria-hidden="true"></i>@Model.CreatorUserName</a>
         </div>
         <div class="post-thumbnail mb-30">
-            <img src=@Model.ImageUrl alt="" style="width:100%">
+            <a href="@Model.ImageUrl" target="_blank"><img src=@Model.ImageUrl alt="" style="width:100%"></a>
         </div>
         <div class="bg-white">
             <p>@Html.Raw(Model.SanitizedContent)</p>

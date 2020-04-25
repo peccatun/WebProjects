@@ -37,7 +37,7 @@ namespace HealthyEnvironment.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateCategoryViewModel model)
+        public async Task<IActionResult> CreateAsync(CreateCategoryViewModel model)
         {
             if (!ModelState.IsValid)
             {

@@ -1,5 +1,6 @@
 ﻿using HealthyEnvironment.Services.Categories;
 using HealthyEnvironment.Services.Discussion;
+using HealthyEnvironment.Services.Solutions;
 using HealthyEnvironment.ViewModels.Discussions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,17 @@ namespace HealthyEnvironment.Controllers
     {
         private readonly ICategoriesService categoriesService;
         private readonly IDiscussionsService discussionsService;
+        private readonly ISolutionsService solutionsService;
 
         public DiscussionsController(
             ICategoriesService categoriesService, 
-            IDiscussionsService discussionsService
+            IDiscussionsService discussionsService,
+            ISolutionsService solutionsService  
             )
         {
             this.categoriesService = categoriesService;
             this.discussionsService = discussionsService;
+            this.solutionsService = solutionsService;
         }
 
         [HttpGet("/Discussions")]
@@ -46,7 +50,7 @@ namespace HealthyEnvironment.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateDiscussion(CreateDiscussionViewModel model)
+        public async Task<IActionResult> CreateDiscussionAsync(CreateDiscussionViewModel model)
         {
             if (!ModelState.IsValid)
             {

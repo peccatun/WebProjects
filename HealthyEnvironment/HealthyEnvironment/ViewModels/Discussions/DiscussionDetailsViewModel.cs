@@ -1,4 +1,5 @@
 ﻿using Ganss.XSS;
+using HealthyEnvironment.ViewModels.Solutions;
 using System;
 using System.Collections.Generic;
 
@@ -19,5 +20,9 @@ namespace HealthyEnvironment.ViewModels.Discussions
         public string AdditionalInfo { get; set; }
 
         public string SanitizedAdditionalInfo => new HtmlSanitizer().Sanitize(AdditionalInfo);
+
+        public CreateSolutionViewModel CreateSolutionModel { get; set; }
+
+        public IEnumerable<SolutionDetailsViewModel> DiscussionSolutions { get; set; }
     }
 }

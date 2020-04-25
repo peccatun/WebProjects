@@ -53,7 +53,7 @@ namespace HealthyEnvironment.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateInformation(CreateInfomationViewModel model)
+        public async Task<IActionResult> CreateInformationAsync(CreateInfomationViewModel model)
         {
             string applicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace HealthyEnvironment.Controllers
 
         [Authorize]
         [HttpPost("/Information")]
-        public async Task<IActionResult> CreateComment(CreateComentViewModel model)
+        public async Task<IActionResult> CreateCommentAsync(CreateComentViewModel model)
         {
             string applicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             model.ApplicationUserId = applicationUserId;

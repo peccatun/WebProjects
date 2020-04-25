@@ -1,5 +1,6 @@
 ﻿using HealthyEnvironment.Data;
 using HealthyEnvironment.Services.Media;
+using HealthyEnvironment.Services.Solutions;
 using HealthyEnvironment.ViewModels.Discussions;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,17 @@ namespace HealthyEnvironment.Services.Discussion
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IMediaService mediaService;
+        private readonly ISolutionsService solutionsService;
 
-        public DiscussionsService(ApplicationDbContext dbContext, IMediaService mediaService)
+        public DiscussionsService(
+            ApplicationDbContext dbContext,
+            IMediaService mediaService,
+            ISolutionsService solutionsService)
         {
             this.dbContext = dbContext;
             this.mediaService = mediaService;
+            this.solutionsService = solutionsService;
+            ;
         }
 
         public async Task CreateDiscussionAsync(CreateDiscussionViewModel model, string applicationUserId)
@@ -71,6 +78,8 @@ namespace HealthyEnvironment.Services.Discussion
                     ImageUrl = d.ImageUrl,
                 })
                 .FirstOrDefault();
+
+            discussion.DiscussionSolutions = this.solutionsService.GetDiscussionSolutons(discussionId);
 
             return discussion;
         }
