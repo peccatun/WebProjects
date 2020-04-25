@@ -5,25 +5,10 @@
 
 <h2>Discussions in @Model.CategoryName</h2>
 
-@*<div class="container">
-    <div class="row">
-        @foreach (var discussion in Model.Discussions)
-        {
-            <div class="col-lg-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="@discussion.ImageUrl" alt="Card image cap" width="150" height="100">
-                    <div class="card-body">
-                        <h5 class="card-title">@discussion.About</h5>
-                        <p class="card-text">@discussion.AdditionalInfo</p>
-                        <p class="card-text">Started on:@discussion.CreatedOn</p>
-                        <a href="/Discussions/DiscussionDetails?discussionId=@discussion.DiscussionId" class="btn btn-primary">Enter discussion</a>
-                    </div>
-                </div>
-            </div>
+<div class="text-center">
+    <a asp-controller="Discussions" asp-action="CreateDiscussionInCategory" asp-route-categoryId="@Model.CategoryId">Start discussion in this category</a>
+</div>
 
-        }
-    </div>
-</div>*@
 <div class="container">
     @foreach (var discussion in Model.Discussions)
     {

@@ -49,6 +49,18 @@ namespace HealthyEnvironment.Controllers
         }
 
         [Authorize]
+        public IActionResult CreateDiscussionInCategory(string categoryId)
+        {
+            CreateDiscussionViewModel model = new CreateDiscussionViewModel()
+            {
+                Categories = this.categoriesService.GetCategoryNameAndId(),
+                CategoryId = categoryId,
+            };
+
+            return this.View("CreateDiscussion", model);
+        }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateDiscussionAsync(CreateDiscussionViewModel model)
         {
@@ -59,9 +71,9 @@ namespace HealthyEnvironment.Controllers
             }
 
             string applicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await this.discussionsService.CreateDiscussionAsync(model, applicationUserId);
+            string discussionId = await this.discussionsService.CreateDiscussionAsync(model, applicationUserId);
 
-            return this.Redirect("/Discussions");
+            return this.RedirectToAction("DiscussionDetails", "Discussions", new { discussionId });
         }
 
         public IActionResult DiscussionsInCategory(string categoryId)
@@ -70,6 +82,7 @@ namespace HealthyEnvironment.Controllers
             {
                 Discussions = this.discussionsService.GetDiscussionsInCategory(categoryId),
                 CategoryName = this.categoriesService.GetCategoryName(categoryId),
+                CategoryId = categoryId,
             };
 
             return this.View(model);

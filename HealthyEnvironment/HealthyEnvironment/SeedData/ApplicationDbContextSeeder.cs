@@ -7,14 +7,18 @@ using HealthyEnvironment.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace HealthyEnvironment.SeedData
 {
+    
+
     public class ApplicationDbContextSeeder
     {
         private readonly ApplicationDbContext dbContext;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+
 
         public ApplicationDbContextSeeder(IServiceProvider serviceProvider, ApplicationDbContext dbContext)
         {
@@ -25,12 +29,13 @@ namespace HealthyEnvironment.SeedData
 
         public async Task SeedDataAsync()
         {
-
             await SeedUserAsync();
             await SeedRoleAsync();
             await SeedUserToRoleAsync();
             await SeedCategoriesAsync();
             await SeedInformationAsync();
+            await SeedDiscussionAsync();
+            await SeedSolutionsAsync();
         }
 
         private async Task SeedUserToRoleAsync()
@@ -66,7 +71,7 @@ namespace HealthyEnvironment.SeedData
             var newRole = new IdentityRole()
             {
                 Name = "Admin"
-                
+
             };
 
             await roleManager.CreateAsync(newRole);
@@ -77,7 +82,7 @@ namespace HealthyEnvironment.SeedData
         {
             var user = await userManager.FindByNameAsync("Admin");
 
-            if (user!= null)
+            if (user != null)
             {
                 return;
             }
@@ -180,6 +185,144 @@ namespace HealthyEnvironment.SeedData
             }
 
             await dbContext.SaveChangesAsync();
+        }
+
+        private async Task SeedDiscussionAsync()
+        {
+            if (dbContext.Discussions.Any())
+            {
+                return;
+            }
+
+
+            string[] categories = { "Random", "GlobalProblems" };
+            var user = await userManager.FindByNameAsync("Admin");
+            int imageUrlContainerIndex = 0;
+
+            for (int i = 0; i < 2; i++)
+            {
+                string categoryId = dbContext.Categories.Where(c => c.Name == categories[i]).Select(c => c.Id).FirstOrDefault();
+
+                for (int j = 0; j < 6; j++)
+                {
+                    string additionalInfo = DiscussionAdditInfoGenerator(j);
+                    string imageUrl = ImageUrlContainer(imageUrlContainerIndex);
+                    imageUrlContainerIndex++;
+                    Discussion discussion = new Discussion
+                    {
+                        About = $"Test discussion about {j}",
+                        AdditionalInfo = additionalInfo,
+                        ApplicationUserId = user.Id,
+                        OpenedOn = DateTime.UtcNow,
+                        IsApproved = true,
+                        IsDeleted = false,
+                        CategoryId = categoryId,
+                        ImageUrl = imageUrl,
+                    };
+
+                    await dbContext.Discussions.AddAsync(discussion);
+                }
+            }
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        private async Task SeedSolutionsAsync()
+        {
+            if (dbContext.Solutions.Any())
+            {
+                return;
+            }
+
+            var user = await userManager.FindByNameAsync("Admin");
+            string applicationUserId = user.Id;
+            string content = SolutionContentGenerator();
+            string imageUrl = string.Empty;
+
+            for (int i = 0; i < 10; i++)
+            {
+                string discussionId = DiscussionIdsContainer(i);
+
+                for (int j = 0; j < 6; j++)
+                {
+                    imageUrl = null;
+
+                    if (j % 2 == 0)
+                    {
+                        imageUrl = ImageUrlContainer(j);
+                    }
+
+                    Solution solution = new Solution
+                    {
+                        IsDeleted = false,
+                        PostedOn = DateTime.UtcNow,
+                        DiscussionId = discussionId,
+                        ApplicationUserId = applicationUserId,
+                        Content = content,
+                        ImageUrl = imageUrl,
+                    };
+
+                    await dbContext.Solutions.AddAsync(solution);
+                }
+            }
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        private string DiscussionAdditInfoGenerator(int j)
+        {
+            StringBuilder additionalInfoResult = new StringBuilder();
+
+            for (int i = 0; i < 50; i++)
+            {
+                additionalInfoResult.Append($"This is random Additional info from seed generator with i = {i} and j= {j}");
+            }
+
+            return additionalInfoResult.ToString();
+        }
+
+        private string ImageUrlContainer(int i)
+        {
+            string[] imageUrls =
+            {
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587577825/vf6pkzwwjpheibmgbis3.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587576286/ztfsbn7sukng0ombdu39.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1586710824/sample.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587296025/oqq0vwuxjzs9pttp6sdx.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587488018/mscb8r6gpelxyvl1qekg.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587577879/vaymqsjt71xcwee9qpez.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587662437/qfamzcghcujosq9fcegu.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587746253/c3ww2oatouyeyvnssrih.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587810238/wzzd91u3epa7bsseko4p.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587820875/c3ldaby59rid3vzm7ta3.png",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587819055/yuwmfi39j5ymq1upqobl.jpg",
+                "https://res.cloudinary.com/dgdburirj/image/upload/v1587491391/i3ybreg5trff0j3zvb5e.jpg",
+
+            };
+
+            return imageUrls[i];
+        }
+
+        private string DiscussionIdsContainer(int i)
+        {
+            string[] discussionIds = dbContext
+                .Discussions
+                .Select(d => d.Id)
+                .ToArray();
+
+            return discussionIds[i];
+        }
+
+        private string SolutionContentGenerator()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < 10; i++)
+            {
+                sb.Append($"The solution content is generated from the seed method SolutionContentGenerator with index {i} ");
+            }
+
+            return sb.ToString();
         }
     }
 }

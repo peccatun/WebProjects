@@ -39,7 +39,7 @@
                                    ]
                                });
                 </script>
-                <form action="" method="post" role="form" class="contactForm" enctype="multipart/form-data">
+                <form asp-controller="Discussions" asp-action="CreateDiscussion" method="post" role="form" class="contactForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label asp-for="@Model.About"></label>
                         <input asp-for="@Model.About" type="text" class="form-control" id="name" placeholder="Discussion topic" data-rule="minlen:4"

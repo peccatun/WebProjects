@@ -6,7 +6,7 @@ namespace HealthyEnvironment.Services.Discussion
 {
     public interface IDiscussionsService
     {
-        Task CreateDiscussionAsync(CreateDiscussionViewModel model, string applicationUserId);
+        Task<string> CreateDiscussionAsync(CreateDiscussionViewModel model, string applicationUserId);
 
         IEnumerable<DiscussionsInCategoryDetailViewModel> GetDiscussionsInCategory(string categoryId);
 

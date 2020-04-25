@@ -26,7 +26,7 @@ namespace HealthyEnvironment.Services.Discussion
             ;
         }
 
-        public async Task CreateDiscussionAsync(CreateDiscussionViewModel model, string applicationUserId)
+        public async Task<string> CreateDiscussionAsync(CreateDiscussionViewModel model, string applicationUserId)
         {
             string imageUrl = await this.mediaService.UploadPictureAsync(model.Image);
 
@@ -44,6 +44,8 @@ namespace HealthyEnvironment.Services.Discussion
 
             await this.dbContext.AddAsync(discussion);
             await this.dbContext.SaveChangesAsync();
+
+            return discussion.Id;
         }
 
         public IEnumerable<DiscussionCategoryDetailsViewModel> GetDiscussionCategories()

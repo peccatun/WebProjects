@@ -7,5 +7,7 @@ namespace HealthyEnvironment.ViewModels.Discussions
         public IEnumerable<DiscussionsInCategoryDetailViewModel> Discussions { get; set; }
 
         public string CategoryName { get; set; }
+
+        public string CategoryId { get; set; }
     }
 }
