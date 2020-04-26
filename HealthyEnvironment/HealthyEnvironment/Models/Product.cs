@@ -43,5 +43,7 @@ namespace HealthyEnvironment.Models
         public bool IsDeleted { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string AdditionalImageUrlsJson { get; set; }
     }
 }

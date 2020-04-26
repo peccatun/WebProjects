@@ -10,9 +10,9 @@ namespace HealthyEnvironment.Areas.Administration.Controllers
     [Authorize(Roles = "Admin")]
     public class InformationController : Controller
     {
-        private readonly IInformationService informationService;
+        private readonly IInformationServiceAdmin informationService;
 
-        public InformationController(IInformationService informationService)
+        public InformationController(IInformationServiceAdmin informationService)
         {
             this.informationService = informationService;
         }

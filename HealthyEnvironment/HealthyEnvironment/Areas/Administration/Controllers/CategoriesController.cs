@@ -10,9 +10,9 @@ namespace HealthyEnvironment.Areas.Administration.Controllers
     [Authorize(Roles ="Admin")]
     public class CategoriesController : Controller
     {
-        private readonly ICategoriesService categoriesService;
+        private readonly ICategoriesServiceAdmin categoriesService;
 
-        public CategoriesController(ICategoriesService categoriesService)
+        public CategoriesController(ICategoriesServiceAdmin categoriesService)
         {
             this.categoriesService = categoriesService;
         }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HealthyEnvironment.Services.Media
 {
@@ -18,6 +19,22 @@ namespace HealthyEnvironment.Services.Media
         {
             this.cloudinary = cloudinary;
         }
+
+        public async Task<string> UploadMultiplePicturesAsync(IFormFile[] files)
+        {
+            List<string> imageUrls = new List<string>();
+
+            foreach (var file in files)
+            {
+                string imageUrl = await UploadPictureAsync(file);
+                imageUrls.Add(imageUrl);
+            }
+
+            var json = JsonConvert.SerializeObject(imageUrls);
+
+            return json;
+        }
+
         public async Task<string> UploadPictureAsync(IFormFile file)
         {
             if (file == null)

@@ -44,16 +44,15 @@ namespace HealthyEnvironment
             
             services.AddTransient<IMediaService, MediaService>();
             services.AddTransient<ICommentsService, CommentsService>();
-            services.AddTransient<IDiscussionsService, DiscussionsService>();
             services.AddTransient<ISolutionsService, SolutionsService>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<IInformationService, InformationService>();
+            services.AddTransient<IDiscussionsService, DiscussionsService>();
 
             //Admin services
-            services.AddTransient<Areas.Administration.Services.IInformationService,
-                Areas.Administration.Services.InformationService>();
-            services.AddTransient<Services.Information.IInformationService, Services.Information.InformationService>();
-            services.AddTransient<Areas.Administration.Services.ICategoriesService, Areas.Administration.Services.CategoriesService>();
-            services.AddTransient<Services.Categories.ICategoriesService,
-                Services.Categories.CategoriesService>();
+            services.AddTransient<IInformationServiceAdmin, InformationServiceAdmin>();
+            services.AddTransient<ICategoriesServiceAdmin, CategoriesServiceAdmin>();
+            services.AddTransient<IProductsServiceAdmin, ProductsServiceAdmin>();
 
             services.AddDefaultIdentity<ApplicationUser>(
                 options =>

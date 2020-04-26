@@ -9,5 +9,7 @@ namespace HealthyEnvironment.Services.Media
     public interface IMediaService
     {
         Task<string> UploadPictureAsync(IFormFile file);
+
+        Task<string> UploadMultiplePicturesAsync(IFormFile[] files);
     }
 }
