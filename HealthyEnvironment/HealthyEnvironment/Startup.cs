@@ -22,6 +22,7 @@ using HealthyEnvironment.Services.Information;
 using HealthyEnvironment.Services.Comments;
 using HealthyEnvironment.Services.Discussion;
 using HealthyEnvironment.Services.Solutions;
+using HealthyEnvironment.Services.Products;
 
 namespace HealthyEnvironment
 {
@@ -44,6 +45,7 @@ namespace HealthyEnvironment
             
             services.AddTransient<IMediaService, MediaService>();
             services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<IProductsService, ProductsService> ();
             services.AddTransient<ISolutionsService, SolutionsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IInformationService, InformationService>();

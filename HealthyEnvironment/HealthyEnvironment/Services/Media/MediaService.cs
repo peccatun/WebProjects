@@ -22,6 +22,16 @@ namespace HealthyEnvironment.Services.Media
 
         public async Task<string> UploadMultiplePicturesAsync(IFormFile[] files)
         {
+            if (files == null)
+            {
+                return null;
+            }
+
+            if (files.Count() == 0)
+            {
+                return null;
+            }
+
             List<string> imageUrls = new List<string>();
 
             foreach (var file in files)

@@ -31,6 +31,7 @@ namespace HealthyEnvironment.Areas.Administration.ViewModels.Products
         [Display(Name = "Product quantity")]
         public int Count { get; set; }
 
+        [MaxLength(8)]
         [Display(Name = "Additional Images")]
         public IFormFile[] AdditionalImages { get; set; }
 
