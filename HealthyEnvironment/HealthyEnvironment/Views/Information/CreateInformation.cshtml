@@ -66,6 +66,13 @@
                                 <span asp-validation-for="@Model.Image"></span>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.AdditionalImages"></label>
+                            <input asp-for="@Model.AdditionalImages"/>
+                            <div class="validation">
+                                <span asp-validation-for="@Model.AdditionalImages"></span>
+                            </div>
+                        </div>
 
                         <div class="text-center"><button type="submit" class="line-btn green">Submit Information</button></div>
                     </div>

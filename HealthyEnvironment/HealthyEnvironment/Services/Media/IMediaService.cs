@@ -11,5 +11,7 @@ namespace HealthyEnvironment.Services.Media
         Task<string> UploadPictureAsync(IFormFile file);
 
         Task<string> UploadMultiplePicturesAsync(IFormFile[] files);
+
+        string[] ConvertJsonToStringArray(string json);
     }
 }

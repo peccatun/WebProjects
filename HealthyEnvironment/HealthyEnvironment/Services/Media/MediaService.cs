@@ -20,6 +20,18 @@ namespace HealthyEnvironment.Services.Media
             this.cloudinary = cloudinary;
         }
 
+        public string[] ConvertJsonToStringArray(string json)
+        {
+            if (json == null)
+            {
+                return null;
+            }
+
+            string[] jsonToArray = JsonConvert.DeserializeObject<string[]>(json);
+
+            return jsonToArray;
+        }
+
         public async Task<string> UploadMultiplePicturesAsync(IFormFile[] files)
         {
             if (files == null)

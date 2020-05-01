@@ -32,6 +32,8 @@ namespace HealthyEnvironment.Models
 
         public DateTime CreatedOn { get; set; }
 
+        public string AdditionalImageUrlsJson { get; set; }
+
         [Required]
         public string CategoryId { get; set; }
 

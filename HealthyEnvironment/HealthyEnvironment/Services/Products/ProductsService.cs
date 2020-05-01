@@ -1,4 +1,5 @@
 ﻿using HealthyEnvironment.Data;
+using HealthyEnvironment.Services.Media;
 using HealthyEnvironment.ViewModels.Categories;
 using HealthyEnvironment.ViewModels.Products;
 using Newtonsoft.Json;
@@ -9,28 +10,15 @@ namespace HealthyEnvironment.Services.Products
     public class ProductsService : IProductsService
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IMediaService mediaService;
 
-        public ProductsService(ApplicationDbContext dbContext)
+        public ProductsService(
+            ApplicationDbContext dbContext,
+            IMediaService mediaService
+            )
         {
             this.dbContext = dbContext;
-        }
-
-        public string[] GetImageArrayFromJson(string productId)
-        {
-            var json = this.dbContext
-                .Products
-                .Where(p => p.Id == productId)
-                .Select(p => p.AdditionalImageUrlsJson)
-                .FirstOrDefault();
-
-            if (string.IsNullOrEmpty(json))
-            {
-                return null;
-            }
-
-            string[] jsonToArray = JsonConvert.DeserializeObject<string[]>(json);
-
-            return jsonToArray;
+            this.mediaService = mediaService;
         }
 
         public ProductCategoryListViewModel GetProductCategories()
@@ -58,7 +46,13 @@ namespace HealthyEnvironment.Services.Products
 
         public ProductDetailsViewModel GetProductDetails(string productId)
         {
-            string[] additionalImageUrls = GetImageArrayFromJson(productId);
+            string json = this.dbContext
+                .Products
+                .Where(d => d.Id == productId)
+                .Select(d => d.AdditionalImageUrlsJson)
+                .FirstOrDefault();
+
+            string[] additionalImageUrls = this.mediaService.ConvertJsonToStringArray(json);
 
             ProductDetailsViewModel product = this.dbContext
                 .Products

@@ -15,6 +15,21 @@
         <div class="post-thumbnail mb-30">
             <a href="@Model.ImageUrl" target="_blank"><img src=@Model.ImageUrl alt="" style="width:100%"></a>
         </div>
+        <hr />
+        <h4>Additional images</h4>
+        <div class="pro-img-list">
+            @if (Model.AdditionalImgUrls != null)
+            {
+                @for (int i = 0; i < Model.AdditionalImgUrls.Length; i++)
+                {
+                    <a href="@Model.AdditionalImgUrls[i]" target="_blank">
+                        <img src="@Model.AdditionalImgUrls[i]" alt="" width="150" height="100">
+                    </a>
+                }
+            }
+        </div>
+        <hr />
+        <h4>Information Content</h4>
         <div class="bg-white">
             <p>@Html.Raw(Model.SanitizedContent)</p>
         </div>

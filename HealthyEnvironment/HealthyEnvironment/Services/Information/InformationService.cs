@@ -29,6 +29,7 @@ namespace HealthyEnvironment.Services.Information
         public async Task Create(CreateInfomationViewModel model, string applicationUserId)
         {
             string imgPath = await this.mediaService.UploadPictureAsync(model.Image);
+            string additionalImageJson = await this.mediaService.UploadMultiplePicturesAsync(model.AdditionalImages);
 
             Models.Information information = new Models.Information
             {
@@ -38,6 +39,7 @@ namespace HealthyEnvironment.Services.Information
                 CategoryId = model.CategoryId,
                 ApplicationUserId = applicationUserId,
                 CreatedOn = DateTime.UtcNow,
+                AdditionalImageUrlsJson = additionalImageJson,
                 IsDeleted = false,
                 IsApproved = false,
             };
@@ -65,6 +67,14 @@ namespace HealthyEnvironment.Services.Information
 
         public InformationDetailsViewModel GetInformationDetails(string informationId)
         {
+            string imageUrlsJson = this.dbContext
+                .Information
+                .Where(i => i.Id == informationId)
+                .Select(i => i.AdditionalImageUrlsJson)
+                .FirstOrDefault();
+
+            string[] additionalImgUrls = this.mediaService.ConvertJsonToStringArray(imageUrlsJson);
+
             InformationDetailsViewModel information = dbContext
                 .Information
                 .Where(i => i.Id == informationId)
@@ -76,6 +86,7 @@ namespace HealthyEnvironment.Services.Information
                     CreatedOn = i.CreatedOn,
                     CreatorId = i.ApplicationUserId,
                     CreatorUserName = i.ApplicationUser.UserName,
+                    AdditionalImgUrls = additionalImgUrls,
                     ImageUrl = i.ImageUrl,
                 })
                 .FirstOrDefault();

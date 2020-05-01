@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HealthyEnvironment.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin,MotherFucker")]
     public class CategoriesController : Controller
     {
         private readonly ICategoriesServiceAdmin categoriesService;

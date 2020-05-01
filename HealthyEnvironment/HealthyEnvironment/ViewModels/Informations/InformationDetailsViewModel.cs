@@ -23,6 +23,8 @@ namespace HealthyEnvironment.ViewModels.Informations
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(Content);
 
+        public string[] AdditionalImgUrls { get; set; }
+
         public IEnumerable<CommentDetailsViewModel> Comments { get; set; } = new HashSet<CommentDetailsViewModel>();
     }
 }

@@ -27,6 +27,10 @@ namespace HealthyEnvironment.ViewModels.Informations
         [Display(Name = "Add in category")]
         public string CategoryId { get; set; }
 
+        [MaxLength(7)]
+        [Display(Name = "Additional Images")]
+        public IFormFile[] AdditionalImages { get; set; }
+
         public IEnumerable<CategoryDropDownViewModel> Categories { get; set; }
     }
 }

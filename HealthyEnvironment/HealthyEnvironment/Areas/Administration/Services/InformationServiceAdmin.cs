@@ -1,5 +1,6 @@
 ﻿using HealthyEnvironment.Areas.Administration.ViewModels.Information;
 using HealthyEnvironment.Data;
+using HealthyEnvironment.Services.Media;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,10 +10,15 @@ namespace HealthyEnvironment.Areas.Administration.Services
     public class InformationServiceAdmin : IInformationServiceAdmin
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IMediaService mediaService;
 
-        public InformationServiceAdmin(ApplicationDbContext dbContext)
+        public InformationServiceAdmin(
+            ApplicationDbContext dbContext,
+            IMediaService mediaService
+            )
         {
             this.dbContext = dbContext;
+            this.mediaService = mediaService;
         }
 
         public IEnumerable<InformationViewModel> GetAllInformation()
@@ -33,6 +39,14 @@ namespace HealthyEnvironment.Areas.Administration.Services
 
         public InformationDetailsViewModel GetInformationById(string informationId)
         {
+            string json = this.dbContext
+                .Information
+                .Where(i => i.Id == informationId)
+                .Select(i => i.AdditionalImageUrlsJson)
+                .FirstOrDefault();
+
+            string[] additionalImgUrls = this.mediaService.ConvertJsonToStringArray(json);
+
             InformationDetailsViewModel information = this.dbContext
                 .Information
                 .Where(i => i.Id == informationId)
@@ -47,6 +61,7 @@ namespace HealthyEnvironment.Areas.Administration.Services
                     CategoryName = i.Category.Name,
                     IsApproved = i.IsApproved,
                     IsDeleted = i.IsDeleted,
+                    AdditionalImgUrls = additionalImgUrls,
                 })
                 .FirstOrDefault();
 

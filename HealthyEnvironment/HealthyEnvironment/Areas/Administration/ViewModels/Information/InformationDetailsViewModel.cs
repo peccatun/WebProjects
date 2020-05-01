@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ganss.XSS;
+using System;
 
 namespace HealthyEnvironment.Areas.Administration.ViewModels.Information
 {
@@ -14,6 +15,8 @@ namespace HealthyEnvironment.Areas.Administration.ViewModels.Information
 
         public string Content { get; set; }
 
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(Content);
+
         public string CategoryName { get; set; }
 
         public DateTime CreatedOn { get; set; }
@@ -21,5 +24,7 @@ namespace HealthyEnvironment.Areas.Administration.ViewModels.Information
         public bool IsApproved { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public string[] AdditionalImgUrls { get; set; }
     }
 }

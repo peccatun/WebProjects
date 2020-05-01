@@ -10,7 +10,5 @@ namespace HealthyEnvironment.Services.Products
         ProductCategoryListViewModel GetProductCategories();
 
         ProductDetailsViewModel GetProductDetails(string productId);
-
-        string[] GetImageArrayFromJson(string productId);
     }
 }
