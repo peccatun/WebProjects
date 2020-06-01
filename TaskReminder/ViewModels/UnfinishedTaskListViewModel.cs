@@ -4,6 +4,6 @@ namespace TaskReminder.ViewModels
 {
     public class UnfinishedTaskListViewModel
     {
-        public IEnumerable<UnfinishedTaskViewModel> UnfinishedTasks  { get; set; }
+        public IEnumerable<UnfinishedTaskViewModel> UnfinishedTasks { get; set; }
     }
 }
