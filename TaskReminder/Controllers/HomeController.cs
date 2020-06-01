@@ -20,6 +20,11 @@ namespace TaskReminder.Controllers
 
         public IActionResult Index()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return this.RedirectToAction("UserUnfinishedTasks", "Tasks");
+            }
+
             return View();
         }
 

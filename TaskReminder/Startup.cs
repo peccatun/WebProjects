@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TaskReminder.Models;
+using TaskReminder.Services;
 
 namespace TaskReminder
 {
@@ -31,6 +32,9 @@ namespace TaskReminder
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ITasksService, TasksService>();
+
             services.AddDefaultIdentity<ApplicationUser>(
                 options =>
                 {
