@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TaskReminder.InputModels;
 using TaskReminder.Services;
 using TaskReminder.ViewModels;
 
@@ -17,6 +18,14 @@ namespace TaskReminder.Controllers
         {
             this.tasksService = tasksService;
         }
+
+        [HttpGet]
+        public IActionResult CreateTask()
+        {
+            CreateTaskInputModel model = new CreateTaskInputModel();
+            return this.View(model);
+        }
+
         public IActionResult UserUnfinishedTasks()
         {
             string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);

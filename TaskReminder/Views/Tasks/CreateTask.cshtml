@@ -1,0 +1,21 @@
+﻿@model  TaskReminder.InputModels.CreateTaskInputModel
+@{
+    ViewData["Title"] = "CreateTask";
+}
+
+<h1>CreateTask</h1>
+
+<form action="/" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-control">
+        <label asp-for="@Model.Content"></label>
+        <textarea asp-for="@Model.Content"></textarea>>
+        <span asp-validation-for="@Model.Content"></span>
+    </div>
+    <div class="form-control">
+        <label asp-for="@Model.ExpireDay"></label>
+        <input asp-for="@Model.ExpireDay" />
+        <span asp-validation-for="@Model.ExpireDay"></span>
+    </div>
+</form>
+
