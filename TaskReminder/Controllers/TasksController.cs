@@ -23,7 +23,26 @@ namespace TaskReminder.Controllers
         public IActionResult CreateTask()
         {
             CreateTaskInputModel model = new CreateTaskInputModel();
+            model.ApplicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTaskAsync(CreateTaskInputModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            if (!tasksService.IsValidUser(model.ApplicationUserId))
+            {
+                return this.View(model);
+            }
+
+            await tasksService.CreateTaskAsync(model);
+
+            return this.RedirectToAction("UserUnfinishedTasks");
         }
 
         public IActionResult UserUnfinishedTasks()
@@ -35,7 +54,7 @@ namespace TaskReminder.Controllers
                 return this.View("UserWithNoTasks");
             }
 
-            return this.View();
+            return this.View(model);
         }
     }
 }

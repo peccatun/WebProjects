@@ -5,6 +5,26 @@
 }
 
 <h1>UserUnfinishedTasks</h1>
+<hr />
+
+@foreach (var task in Model.UnfinishedTasks)
+{
+    <div class="row">
+        <div class="col">
+            @task.IsCompleated
+        </div>
+        <div class="col">
+            @task.Content
+        </div>
+        <div class="col">
+            @task.ExpireDay
+        </div>
+    </div>
+}
+<br />
+<div class="text-center">
+    <a asp-controller="Tasks" asp-action="CreateTask" class="btn btn-success btn-sm">Create new task</a>
+</div>
 
 
 

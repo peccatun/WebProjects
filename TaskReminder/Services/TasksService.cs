@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TaskReminder.Data;
+using TaskReminder.InputModels;
 using TaskReminder.ViewModels;
 
 namespace TaskReminder.Services
@@ -12,6 +14,20 @@ namespace TaskReminder.Services
         public TasksService(ApplicationDbContext db)
         {
             this.db = db;
+        }
+
+        public async Task CreateTaskAsync(CreateTaskInputModel model)
+        {
+            Models.Task task = new Models.Task
+            {
+                ApplicationUserId = model.ApplicationUserId,
+                Content = model.Content,
+                ExpireDay = model.ExpireDay,
+                IsCompleated = false,
+            };
+
+            await db.Tasks.AddAsync(task);
+            await db.SaveChangesAsync();
         }
 
         public UnfinishedTaskListViewModel GetUserUnfinishedTaskListById(string userId)
@@ -35,6 +51,11 @@ namespace TaskReminder.Services
             };
 
             return unfinishedTaskListModel;
+        }
+
+        public bool IsValidUser(string userId)
+        {
+            return this.db.Users.Any(u => u.Id == userId);
         }
     }
 }
