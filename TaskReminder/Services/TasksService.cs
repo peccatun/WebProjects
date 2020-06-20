@@ -57,5 +57,22 @@ namespace TaskReminder.Services
         {
             return this.db.Users.Any(u => u.Id == userId);
         }
+
+        public UnfinishedTaskDetailsViewModel GetUnfinishedTaskDetails(int taskId)
+        {
+            UnfinishedTaskDetailsViewModel model = this.db.Tasks
+                .Where(t => t.Id == taskId)
+                .Select(t => new UnfinishedTaskDetailsViewModel
+                {
+                    ApplicationUserId = t.ApplicationUserId,
+                    Content = t.Content,
+                    ExpireDay = t.ExpireDay,
+                    IsCompleated = t.IsCompleated,
+                    TaskId = taskId
+                })
+                .FirstOrDefault();
+
+            return model;
+        }
     }
 }

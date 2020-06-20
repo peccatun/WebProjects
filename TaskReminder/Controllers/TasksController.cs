@@ -56,5 +56,15 @@ namespace TaskReminder.Controllers
 
             return this.View(model);
         }
+
+        public IActionResult UnfinishedTaskDetails(int taskId)
+        {
+            UnfinishedTaskDetailsViewModel model = this.tasksService.GetUnfinishedTaskDetails(taskId);
+            if (model == null)
+            {
+                return this.RedirectToAction("UserUnfinishedTasks");
+            }
+            return this.View(model);
+        }
     }
 }

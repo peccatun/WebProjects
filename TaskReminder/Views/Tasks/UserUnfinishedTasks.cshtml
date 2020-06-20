@@ -2,28 +2,41 @@
 
 @{
     ViewData["Title"] = "MyUnfinishedTasks";
+    int i = @Model.UnfinishedTasks.Count();
 }
 
 <h1>UserUnfinishedTasks</h1>
 <hr />
 
-@foreach (var task in Model.UnfinishedTasks)
-{
-    <div class="row">
-        <div class="col">
-            @task.IsCompleated
-        </div>
-        <div class="col">
-            @task.Content
-        </div>
-        <div class="col">
-            @task.ExpireDay
-        </div>
-    </div>
-}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Is Compleated</th>
+            <th scope="col">Content</th>
+            <th scope="col">Finish Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model.UnfinishedTasks)
+        {
+            <tr>
+                <th scope="row">@(i--)</th>
+                <td>@task.IsCompleated</td>
+                <td>@task.Content</td>
+                <td>@task.ExpireDay</td>
+                <td><a asp-controller="Tasks" 
+                       asp-action="UnfinishedTaskDetails" 
+                       asp-route-taskId="@task.TaskId" class="btn btn-secondary">Details</a></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
 <br />
 <div class="text-center">
-    <a asp-controller="Tasks" asp-action="CreateTask" class="btn btn-success btn-sm">Create new task</a>
+    <a asp-controller="Tasks" asp-action="CreateTask" class="btn btn-light btn-lg">Create new task</a>
 </div>
 
 

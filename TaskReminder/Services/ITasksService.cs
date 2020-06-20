@@ -11,5 +11,7 @@ namespace TaskReminder.Services
         bool IsValidUser(string userId);
 
         Task CreateTaskAsync(CreateTaskInputModel model);
+
+        UnfinishedTaskDetailsViewModel GetUnfinishedTaskDetails(int taskId);
     }
 }
