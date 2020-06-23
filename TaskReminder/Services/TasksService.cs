@@ -74,5 +74,35 @@ namespace TaskReminder.Services
 
             return model;
         }
+
+        public EditUnfinishedTaskViewModel GetEditUnfinishedTask(int taskId)
+        {
+            EditUnfinishedTaskViewModel model = this.db.Tasks
+                .Where(t => t.Id == taskId)
+                .Select(t => new EditUnfinishedTaskViewModel
+                {
+                    TaskId = t.Id,
+                    Content = t.Content,
+                    ExpireDate = t.ExpireDay,
+                })
+                .FirstOrDefault();
+
+            return model;
+        }
+
+        public async Task EditUnfinishedTaskByIdAsync(EditUnfinishedTaskInputModel model)
+        {
+            var task = this.db.Tasks.FirstOrDefault(t => t.Id == model.TaskId);
+
+            if (task == null)
+            {
+                return;
+            }
+
+            task.Content = model.Content;
+            task.ExpireDay = model.ExpireDate;
+
+            await db.SaveChangesAsync();
+        }
     }
 }

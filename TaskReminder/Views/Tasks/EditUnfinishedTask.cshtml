@@ -1,0 +1,27 @@
+﻿@model  TaskReminder.ViewModels.EditUnfinishedTaskViewModel
+@{
+    ViewData["Title"] = "EditUnfinishedTask";
+}
+
+<h1>EditUnfinishedTask</h1>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label id="Content"></label>
+        <textarea class="form-control" id="Content" name="Content" rows="4" cols="50" placeholder="Task content...">@Model.Content</textarea>
+        <span asp-validation-for="@Model.Content"></span>
+    </div>
+    <div>
+        <div class="form-control">
+            <label asp-for="@Model.ExpireDate"></label>
+            <input asp-for="@Model.ExpireDate" value="@Model.ExpireDate.Date" />
+            <span asp-validation-for="@Model.ExpireDate"></span>
+        </div>
+    </div>
+    <br />
+    <div class="text-center">
+        <input class="btn btn-lg btn-warning" type="submit" name="submitTask" value="Submit" />
+    </div>
+</form>
+

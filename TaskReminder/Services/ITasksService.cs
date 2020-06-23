@@ -13,5 +13,9 @@ namespace TaskReminder.Services
         Task CreateTaskAsync(CreateTaskInputModel model);
 
         UnfinishedTaskDetailsViewModel GetUnfinishedTaskDetails(int taskId);
+
+        EditUnfinishedTaskViewModel GetEditUnfinishedTask(int taskId);
+
+        Task EditUnfinishedTaskByIdAsync(EditUnfinishedTaskInputModel model);
     }
 }

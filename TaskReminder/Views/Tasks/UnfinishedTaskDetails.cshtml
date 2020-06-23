@@ -7,3 +7,10 @@
 
 <h2>@Model.TaskId</h2>
 
+<blockquote class="blockquote">
+    <p class="mb-0">@Model.Content</p>
+    <footer class="blockquote-footer">Finishing day: <cite title="Source Title">@Model.ExpireDay</cite></footer>
+</blockquote>
+<a class="btn btn-warning btn-lg" asp-controller="Tasks" asp-action="EditUnfinishedTask" asp-route-taskId="@Model.TaskId">Edit</a>
+<a class="btn btn-danger btn-lg" href="#">Delete</a>
+

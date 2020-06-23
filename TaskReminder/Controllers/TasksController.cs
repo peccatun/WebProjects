@@ -66,5 +66,23 @@ namespace TaskReminder.Controllers
             }
             return this.View(model);
         }
+
+        public IActionResult EditUnfinishedTask(int taskId)
+        {
+            EditUnfinishedTaskViewModel model = this.tasksService.GetEditUnfinishedTask(taskId);
+            if (model == null)
+            {
+                return this.RedirectToAction("UserUnfinishedTasks");
+            }
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUnfinishedTaskAsync(EditUnfinishedTaskInputModel model)
+        {
+            await this.tasksService.EditUnfinishedTaskByIdAsync(model);
+            return this.RedirectToAction("UnfinishedTaskDetails", new { taskId = model.TaskId });
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "MyUnfinishedTasks";
-    int i = @Model.UnfinishedTasks.Count();
+    int i = 1;
 }
 
 <h1>UserUnfinishedTasks</h1>
@@ -21,7 +21,7 @@
         @foreach (var task in Model.UnfinishedTasks)
         {
             <tr>
-                <th scope="row">@(i--)</th>
+                <th scope="row">@(i++)</th>
                 <td>@task.IsCompleated</td>
                 <td>@task.Content</td>
                 <td>@task.ExpireDay</td>
