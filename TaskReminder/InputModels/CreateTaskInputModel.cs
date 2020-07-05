@@ -14,6 +14,9 @@ namespace TaskReminder.InputModels
         [Display(Name = "Expire day")]
         public DateTime ExpireDay { get; set; }
 
+        [Display(Name = "Expire time")]
+        public DateTime ExpireTime { get; set; }
+
         public string ApplicationUserId { get; set; }
     }
 }

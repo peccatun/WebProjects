@@ -15,5 +15,8 @@ namespace TaskReminder.ViewModels
 
         [Display(Name = "Expire day")]
         public DateTime ExpireDate { get; set; }
+
+        [Display(Name = "Expire time")]
+        public DateTime ExpireTime { get; set; }
     }
 }

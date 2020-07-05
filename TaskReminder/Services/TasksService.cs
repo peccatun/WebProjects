@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TaskReminder.Data;
@@ -18,11 +19,13 @@ namespace TaskReminder.Services
 
         public async Task CreateTaskAsync(CreateTaskInputModel model)
         {
+            DateTime taskExpireDateTime = model.ExpireDay.Date.Add(model.ExpireTime.TimeOfDay);
+
             Models.Task task = new Models.Task
             {
                 ApplicationUserId = model.ApplicationUserId,
                 Content = model.Content,
-                ExpireDay = model.ExpireDay,
+                ExpireDay = taskExpireDateTime,
                 IsCompleated = false,
             };
 
@@ -84,6 +87,7 @@ namespace TaskReminder.Services
                     TaskId = t.Id,
                     Content = t.Content,
                     ExpireDate = t.ExpireDay,
+                    ExpireTime = t.ExpireDay,
                 })
                 .FirstOrDefault();
 
@@ -99,8 +103,10 @@ namespace TaskReminder.Services
                 return;
             }
 
+            DateTime combinedDateTime = model.ExpireDate.Date.Add(model.ExpireTime.TimeOfDay);
+
             task.Content = model.Content;
-            task.ExpireDay = model.ExpireDate;
+            task.ExpireDay = combinedDateTime;
 
             await db.SaveChangesAsync();
         }

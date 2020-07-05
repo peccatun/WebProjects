@@ -23,6 +23,7 @@ namespace TaskReminder.Controllers
         public IActionResult CreateTask()
         {
             CreateTaskInputModel model = new CreateTaskInputModel();
+            model.ExpireDay = DateTime.UtcNow;
             model.ApplicationUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             return this.View(model);
         }

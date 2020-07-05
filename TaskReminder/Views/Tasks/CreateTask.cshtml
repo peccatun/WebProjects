@@ -15,8 +15,11 @@
     <div>
         <div class="form-control">
             <label asp-for="@Model.ExpireDay"></label>
-            <input asp-for="@Model.ExpireDay" value="@DateTime.Now"/>
+            <input asp-for="@Model.ExpireDay" type="date" />
             <span asp-validation-for="@Model.ExpireDay"></span>
+            <label asp-for="@Model.ExpireTime"></label>
+            <input asp-for="@Model.ExpireTime" type="time" />
+            <span asp-validation-for="@Model.ExpireTime"></span>
         </div>
     </div>
     <input type="hidden" name="applicationUserId" value="@Model.ApplicationUserId" />
