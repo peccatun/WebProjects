@@ -28,6 +28,18 @@ namespace TaskReminder.Controllers
             return this.View(model);
         }
 
+        public async Task<IActionResult> DeleteTaskById(int taskId)
+        {
+            if (!this.tasksService.IsValidTask(taskId))
+            {
+                return this.RedirectToAction("UserUnfinishedTasks");
+            }
+
+            await this.tasksService.DeleteTaskByIdAsync(taskId);
+
+            return this.RedirectToAction("UserUnfinishedTasks");
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateTaskAsync(CreateTaskInputModel model)
         {

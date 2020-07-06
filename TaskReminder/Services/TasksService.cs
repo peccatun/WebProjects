@@ -56,11 +56,6 @@ namespace TaskReminder.Services
             return unfinishedTaskListModel;
         }
 
-        public bool IsValidUser(string userId)
-        {
-            return this.db.Users.Any(u => u.Id == userId);
-        }
-
         public UnfinishedTaskDetailsViewModel GetUnfinishedTaskDetails(int taskId)
         {
             UnfinishedTaskDetailsViewModel model = this.db.Tasks
@@ -108,6 +103,24 @@ namespace TaskReminder.Services
             task.Content = model.Content;
             task.ExpireDay = combinedDateTime;
 
+            await db.SaveChangesAsync();
+        }
+
+        public bool IsValidUser(string userId)
+        {
+            return this.db.Users.Any(u => u.Id == userId);
+        }
+
+        public bool IsValidTask(int taskId)
+        {
+            return this.db.Tasks.Any(t => t.Id == taskId);
+        }
+
+        public async Task DeleteTaskByIdAsync(int taskId)
+        {
+            var task = this.db.Tasks.FirstOrDefault(t => t.Id == taskId);
+
+            db.Tasks.Remove(task);
             await db.SaveChangesAsync();
         }
     }

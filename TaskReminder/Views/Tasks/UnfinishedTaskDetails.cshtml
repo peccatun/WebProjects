@@ -12,5 +12,5 @@
     <footer class="blockquote-footer">Finishing day: <cite title="Source Title">@Model.ExpireDay</cite></footer>
 </blockquote>
 <a class="btn btn-warning btn-lg" asp-controller="Tasks" asp-action="EditUnfinishedTask" asp-route-taskId="@Model.TaskId">Edit</a>
-<a class="btn btn-danger btn-lg" href="#">Delete</a>
+<a class="btn btn-danger btn-lg" asp-controller="Tasks" asp-action="DeleteTaskById" asp-route-taskId="@Model.TaskId">Delete</a>
 

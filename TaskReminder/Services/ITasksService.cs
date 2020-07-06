@@ -17,5 +17,9 @@ namespace TaskReminder.Services
         EditUnfinishedTaskViewModel GetEditUnfinishedTask(int taskId);
 
         Task EditUnfinishedTaskByIdAsync(EditUnfinishedTaskInputModel model);
+
+        Task DeleteTaskByIdAsync(int taskId);
+
+        bool IsValidTask(int taskId);
     }
 }
