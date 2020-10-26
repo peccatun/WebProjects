@@ -16,11 +16,11 @@ namespace FurnitureOnlineShop.Models
 
         public string ImageUrl { get; set; }
 
+        public byte[] Image { get; set; }
+
         public bool IsDeleted { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public string[] AdditionalImageUrls { get; set; }
 
         public int CategoryId { get; set; }
 
