@@ -6,21 +6,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FurnitureOnlineShop.Models;
+using FurnitureOnlineShop.Services.Categories;
+using FurnitureOnlineShop.ViewModels.Categories;
 
 namespace FurnitureOnlineShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICategoriesService categoriesService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICategoriesService categoriesService)
         {
             _logger = logger;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            AllCategoriesViewModel model = categoriesService.GetAllCategories();
+
+            return View(model);
         }
 
         public IActionResult Privacy()

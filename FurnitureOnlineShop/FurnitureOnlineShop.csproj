@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="InputModels\" />
+    <Folder Include="ViewModels\Products\" />
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Products\" />
   </ItemGroup>

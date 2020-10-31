@@ -1,7 +1,9 @@
-﻿namespace FurnitureOnlineShop.Services.Categories
+﻿using FurnitureOnlineShop.ViewModels.Categories;
+
+namespace FurnitureOnlineShop.Services.Categories
 {
     public interface ICategoriesService
     {
-        //Create AllCategories Method;
+        AllCategoriesViewModel GetAllCategories();
     }
 }

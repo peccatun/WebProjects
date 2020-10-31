@@ -1,7 +1,9 @@
-﻿namespace FurnitureOnlineShop.ViewModels.Categories
+﻿using System.Collections.Generic;
+
+namespace FurnitureOnlineShop.ViewModels.Categories
 {
     public class AllCategoriesViewModel
     {
-        //Create CategoryDetailsViewModel so you can make a IEnumerable here;
+        public IEnumerable<CategoryDetailsViewModel> AllCategories { get; set; }
     }
 }

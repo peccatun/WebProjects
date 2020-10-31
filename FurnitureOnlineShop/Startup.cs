@@ -12,6 +12,7 @@ using FurnitureOnlineShop.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FurnitureOnlineShop.Services.Categories;
 
 namespace FurnitureOnlineShop
 {
@@ -30,6 +31,9 @@ namespace FurnitureOnlineShop
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ICategoriesService, CategoriesService>();
+
             services.AddDefaultIdentity<IdentityUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;

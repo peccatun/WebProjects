@@ -1,4 +1,6 @@
-﻿@{
+﻿@model FurnitureOnlineShop.ViewModels.Categories.AllCategoriesViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +8,23 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div class="container">
+    <div class="row">
+        @foreach (var category in Model.AllCategories)
+        {
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img src="@category.ImageUrl" class="card-img-top" alt="..." height="200" width="50">
+                    <div class="card-body">
+                        <h5 class="card-title">@category.CategoryName</h5>
+                        <p class="card-text">@category.Description</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
