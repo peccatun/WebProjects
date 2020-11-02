@@ -4,5 +4,6 @@ namespace FurnitureOnlineShop.Controllers
 {
     public class ProductsController : Controller
     {
+        //Create AllProductsInCategory Action;
     }
 }
