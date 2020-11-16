@@ -1,0 +1,32 @@
+﻿@model FurnitureOnlineShop.ViewModels.Products.AllProductsCollectionViewModel
+@{
+    ViewData["Title"] = "AllProductsInCategory";
+}
+
+<h1>@Model.CategoryName</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model.AllProductsList)
+        {
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="..." height="200" width="50">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text">@product.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Price:@product.Price</li>
+                        <li class="list-group-item">Color:@product.Color</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

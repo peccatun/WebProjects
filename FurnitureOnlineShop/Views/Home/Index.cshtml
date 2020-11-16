@@ -9,6 +9,8 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<a asp-area="Administration" asp-controller="Products" asp-action="CreateProduct">Go to administration</a>
+
 <div class="container">
     <div class="row">
         @foreach (var category in Model.AllCategories)
@@ -19,7 +21,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@category.CategoryName</h5>
                         <p class="card-text">@category.Description</p>
-                        <a href="#" class="btn btn-primary">See all @category.CategoryName</a>
+                        <a asp-controller="Products" asp-action="AllProductsInCategory" asp-route-categoryId="@category.CategoryId" class="btn btn-primary">See all @category.CategoryName</a>
                     </div>
                 </div>
             </div>
