@@ -1,0 +1,25 @@
+﻿@model FurnitureOnlineShop.Areas.Administration.InputModels.Categories.CreateCategoryInputModel
+
+<h1>Създайте нова категория</h1>
+
+<form asp-area="Administration" asp-controller="Categories" asp-action="CreateCategory" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.CategoryName"></label>
+        <input asp-for="@Model.CategoryName" class="form-control" />
+        <span asp-validation-for="@Model.CategoryName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description"></label>
+        <input asp-for="@Model.Description" class="form-control" />
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ImageUrl"></label>
+        <input asp-for="@Model.ImageUrl" class="form-control" />
+        <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Създай нова категория</button>
+    </div>
+</form>
+

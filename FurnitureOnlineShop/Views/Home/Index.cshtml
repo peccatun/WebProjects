@@ -8,9 +8,10 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-
-<a asp-area="Administration" asp-controller="Products" asp-action="CreateProduct">Go to administration</a>
-
+<div class="text-center">
+    <a class="btn btn-primary" asp-area="Administration" asp-controller="Home" asp-action="Index">Go to administration</a>
+</div>
+<br />
 <div class="container">
     <div class="row">
         @foreach (var category in Model.AllCategories)

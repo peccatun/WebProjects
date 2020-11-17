@@ -1,7 +1,10 @@
-﻿using FurnitureOnlineShop.Data;
+﻿using FurnitureOnlineShop.Areas.Administration.InputModels.Categories;
+using FurnitureOnlineShop.Data;
+using FurnitureOnlineShop.Models;
 using FurnitureOnlineShop.ViewModels.Categories;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FurnitureOnlineShop.Services.Categories
 {
@@ -12,6 +15,20 @@ namespace FurnitureOnlineShop.Services.Categories
         public CategoriesService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task CreateCategoryAsync(CreateCategoryInputModel input)
+        {
+            Category category = new Category
+            {
+                CategoryName = input.CategoryName,
+                Description = input.Description,
+                ImageUrl = input.ImageUrl,
+            };
+
+            await dbContext.Categories.AddAsync(category);
+
+            await dbContext.SaveChangesAsync();
         }
 
         public AllCategoriesViewModel GetAllCategories()
