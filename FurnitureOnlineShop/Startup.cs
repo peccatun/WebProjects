@@ -16,6 +16,7 @@ using FurnitureOnlineShop.Services.Categories;
 using FurnitureOnlineShop.Services.Products;
 using FurnitureOnlineShop.SeedData;
 using FurnitureOnlineShop.Models;
+using FurnitureOnlineShop.Services.CategoryImages;
 
 namespace FurnitureOnlineShop
 {
@@ -37,6 +38,7 @@ namespace FurnitureOnlineShop
 
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<ICategoryImageService, CategoryImageService>();
 
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FurnitureOnlineShop.Models
@@ -14,7 +15,13 @@ namespace FurnitureOnlineShop.Models
         [StringLength(500)]
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public int CategoryImageId { get; set; }
+
+        public virtual CategoryImage CategoryImage { get; set; }
 
         public virtual IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
     }

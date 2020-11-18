@@ -23,7 +23,6 @@ namespace FurnitureOnlineShop.Services.Products
                 {
                     ProductId = p.Id,
                     Description = p.Description,
-                    ImageUrl = p.ImageUrl,
                     Price = p.Price,
                     ProductName = p.ProductName,
                     Color = p.Color,

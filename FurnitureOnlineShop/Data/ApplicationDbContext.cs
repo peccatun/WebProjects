@@ -18,6 +18,10 @@ namespace FurnitureOnlineShop.Data
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<CategoryImage> CategoryImages { get; set; }
+
+        public DbSet<ProductImage> ProductImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -26,6 +30,16 @@ namespace FurnitureOnlineShop.Data
                 .HasMany(c => c.Products)
                 .WithOne(p => p.Category)
                 .HasForeignKey(p => p.CategoryId);
+
+            builder.Entity<Category>()
+                .HasOne(c => c.CategoryImage)
+                .WithOne(c => c.Category)
+                .HasForeignKey<Category>(c => c.CategoryImageId);
+
+            builder.Entity<Product>()
+                .HasMany(p => p.ProductImages)
+                .WithOne(p => p.Product)
+                .HasForeignKey(p => p.ProductId);
         }
     }
 }

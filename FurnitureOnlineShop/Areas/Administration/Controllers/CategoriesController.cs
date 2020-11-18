@@ -17,6 +17,11 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
             this.categoriesService = categoriesService;
         }
 
+        public IActionResult CategoriesMenu()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult CreateCategory()
         {
@@ -35,5 +40,13 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
 
             return RedirectToAction("Index","Home",new { area =""});
         }
+
+        [HttpGet]
+        public IActionResult AllCategories()
+        {
+            return View();
+        }
+
+        //Create EditCategoryAction
     }
 }
