@@ -10,7 +10,7 @@
         </div>
         <button type="submit">Comment</button>
         <input type="file" asp-for="Image" value="" accept="image/x-png,image/gif/image/jpeg" />
-        <input type="hidden" name="TopicId" value="@Model.TopicId" />
+        <input type="hidden" name="topicId" value="@Model.TopicId" />
     </form>
 
     <textarea asp-for="Content" form="replyForm" rows="5" cols="50" placeholder="Enter your comment here"></textarea>

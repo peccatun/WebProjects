@@ -20,7 +20,9 @@ namespace MySecondTryForum
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                    .UseIISIntegration()
+                    .UseIIS();
                 });
     }
 }

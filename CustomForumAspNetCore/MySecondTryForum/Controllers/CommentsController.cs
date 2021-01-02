@@ -49,7 +49,7 @@ namespace MySecondTryForum.Controllers
             }
             await commentsService.CreateCommentAsync(userName, input);
 
-            return this.Redirect($"/Comments/AllComents?id={input.TopicId}");
+            return this.Redirect($"/Comments/AllComments?topicId={input.TopicId}");
         }
 
         //TODO: Implement Delete action!!!
