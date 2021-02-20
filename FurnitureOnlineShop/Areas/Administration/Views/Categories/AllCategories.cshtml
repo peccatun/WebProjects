@@ -4,3 +4,20 @@
     <h1>Редактирай категория</h1>
 </div>
 
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var category in Model.CategoryCollection)
+    {
+        <div class="col">
+            <div class="card">
+                <img src="@category.ImageUrl" class="card-img-top" alt="..." height="200" width="50">
+                <div class="card-body">
+                    <h5 class="card-title">@category.CategoryName</h5>
+                    <p class="card-text">@category.Description</p>
+                    <a asp-area="Administration" asp-controller="Categories" asp-action="EditCategory" asp-route-categoryId="@category.CategoryId" class="btn btn-primary">content</a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+

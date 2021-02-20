@@ -1,7 +1,9 @@
 ﻿using FurnitureOnlineShop.Areas.Administration.InputModels.Categories;
+using FurnitureOnlineShop.Areas.Administration.ViewModels.Categories;
 using FurnitureOnlineShop.Services.Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using System.Threading.Tasks;
 
 namespace FurnitureOnlineShop.Areas.Administration.Controllers
@@ -44,9 +46,27 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult AllCategories()
         {
-            return View();
+            AllCategoryCollectionViewModel model = categoriesService.GetAllCategoriesForAdmin();
+
+            return View(model);
         }
 
-        //Create EditCategoryAction
+        [HttpGet]
+        public IActionResult EditCategory(int categoryId)
+        {
+            EditCategoryViewModel model = categoriesService.GetEditCategoryInfo(categoryId);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteCategory(int categoryId)
+        {
+            await categoriesService.DeleteCategoryByIdAsync(categoryId);
+
+            var redirectUrl = "AllCategories";
+
+            return Json(new { Url = redirectUrl });
+        }
     }
 }

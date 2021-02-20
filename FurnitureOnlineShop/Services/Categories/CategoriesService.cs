@@ -1,4 +1,5 @@
 ﻿using FurnitureOnlineShop.Areas.Administration.InputModels.Categories;
+using FurnitureOnlineShop.Areas.Administration.ViewModels.Categories;
 using FurnitureOnlineShop.Data;
 using FurnitureOnlineShop.Models;
 using FurnitureOnlineShop.Services.CategoryImages;
@@ -38,6 +39,21 @@ namespace FurnitureOnlineShop.Services.Categories
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteCategoryByIdAsync(int categoryId)
+        {
+            Category categoryToDelete = dbContext.Categories.FirstOrDefault(c => c.Id == categoryId);
+
+            if (categoryToDelete != null)
+            {
+                int categoryImageId = categoryToDelete.CategoryImageId;
+                await categoryImageService.DeleteCategoryImageByIdAsync(categoryImageId);
+
+                dbContext.Categories.Remove(categoryToDelete);
+                await dbContext.SaveChangesAsync();
+            }
+
+        }
+
         public AllCategoriesViewModel GetAllCategories()
         {
             IEnumerable<CategoryDetailsViewModel> model = dbContext.Categories
@@ -57,6 +73,44 @@ namespace FurnitureOnlineShop.Services.Categories
             };
 
             return AllCategories;
+        }
+
+        public AllCategoryCollectionViewModel GetAllCategoriesForAdmin()
+        {
+            IEnumerable<CategoryCollectionDetailsViewModel> model = dbContext.Categories
+                .Where(c => !c.IsDeleted)
+                .Select(c => new CategoryCollectionDetailsViewModel
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.CategoryName,
+                    Description = c.Description,
+                    ImageUrl = categoryImageService.GetImagePathByImageId(c.CategoryImageId),
+                })
+                .ToList();
+
+
+            AllCategoryCollectionViewModel allCategories = new AllCategoryCollectionViewModel
+            {
+                CategoryCollection = model,
+            };
+
+            return allCategories;
+        }
+
+        public EditCategoryViewModel GetEditCategoryInfo(int categoryId)
+        {
+            EditCategoryViewModel model = dbContext.Categories
+                .Where(c => !c.IsDeleted && c.Id == categoryId)
+                .Select(c => new EditCategoryViewModel
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.CategoryName,
+                    Description = c.Description,
+                    ImagePath = categoryImageService.GetImagePathByImageId(c.CategoryImageId),
+                })
+                .FirstOrDefault();
+
+            return model;
         }
     }
 }

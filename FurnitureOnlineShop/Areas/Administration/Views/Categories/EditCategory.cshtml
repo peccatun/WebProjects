@@ -1,0 +1,27 @@
+﻿@model FurnitureOnlineShop.Areas.Administration.ViewModels.Categories.EditCategoryViewModel
+
+<div class="form-group">
+    <label asp-for="@Model.CategoryName"></label>
+    <input asp-for="@Model.CategoryName" class="form-control" />
+    <span asp-validation-for="@Model.CategoryName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="@Model.Description"></label>
+    <input asp-for="@Model.Description" class="form-control" />
+    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+</div>
+<div id="editImageFromAdmin" class="text-center form-group" style="width: 10%; height: 10%">
+    <label asp-for="@Model.ImagePath"></label>
+    <img src="@Model.ImagePath" class="rounded" alt="...">
+</div>
+<div class="form-control">
+    <label asp-for="@Model.NewImage"></label>
+    <input asp-for="@Model.NewImage" />
+</div>
+<hr />
+<div class="text-center">
+    <a class="btn btn-warning btn-lg">Запази промените</a>
+    <a class="btn btn-danger btn-lg" onclick="alertForDelete(@Model.CategoryId)">Изтрий</a>
+    <a class="btn btn-success btn-lg">Назад</a>
+</div>
+asp-area="Administration" asp-controller="Categories" asp-action="DeleteCategory" asp-route-categoryId="@Model.CategoryId"

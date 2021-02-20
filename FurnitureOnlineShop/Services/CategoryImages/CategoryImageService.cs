@@ -17,6 +17,17 @@ namespace FurnitureOnlineShop.Services.CategoryImages
             this.dbContext = dbContext;
         }
 
+        public async Task DeleteCategoryImageByIdAsync(int categoryImageId)
+        {
+            CategoryImage categoryImageToDelete = dbContext.CategoryImages.FirstOrDefault(c => c.Id == categoryImageId);
+
+            if (categoryImageToDelete != null)
+            {
+                dbContext.CategoryImages.Remove(categoryImageToDelete);
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
         public string GetImagePathByImageId(int categoryImageId)
         {
             byte[] imageBytes = dbContext

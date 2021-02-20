@@ -8,5 +8,7 @@ namespace FurnitureOnlineShop.Services.CategoryImages
         Task<int> SaveCategoryImageToDb(IFormFile file);
 
         string GetImagePathByImageId(int categoryImageId);
+
+        Task DeleteCategoryImageByIdAsync(int categoryImageId);
     }
 }

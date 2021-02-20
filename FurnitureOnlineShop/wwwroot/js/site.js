@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function alertForDelete(id) {
+    if (confirm('Сигурни ли сте че искате да изтриете тази категория')) {
+        callDeleteCategoryMethod(id);
+    } else {
 
-// Write your JavaScript code.
+    }
+}
+
+function callDeleteCategoryMethod(id) {
+    $.ajax({
+        url: "DeleteCategory?categoryId=" + id,
+        type: "GET",
+        data: {},
+        dataType: "json",
+        success: function (responce) {
+            alert('Успешно изтрихте избраната категория');
+            window.location.href = responce.url;
+        },
+        error: function () { }
+    });
+}
+
