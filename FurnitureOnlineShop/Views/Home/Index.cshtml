@@ -3,6 +3,11 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <partial name="_TreeViewPartial" />
+    </div>
+</div>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -12,6 +17,7 @@
 <div class="text-center">
     <a class="btn btn-primary" asp-area="Administration" asp-controller="Home" asp-action="Index">Админ Меню</a>
 </div>
+
 <br />
 <div class="container">
     <div class="row">
@@ -30,5 +36,4 @@
         }
     </div>
 </div>
-
 
