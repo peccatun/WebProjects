@@ -23,6 +23,6 @@ namespace FurnitureOnlineShop.Models
 
         public virtual CategoryImage CategoryImage { get; set; }
 
-        public virtual IEnumerable<Product> Products { get; set; } = new HashSet<Product>();
+        public virtual IEnumerable<SubCategory> SubCategories { get; set; } = new HashSet<SubCategory>();
     }
 }

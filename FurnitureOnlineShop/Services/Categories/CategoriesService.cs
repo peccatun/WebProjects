@@ -97,6 +97,21 @@ namespace FurnitureOnlineShop.Services.Categories
             return allCategories;
         }
 
+        public List<CategoryDropDownMenuViewModel> GetCategoryDropDownItems()
+        {
+            var categoryDropDownMenuItems = dbContext
+                .Categories
+                .Where(c => !c.IsDeleted)
+                .Select(c => new CategoryDropDownMenuViewModel
+                {
+                    Text = c.CategoryName,
+                    Value = c.Id.ToString()
+                })
+                .ToList();
+
+                return categoryDropDownMenuItems;
+        }
+
         public EditCategoryViewModel GetEditCategoryInfo(int categoryId)
         {
             EditCategoryViewModel model = dbContext.Categories

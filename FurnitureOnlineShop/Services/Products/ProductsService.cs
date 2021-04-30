@@ -14,11 +14,11 @@ namespace FurnitureOnlineShop.Services.Products
             this.dbContext = dbContext;
         }
 
-        public AllProductsCollectionViewModel GetAllProductsInCategory(int categoryId)
+        public AllProductsCollectionViewModel GetAllProductsInCategory(int subCategoryId)
         {
             List<AllProductsViewModel> productsViewModel = dbContext
                 .Products
-                .Where(p => p.CategoryId == categoryId)
+                .Where(p => p.SubCategoryId == subCategoryId)
                 .Select(p => new AllProductsViewModel
                 {
                     ProductId = p.Id,
@@ -29,16 +29,16 @@ namespace FurnitureOnlineShop.Services.Products
                 })
                 .ToList();
 
-            string categoryName = dbContext
-                .Categories
-                .Where(c => c.Id == categoryId)
-                .Select(c => c.CategoryName)
+            string subCategoryName = dbContext
+                .SubCategories
+                .Where(c => c.Id == subCategoryId)
+                .Select(c => c.SubCategoryName)
                 .FirstOrDefault();
 
             AllProductsCollectionViewModel model = new AllProductsCollectionViewModel
             {
                 AllProductsList = productsViewModel,
-                CategoryName = categoryName,
+                CategoryName = subCategoryName,
             };
             return model;
         }

@@ -22,14 +22,24 @@ namespace FurnitureOnlineShop.Data
 
         public DbSet<ProductImage> ProductImages { get; set; }
 
+        public DbSet<SubCategory> SubCategories { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Category>()
-                .HasMany(c => c.Products)
-                .WithOne(p => p.Category)
-                .HasForeignKey(p => p.CategoryId);
+
+            builder.Entity<SubCategory>()
+                .HasOne(sc => sc.Category)
+                .WithMany(c => c.SubCategories)
+                .HasForeignKey(sb => sb.CategoryId);
+
+            builder.Entity<Product>()
+                .HasOne(p => p.SubCategory)
+                .WithMany(sb => sb.Products)
+                .HasForeignKey(p => p.SubCategoryId);
 
             builder.Entity<Category>()
                 .HasOne(c => c.CategoryImage)

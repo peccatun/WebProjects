@@ -27,9 +27,9 @@ namespace FurnitureOnlineShop.Models
 
         public DateTime CreatedOn { get; set; }
 
-        public int CategoryId { get; set; }
+        public int SubCategoryId { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
 
         public virtual IEnumerable<ProductImage> ProductImages { get; set; } = new HashSet<ProductImage>();
     }

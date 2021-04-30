@@ -44,6 +44,16 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
         }
 
         [HttpGet]
+        public IActionResult CreateSubCategory()
+        {
+            CreateSubCategoryInputModel model = new CreateSubCategoryInputModel();
+
+            model.CategoryDropDownMenu = categoriesService.GetCategoryDropDownItems();
+
+            return View(model);
+        }
+
+        [HttpGet]
         public IActionResult AllCategories()
         {
             AllCategoryCollectionViewModel model = categoriesService.GetAllCategoriesForAdmin();
