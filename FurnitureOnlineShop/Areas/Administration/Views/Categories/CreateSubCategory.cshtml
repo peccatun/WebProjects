@@ -2,18 +2,22 @@
 @using FurnitureOnlineShop.Areas.Administration.InputModels.Categories;
 
 <h1>Добави под категория</h1>
+<hr  class="bg-light"/>
 
 <form asp-area="Administration" asp-controller="Categories" asp-action="CreateSubCategory" method="post">
     <div class="form-group">
         <label asp-for="@Model.SubCategoryName"></label>
-        <input asp-for="@Model.SubCategoryName"/>
+        <input asp-for="@Model.SubCategoryName"  class="form-control"/>
         <span asp-validation-for="@Model.SubCategoryName" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="@Model.CategoryId"></label>
-        <select asp-for="@Model.CategoryId" asp-items="@Model.CategoryDropDownMenu.Select(c => new SelectListItem(c.Text,c.Value))">
-
+        <select asp-for="@Model.CategoryId" asp-items="@Model.CategoryDropDownMenu.Select(c => new SelectListItem(c.Text,c.Value))" class="form-control">
         </select>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Добави подкатегория</button>
+        <a class="btn btn-danger" asp-area="Administration" asp-controller="Categories" asp-action="CategoriesMenu">Назад</a>
     </div>
 </form>

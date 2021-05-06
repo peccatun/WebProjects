@@ -39,6 +39,20 @@ namespace FurnitureOnlineShop.Services.Categories
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task CreateSubCategory(CreateSubCategoryInputModel model)
+        {
+            SubCategory subCategory = new SubCategory
+            {
+                CreateOn = DateTime.Now,
+                IsDel = false,
+                SubCategoryName = model.SubCategoryName,
+                CategoryId = model.CategoryId
+            };
+
+            await dbContext.SubCategories.AddAsync(subCategory);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task DeleteCategoryByIdAsync(int categoryId)
         {
             Category categoryToDelete = dbContext.Categories.FirstOrDefault(c => c.Id == categoryId);
@@ -67,9 +81,31 @@ namespace FurnitureOnlineShop.Services.Categories
                 })
                 .ToList();
 
+            IEnumerable<CategoryMenuItemViewModel> categoryMenuItems = dbContext
+                .Categories
+                .Where(c => !c.IsDeleted)
+                .Select(c => new CategoryMenuItemViewModel
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.CategoryName,
+                    SubCategories = c.SubCategories.Where(sc => sc.CategoryId == c.Id && !sc.IsDel).Select(sc => new SubCategoryMenuItemViewModel
+                    {
+                        SubCategoryId = sc.Id,
+                        SubCategoryName = sc.SubCategoryName
+                    })
+                    .ToList()
+                })
+                .ToList();
+
+            CategoryMenuViewModel categoryMenuViewModel = new CategoryMenuViewModel
+            {
+                Categories = categoryMenuItems,
+            };
+
             AllCategoriesViewModel AllCategories = new AllCategoriesViewModel
             {
                 AllCategories = model,
+                CategoryMenu = categoryMenuViewModel,
             };
 
             return AllCategories;

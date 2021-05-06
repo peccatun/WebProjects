@@ -11,6 +11,8 @@ namespace FurnitureOnlineShop.Areas.Administration.InputModels.Categories
         [StringLength(100, MinimumLength = 0, ErrorMessage = "{0} трябва да е между {1} и {2} символа.")]
         public string SubCategoryName { get; set; }
 
+        [Required]
+        [Display(Name = "Категория")]
         public int CategoryId { get; set; }
 
         public IEnumerable<CategoryDropDownMenuViewModel> CategoryDropDownMenu { get; set; }

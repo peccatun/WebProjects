@@ -53,6 +53,19 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateSubCategory(CreateSubCategoryInputModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await categoriesService.CreateSubCategory(model);
+
+            return RedirectToAction("Index","Home", new { area=""});
+        }
+
         [HttpGet]
         public IActionResult AllCategories()
         {
