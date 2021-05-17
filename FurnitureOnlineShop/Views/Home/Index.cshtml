@@ -27,13 +27,26 @@
                 <div class="card" style="width: 18rem;">
                     <img src="@category.ImagePath" class="card-img-top" alt="..." height="200" width="50">
                     <div class="card-body">
-                        <h5 class="card-title">@category.CategoryName</h5>
+                        <h5 class="card-title"><a asp-controller="Products" asp-action="AllProductsInCategory" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a></h5>
                         <p class="card-text">@category.Description</p>
-                        <a asp-controller="Products" asp-action="AllProductsInCategory" asp-route-categoryId="@category.CategoryId" class="btn btn-primary">See all @category.CategoryName</a>
+                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#cardMenu_@category.CategoryId" role="button" aria-expanded="false" aria-controls="cardMenu">
+                            Подкатегории
+                        </a>
+                    </div>
+                    <p>
+  
+                    </p>
+                    <div class="collapse" id="cardMenu_@category.CategoryId">
+                        <div class="list-group">
+                            @foreach (var subCategory in category.SubCategories)
+
+                            {
+                                <a href="#" class="list-group-item list-group-item-action">@subCategory.SubCategoryName</a>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
-

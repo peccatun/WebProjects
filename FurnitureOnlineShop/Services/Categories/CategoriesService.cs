@@ -78,6 +78,12 @@ namespace FurnitureOnlineShop.Services.Categories
                     CategoryName = c.CategoryName,
                     Description = c.Description,
                     ImagePath = categoryImageService.GetImagePathByImageId(c.CategoryImageId),
+                    SubCategories = c.SubCategories.Where(sc => sc.CategoryId == c.Id && !c.IsDeleted).Select(sc => new SubCategoryMenuItemViewModel
+                    {
+                        SubCategoryId = sc.Id,
+                        SubCategoryName = sc.SubCategoryName
+                    })
+                    .ToList()
                 })
                 .ToList();
 
