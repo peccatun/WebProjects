@@ -1,7 +1,50 @@
-﻿
+﻿@model FurnitureOnlineShop.Areas.Administration.InputModels.Products.CreateProductInputModel
 @{
     ViewData["Title"] = "CreateProduct";
 }
+<div class="text-center">
+    <h1>Добави продукт</h1>
+</div>
 
-<h1>Hello from administration create product view</h1>
+
+<form asp-area="Administration" asp-controller="Products" asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="@Model.ProductName."></label>
+        <input asp-for="@Model.ProductName" class="form-control"/>
+        <span asp-validation-for="@Model.ProductName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description"></label>
+        <input asp-for="@Model.Description" class="form-control" />
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Color"></label>
+        <input asp-for="@Model.Color" class="form-control" />
+        <span asp-validation-for="@Model.Color" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Price"></label>
+        <input asp-for="@Model.Price" class="form-control" />
+        <span asp-validation-for="@Model.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Quantity"></label>
+        <input asp-for="@Model.Quantity" class="form-control" />
+        <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.SubCategoryId"></label>
+        <select asp-for="@Model.SubCategoryId" asp-items="@Model.SubCategories.Select(sc => new SelectListItem(sc.Text,sc.Value))" class="form-control">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.ProductImagePath"></label>
+        <input asp-for="@Model.ProductImagePath" class="form-control" />
+        <span asp-validation-for="@Model.ProductImagePath" class="text-danger"></span>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg">Добави</button>
+    </div>
+</form>
 

@@ -47,9 +47,9 @@ namespace FurnitureOnlineShop.Data
                 .HasForeignKey<Category>(c => c.CategoryImageId);
 
             builder.Entity<Product>()
-                .HasMany(p => p.ProductImages)
-                .WithOne(p => p.Product)
-                .HasForeignKey(p => p.ProductId);
+                .HasOne(p => p.ProductImage)
+                .WithOne(pc => pc.Product)
+                .HasForeignKey<ProductImage>(pc => pc.ProductId);
         }
     }
 }

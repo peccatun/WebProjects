@@ -139,12 +139,12 @@ namespace FurnitureOnlineShop.Services.Categories
             return allCategories;
         }
 
-        public List<CategoryDropDownMenuViewModel> GetCategoryDropDownItems()
+        public List<SubCategoryDropDownMenuViewModel> GetCategoryDropDownItems()
         {
             var categoryDropDownMenuItems = dbContext
                 .Categories
                 .Where(c => !c.IsDeleted)
-                .Select(c => new CategoryDropDownMenuViewModel
+                .Select(c => new SubCategoryDropDownMenuViewModel
                 {
                     Text = c.CategoryName,
                     Value = c.Id.ToString()

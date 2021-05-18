@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FurnitureOnlineShop.Areas.Administration.InputModels.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FurnitureOnlineShop.Areas.Administration.Controllers
@@ -7,9 +8,19 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
     [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
+        [HttpGet]
         public IActionResult CreateProduct()
         {
-            return this.View();
+            CreateProductInputModel model = new CreateProductInputModel();
+
+            return this.View(model);
         }
+
+        public IActionResult ProductsMenu()
+        {
+            return View();
+        }
+
+
     }
 }

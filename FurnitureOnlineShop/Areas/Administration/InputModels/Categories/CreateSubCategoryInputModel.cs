@@ -15,7 +15,7 @@ namespace FurnitureOnlineShop.Areas.Administration.InputModels.Categories
         [Display(Name = "Категория")]
         public int CategoryId { get; set; }
 
-        public IEnumerable<CategoryDropDownMenuViewModel> CategoryDropDownMenu { get; set; }
+        public IEnumerable<SubCategoryDropDownMenuViewModel> CategoryDropDownMenu { get; set; }
 
     }
 }
