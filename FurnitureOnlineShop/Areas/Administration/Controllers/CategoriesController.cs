@@ -4,6 +4,7 @@ using FurnitureOnlineShop.Services.Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FurnitureOnlineShop.Areas.Administration.Controllers
@@ -48,7 +49,7 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
         {
             CreateSubCategoryInputModel model = new CreateSubCategoryInputModel();
 
-            model.CategoryDropDownMenu = categoriesService.GetCategoryDropDownItems();
+            model.CategoryDropDownMenu = categoriesService.GetSubCategoryDropDownItems();
 
             return View(model);
         }

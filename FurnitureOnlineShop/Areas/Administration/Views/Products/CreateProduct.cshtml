@@ -10,7 +10,7 @@
 <form asp-area="Administration" asp-controller="Products" asp-action="CreateProduct" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="@Model.ProductName."></label>
-        <input asp-for="@Model.ProductName" class="form-control"/>
+        <input asp-for="@Model.ProductName" class="form-control" />
         <span asp-validation-for="@Model.ProductName" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -34,8 +34,13 @@
         <span asp-validation-for="@Model.Quantity" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="@Model.CategoryId"></label>
+        <select asp-for="@Model.CategoryId" asp-items="@Model.Categories.Select(sc => new SelectListItem(sc.Text,sc.Value))" class="form-control" onchange="getSubCategoryItems(this.value)">
+        </select>
+    </div>
+    <div class="form-group">
         <label asp-for="@Model.SubCategoryId"></label>
-        <select asp-for="@Model.SubCategoryId" asp-items="@Model.SubCategories.Select(sc => new SelectListItem(sc.Text,sc.Value))" class="form-control">
+        <select asp-for="@Model.SubCategoryId" id="subCategoryDropDown" class="form-control" >
         </select>
     </div>
     <div class="form-group">

@@ -139,7 +139,7 @@ namespace FurnitureOnlineShop.Services.Categories
             return allCategories;
         }
 
-        public List<SubCategoryDropDownMenuViewModel> GetCategoryDropDownItems()
+        public List<SubCategoryDropDownMenuViewModel> GetSubCategoryDropDownItems()
         {
             var categoryDropDownMenuItems = dbContext
                 .Categories
@@ -168,6 +168,36 @@ namespace FurnitureOnlineShop.Services.Categories
                 .FirstOrDefault();
 
             return model;
+        }
+
+        IEnumerable<CategoryDropDownMenuItemViewModel> ICategoriesService.GetCategoryDropDownItems()
+        {
+            IEnumerable<CategoryDropDownMenuItemViewModel> items = dbContext.Categories.
+                Where(c => !c.IsDeleted)
+                .Select(c => new CategoryDropDownMenuItemViewModel
+                {
+                    Text = c.CategoryName,
+                    Value = c.Id.ToString(),
+                })
+                .ToList();
+
+            return items;
+        }
+
+        public List<SubCategoryDropDownMenuViewModel> GetSubCategoryDropDownItems(int categoryId)
+        {
+            List<SubCategoryDropDownMenuViewModel> subCategoryItems = dbContext
+                .SubCategories
+                .Where(sc => !sc.IsDel && sc.CategoryId == categoryId)
+                .Select(sc => new SubCategoryDropDownMenuViewModel
+                {
+                    Text = sc.SubCategoryName,
+                    Value = sc.Id.ToString(),
+                })
+                .ToList();
+
+            return subCategoryItems;
+                
         }
     }
 }

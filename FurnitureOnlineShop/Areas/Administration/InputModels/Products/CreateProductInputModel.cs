@@ -28,13 +28,15 @@ namespace FurnitureOnlineShop.Areas.Administration.InputModels.Products
         [Display(Name = "Налични бройки")]
         public int Quantity { get; set; }
 
-        [Required]
-        [Display(Name = "Подкатегория")]
+        [Display(Name = "Категория")]
+        public int CategoryId { get; set; }
+
+        [Display(Name = "ПодКатегория")]
         public int SubCategoryId { get; set; }
 
         [Display(Name = "Снимка на продукта")]
         public IFormFile ProductImagePath { get; set; }
 
-        public IEnumerable<SubCategoryDropDownMenuViewModel> SubCategories { get; set; } = new HashSet<SubCategoryDropDownMenuViewModel>();
+        public IEnumerable<CategoryDropDownMenuItemViewModel> Categories { get; set; } = new HashSet<CategoryDropDownMenuItemViewModel>();
     }
 }

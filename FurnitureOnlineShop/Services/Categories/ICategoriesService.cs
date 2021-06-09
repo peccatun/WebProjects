@@ -18,8 +18,12 @@ namespace FurnitureOnlineShop.Services.Categories
 
         Task DeleteCategoryByIdAsync(int categoryId);
 
-        List<SubCategoryDropDownMenuViewModel> GetCategoryDropDownItems();
+        List<SubCategoryDropDownMenuViewModel> GetSubCategoryDropDownItems();
 
         Task CreateSubCategory(CreateSubCategoryInputModel model);
+
+        IEnumerable<CategoryDropDownMenuItemViewModel> GetCategoryDropDownItems();
+
+        List<SubCategoryDropDownMenuViewModel> GetSubCategoryDropDownItems(int categoryId);
     }
 }
