@@ -49,3 +49,30 @@ function clearList(list1) {
     }
 }
 
+function addColor() {
+    var text = document.getElementById("colorName").value;
+
+    $.ajax({
+        url: "AddColor?color=" + text,
+        type: "GET",
+        data: {},
+        dataType: "Json",
+        success: function (colors) {
+            var colorsSelect = document.getElementById("colorsSelect");
+            clearList(colorsSelect);
+            for (var i = 0; i < colors.length; i++) {
+                var opt = colors[i].text;
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = colors[i].value;
+                colorsSelect.appendChild(el);
+            }
+        },
+        error: function () {
+
+        }
+
+    })
+
+}
+

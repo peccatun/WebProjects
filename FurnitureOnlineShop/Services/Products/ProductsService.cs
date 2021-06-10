@@ -25,7 +25,7 @@ namespace FurnitureOnlineShop.Services.Products
                     Description = p.Description,
                     Price = p.Price,
                     ProductName = p.ProductName,
-                    Color = p.Color,
+                    Color = p.Color.ColorName,
                 })
                 .ToList();
 

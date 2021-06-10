@@ -19,10 +19,8 @@ namespace FurnitureOnlineShop.Models
         [StringLength(500)]
         public string Description { get; set; }
 
-        [MaxLength(50)]
-        [StringLength(50)]
-        public string Color { get; set; }
-
+        [Required]
+        public int ColorId { get; set; }
 
         public int Quantity { get; set; }
 
@@ -41,6 +39,8 @@ namespace FurnitureOnlineShop.Models
         public virtual SubCategory SubCategory { get; set; }
 
         public virtual ProductImage ProductImage { get; set; }
+
+        public virtual Color Color { get; set; }
 
     }
 }

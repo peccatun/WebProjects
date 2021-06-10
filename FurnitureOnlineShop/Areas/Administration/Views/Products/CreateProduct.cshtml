@@ -19,9 +19,20 @@
         <span asp-validation-for="@Model.Description" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="@Model.Color"></label>
-        <input asp-for="@Model.Color" class="form-control" />
-        <span asp-validation-for="@Model.Color" class="text-danger"></span>
+        <label asp-for="@Model.ColorId"></label>
+        <select asp-for="@Model.ColorId" asp-items="@Model.Colors.Select(c => new SelectListItem(c.Text,c.Value))" class="form-control" id="colorsSelect">
+        </select>
+        <span asp-validation-for="@Model.ColorId" class="text-danger"></span>
+        <a class="btn btn-success btn-sm" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Добави цвят
+        </a>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                <label>Цвят</label>
+                <input type="text" id="colorName" class="form-control" />
+                <a class="btn btn-secondary" onclick="addColor()"></a>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <label asp-for="@Model.Price"></label>
@@ -40,7 +51,7 @@
     </div>
     <div class="form-group">
         <label asp-for="@Model.SubCategoryId"></label>
-        <select asp-for="@Model.SubCategoryId" id="subCategoryDropDown" class="form-control" >
+        <select asp-for="@Model.SubCategoryId" id="subCategoryDropDown" class="form-control">
         </select>
     </div>
     <div class="form-group">

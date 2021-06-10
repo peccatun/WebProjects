@@ -1,4 +1,5 @@
 ﻿using FurnitureOnlineShop.Areas.Administration.InputModels.Categories;
+using FurnitureOnlineShop.Areas.Administration.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,9 +18,9 @@ namespace FurnitureOnlineShop.Areas.Administration.InputModels.Products
         [StringLength(500, MinimumLength = 0, ErrorMessage = "{0} трябва да е между {2} и {1} символа!")]
         public string Description { get; set; }
 
+        [Required]
         [Display(Name = "Цвят")]
-        [StringLength(50, MinimumLength = 0, ErrorMessage = "{0} трябва да е между {2} и {1} символа!")]
-        public string Color { get; set; }
+        public int ColorId { get; set; }
 
         [Required]
         [Display(Name = "Цена")]
@@ -38,5 +39,7 @@ namespace FurnitureOnlineShop.Areas.Administration.InputModels.Products
         public IFormFile ProductImagePath { get; set; }
 
         public IEnumerable<CategoryDropDownMenuItemViewModel> Categories { get; set; } = new HashSet<CategoryDropDownMenuItemViewModel>();
+
+        public IEnumerable<ColorViewModel> Colors { get; set; } = new HashSet<ColorViewModel>();
     }
 }

@@ -24,6 +24,8 @@ namespace FurnitureOnlineShop.Data
 
         public DbSet<SubCategory> SubCategories { get; set; }
 
+        public DbSet<Color> Colors { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -50,6 +52,11 @@ namespace FurnitureOnlineShop.Data
                 .HasOne(p => p.ProductImage)
                 .WithOne(pc => pc.Product)
                 .HasForeignKey<ProductImage>(pc => pc.ProductId);
+
+            builder.Entity<Product>()
+                .HasOne(p => p.Color)
+                .WithOne(c => c.Product)
+                .HasForeignKey<Product>(p => p.ColorId);
         }
     }
 }
