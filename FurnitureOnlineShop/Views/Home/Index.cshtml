@@ -41,7 +41,7 @@
                             @foreach (var subCategory in category.SubCategories)
 
                             {
-                                <a href="#" class="list-group-item list-group-item-action">@subCategory.SubCategoryName</a>
+                                <a asp-controller="SubCategory" asp-action="SubCategoryItems" asp-route-subCategoryId="@subCategory.SubCategoryId" asp- class="list-group-item list-group-item-action">@subCategory.SubCategoryName</a>
                             }
                         </div>
                     </div>

@@ -18,9 +18,7 @@ namespace FurnitureOnlineShop.Data
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<CategoryImage> CategoryImages { get; set; }
-
-        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public DbSet<SubCategory> SubCategories { get; set; }
 
@@ -44,14 +42,14 @@ namespace FurnitureOnlineShop.Data
                 .HasForeignKey(p => p.SubCategoryId);
 
             builder.Entity<Category>()
-                .HasOne(c => c.CategoryImage)
+                .HasOne(c => c.Image)
                 .WithOne(c => c.Category)
-                .HasForeignKey<Category>(c => c.CategoryImageId);
+                .HasForeignKey<Category>(c => c.ImageId);
 
             builder.Entity<Product>()
-                .HasOne(p => p.ProductImage)
+                .HasOne(p => p.Image)
                 .WithOne(pc => pc.Product)
-                .HasForeignKey<ProductImage>(pc => pc.ProductId);
+                .HasForeignKey<Product>(pc => pc.ImageId);
 
             builder.Entity<Product>()
                 .HasOne(p => p.Color)

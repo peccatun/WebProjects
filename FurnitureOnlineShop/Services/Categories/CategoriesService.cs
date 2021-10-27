@@ -2,7 +2,7 @@
 using FurnitureOnlineShop.Areas.Administration.ViewModels.Categories;
 using FurnitureOnlineShop.Data;
 using FurnitureOnlineShop.Models;
-using FurnitureOnlineShop.Services.CategoryImages;
+using FurnitureOnlineShop.Services.Images;
 using FurnitureOnlineShop.ViewModels.Categories;
 using System;
 using System.Collections.Generic;
@@ -14,17 +14,17 @@ namespace FurnitureOnlineShop.Services.Categories
     public class CategoriesService : ICategoriesService
     {
         private readonly ApplicationDbContext dbContext;
-        private readonly ICategoryImageService categoryImageService;
+        private readonly IImageService imageService;
 
-        public CategoriesService(ApplicationDbContext dbContext, ICategoryImageService categoryImageService)
+        public CategoriesService(ApplicationDbContext dbContext, IImageService imageService)
         {
             this.dbContext = dbContext;
-            this.categoryImageService = categoryImageService;
+            this.imageService = imageService;
         }
 
         public async Task CreateCategoryAsync(CreateCategoryInputModel input)
         {
-            int categoryImageId = await categoryImageService.SaveCategoryImageToDb(input.Image);
+            int imageId = await imageService.SaveImageToDbAsync(input.Image);
 
             Category category = new Category
             {
@@ -32,7 +32,7 @@ namespace FurnitureOnlineShop.Services.Categories
                 Description = input.Description,
                 IsDeleted = false,
                 CreatedOn = DateTime.UtcNow,
-                CategoryImageId = categoryImageId,
+                ImageId = imageId,
             };
 
             await dbContext.Categories.AddAsync(category);
@@ -59,8 +59,8 @@ namespace FurnitureOnlineShop.Services.Categories
 
             if (categoryToDelete != null)
             {
-                int categoryImageId = categoryToDelete.CategoryImageId;
-                await categoryImageService.DeleteCategoryImageByIdAsync(categoryImageId);
+                int imageId = categoryToDelete.ImageId;
+                await imageService.DeleteImageByIdAsync(imageId);
 
                 dbContext.Categories.Remove(categoryToDelete);
                 await dbContext.SaveChangesAsync();
@@ -77,7 +77,7 @@ namespace FurnitureOnlineShop.Services.Categories
                     CategoryId = c.Id,
                     CategoryName = c.CategoryName,
                     Description = c.Description,
-                    ImagePath = categoryImageService.GetImagePathByImageId(c.CategoryImageId),
+                    ImagePath = imageService.GetImagePathByImageId(c.ImageId),
                     SubCategories = c.SubCategories.Where(sc => sc.CategoryId == c.Id && !c.IsDeleted).Select(sc => new SubCategoryMenuItemViewModel
                     {
                         SubCategoryId = sc.Id,
@@ -126,7 +126,7 @@ namespace FurnitureOnlineShop.Services.Categories
                     CategoryId = c.Id,
                     CategoryName = c.CategoryName,
                     Description = c.Description,
-                    ImageUrl = categoryImageService.GetImagePathByImageId(c.CategoryImageId),
+                    ImageUrl = imageService.GetImagePathByImageId(c.ImageId),
                 })
                 .ToList();
 
@@ -163,7 +163,7 @@ namespace FurnitureOnlineShop.Services.Categories
                     CategoryId = c.Id,
                     CategoryName = c.CategoryName,
                     Description = c.Description,
-                    ImagePath = categoryImageService.GetImagePathByImageId(c.CategoryImageId),
+                    ImagePath = imageService.GetImagePathByImageId(c.ImageId),
                 })
                 .FirstOrDefault();
 

@@ -1,0 +1,25 @@
+﻿.custom-card {
+    box-shadow: 0 4px 8px 0rgba(0, 0, 0, 0.2);
+    max-width:300px;
+    margin:auto;
+    text-align:center;
+    font-family:Arial;
+}
+
+.price {
+    color:gray;
+    font-size:22px;
+}
+
+.sub-category-image {
+    width: 330px;
+    height: 263px;
+}
+
+.sub-category-box{
+    width:370px;
+    height:500px;
+    padding:10px;
+    border:5px solid gray;
+    margin:0;
+}

@@ -17,13 +17,13 @@ namespace FurnitureOnlineShop.Data.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
-                oldNullable: true);
+                oldNullable: false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId",
-                unique: true);
+                unique: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

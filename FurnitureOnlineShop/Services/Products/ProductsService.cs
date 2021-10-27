@@ -1,17 +1,24 @@
-﻿using FurnitureOnlineShop.Data;
+﻿using FurnitureOnlineShop.Areas.Administration.InputModels.Products;
+using FurnitureOnlineShop.Data;
+using FurnitureOnlineShop.Models;
 using FurnitureOnlineShop.ViewModels.Products;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System;
+using FurnitureOnlineShop.Services.Images;
 
 namespace FurnitureOnlineShop.Services.Products
 {
     public class ProductsService : IProductsService
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IImageService imageService;
 
-        public ProductsService(ApplicationDbContext dbContext)
+        public ProductsService(ApplicationDbContext dbContext, IImageService imageService)
         {
             this.dbContext = dbContext;
+            this.imageService = imageService;
         }
 
         public AllProductsCollectionViewModel GetAllProductsInCategory(int subCategoryId)
@@ -41,6 +48,27 @@ namespace FurnitureOnlineShop.Services.Products
                 CategoryName = subCategoryName,
             };
             return model;
+        }
+
+        public async Task InsertProduct(CreateProductInputModel inputModel)
+        {
+            int imageId = await imageService.SaveImageToDbAsync(inputModel.ProductImagePath);
+            //TODO :Alter database. Product must have image id and category must have image id.
+            Product product = new Product
+            {
+                ColorId = inputModel.ColorId,
+                CreatedOn = DateTime.Now,
+                Description = inputModel.Description,
+                IsDeleted = false,
+                Price = inputModel.Price,
+                Quantity = inputModel.Quantity,
+                SubCategoryId = inputModel.SubCategoryId,
+                ProductName = inputModel.ProductName,
+                ImageId = imageId,
+            };
+
+            await dbContext.Products.AddAsync(product);
+            await dbContext.SaveChangesAsync();
         }
 
         //Create the view and get the view data with this service method!!!

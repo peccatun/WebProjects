@@ -36,9 +36,11 @@ namespace FurnitureOnlineShop.Models
         [Required]
         public int SubCategoryId { get; set; }
 
+        public int ImageId { get; set; }
+
         public virtual SubCategory SubCategory { get; set; }
 
-        public virtual ProductImage ProductImage { get; set; }
+        public virtual Image Image { get; set; }
 
         public virtual Color Color { get; set; }
 

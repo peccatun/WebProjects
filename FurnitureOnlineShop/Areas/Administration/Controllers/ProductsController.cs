@@ -4,6 +4,7 @@ using FurnitureOnlineShop.Areas.Administration.InputModels.Products;
 using FurnitureOnlineShop.Areas.Administration.ViewModels;
 using FurnitureOnlineShop.Services.Categories;
 using FurnitureOnlineShop.Services.Colors;
+using FurnitureOnlineShop.Services.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
     public class ProductsController : Controller
     {
         private readonly ICategoriesService categoriesService;
+        private readonly IProductsService productsService;
         private readonly IColorService colorService;
 
-        public ProductsController(ICategoriesService categoriesService, IColorService colorService)
+        public ProductsController(ICategoriesService categoriesService, IProductsService productsService, IColorService colorService)
         {
             this.categoriesService = categoriesService;
+            this.productsService = productsService;
             this.colorService = colorService;
         }
 
@@ -39,6 +42,13 @@ namespace FurnitureOnlineShop.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductInputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await productsService.InsertProduct(model);
+
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 

@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\ProductImages\**" />
+    <Content Remove="Services\ProductImages\**" />
+    <EmbeddedResource Remove="Services\ProductImages\**" />
+    <None Remove="Services\ProductImages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20201117162426_ImageEntityAndRelations.cs" />
     <Compile Remove="Data\Migrations\20201117162426_ImageEntityAndRelations.Designer.cs" />
   </ItemGroup>
@@ -21,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="InputModels\" />
-    <Folder Include="Services\ProductImages\" />
     <Folder Include="Views\Categories\" />
   </ItemGroup>
 

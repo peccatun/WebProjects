@@ -6,24 +6,24 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FurnitureOnlineShop.Services.CategoryImages
+namespace FurnitureOnlineShop.Services.Images
 {
-    public class CategoryImageService : ICategoryImageService
+    public class ImageService : IImageService
     {
         private readonly ApplicationDbContext dbContext;
 
-        public CategoryImageService(ApplicationDbContext dbContext)
+        public ImageService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task DeleteCategoryImageByIdAsync(int categoryImageId)
+        public async Task DeleteImageByIdAsync(int imageId)
         {
-            CategoryImage categoryImageToDelete = dbContext.CategoryImages.FirstOrDefault(c => c.Id == categoryImageId);
+            Image imageToDelete = dbContext.Images.FirstOrDefault(c => c.Id == imageId);
 
-            if (categoryImageToDelete != null)
+            if (imageToDelete != null)
             {
-                dbContext.CategoryImages.Remove(categoryImageToDelete);
+                dbContext.Images.Remove(imageToDelete);
                 await dbContext.SaveChangesAsync();
             }
         }
@@ -31,7 +31,7 @@ namespace FurnitureOnlineShop.Services.CategoryImages
         public string GetImagePathByImageId(int categoryImageId)
         {
             byte[] imageBytes = dbContext
-                .CategoryImages
+                .Images
                 .Where(c => c.Id == categoryImageId)
                 .Select(c => c.ImageBytes)
                 .FirstOrDefault();
@@ -43,7 +43,7 @@ namespace FurnitureOnlineShop.Services.CategoryImages
             return imagePath;
         }
 
-        public async Task<int> SaveCategoryImageToDb(IFormFile file)
+        public async Task<int> SaveImageToDbAsync(IFormFile file)
         {
             byte[] imageBytes;
 
@@ -53,14 +53,14 @@ namespace FurnitureOnlineShop.Services.CategoryImages
                 imageBytes = ms.ToArray();
             }
 
-            CategoryImage categoryImage = new CategoryImage
+            Image categoryImage = new Image
             {
                 CreatedOn = DateTime.UtcNow,
                 ImageName = file.FileName,
                 ImageBytes = imageBytes,
             };
 
-            await dbContext.CategoryImages.AddAsync(categoryImage);
+            await dbContext.Images.AddAsync(categoryImage);
             await dbContext.SaveChangesAsync();
 
             return categoryImage.Id;
