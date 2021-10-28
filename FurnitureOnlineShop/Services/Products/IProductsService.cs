@@ -9,5 +9,7 @@ namespace FurnitureOnlineShop.Services.Products
         AllProductsCollectionViewModel GetAllProductsInCategory(int categoryId);
 
         Task InsertProduct(CreateProductInputModel inputModel);
+
+        ProductDetailsViewModel ProductDetails(int id);
     }
 }

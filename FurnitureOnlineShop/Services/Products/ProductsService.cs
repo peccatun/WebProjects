@@ -71,6 +71,23 @@ namespace FurnitureOnlineShop.Services.Products
             await dbContext.SaveChangesAsync();
         }
 
-        //Create the view and get the view data with this service method!!!
+        public ProductDetailsViewModel ProductDetails(int id)
+        {
+            ProductDetailsViewModel model = dbContext
+                .Products
+                .Where(p => p.Id == id && !p.IsDeleted)
+                .Select(p => new ProductDetailsViewModel
+                {
+                    ImagePath = imageService.GetImagePathByImageId(p.ImageId),
+                    Color = p.Color.ColorName,
+                    Price = p.Price,
+                    ProductDescription = p.Description,
+                    ProductId = p.Id,
+                    ProductName = p.ProductName,
+                })
+                .FirstOrDefault();
+
+            return model;
+        }
     }
 }

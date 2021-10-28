@@ -76,3 +76,17 @@ function addColor() {
 
 }
 
+function productDetails(id) {
+    $.ajax({
+        url: '@Url.Content("~/Products/ProductDetails?id=" + id)',
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (data) {
+
+        },
+        error: function (error) {
+
+        }
+    });
+}
+
