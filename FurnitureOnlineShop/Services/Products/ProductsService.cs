@@ -84,6 +84,8 @@ namespace FurnitureOnlineShop.Services.Products
                     ProductDescription = p.Description,
                     ProductId = p.Id,
                     ProductName = p.ProductName,
+                    SubCategory = p.SubCategory.SubCategoryName,
+                    SubCategoryId = p.SubCategoryId,
                 })
                 .FirstOrDefault();
 

@@ -1,7 +1,19 @@
 ﻿@model FurnitureOnlineShop.ViewModels.Products.ProductDetailsViewModel
 
-    <img src="@Model.ImagePath" alt="Alternate Text" width="600" height="400" />
-    <h1>@Model.ProductName</h1>
-    <p>@Model.ProductDescription</p>
-    <p>@Model.Price</p>
-    <p>@Model.Color</p>
+<div class="holder">
+    <div class="left-column">
+        <img src="@Model.ImagePath" alt="Alternate Text" />
+    </div>
+
+    <div class="right-column">
+        <div class="product-description">
+            <a asp-controller="SubCategory" asp-action="SubCategoryItems" asp-route-subCategoryId="@Model.SubCategoryId"><span>@Model.SubCategory</span></a>
+            <h1>@Model.ProductName</h1>
+            <p>@Model.ProductDescription</p>
+        </div>
+
+        <div class="product-price">
+            <span>@Model.Price лв.</span>
+        </div>
+    </div>
+</div>

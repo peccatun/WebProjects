@@ -13,5 +13,9 @@
         public string ImagePath { get; set; }
 
         public string Color { get; set; }
+
+        public string SubCategory { get; set; }
+
+        public int SubCategoryId { get; set; }
     }
 }
