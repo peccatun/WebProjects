@@ -1,0 +1,12 @@
+﻿.category {
+    width: 100%;
+    height: 350px;
+    border-style: groove;
+    border-color: ButtonShadow;
+    margin-top: 5px;
+    margin-bottom:5px;
+}
+
+.collapse-absolute {
+    position:absolute;
+}
