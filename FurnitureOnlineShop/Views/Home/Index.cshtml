@@ -23,26 +23,15 @@
     <div class="row">
         @foreach (var category in Model.AllCategories)
         {
-            <div class="col col-12 col-xxl-3 col-xs-12 col-sm-12 col-md-6 col-lg-12">
+            <div class="col col-12 col-xxl-3 col-xs-12 col-sm-12 col-md-6 col-lg-12" style="margin-top:2%">
                 <div class="category">
                     <img src="@category.ImagePath" class="card-img-top" alt="..." height="200" width="50">
                     <div class="card-body">
                         <h5 class="card-title"><a asp-controller="Products" asp-action="AllProductsInCategory" asp-route-categoryId="@category.CategoryId">@category.CategoryName</a></h5>
                         <p class="card-text">@category.Description</p>
-                        <a class="btn btn-secondary collapse-absolute" data-bs-toggle="collapse" href="#cardMenu_@category.CategoryId" role="button" aria-expanded="false" aria-controls="cardMenu">
+                        <a class="btn btn-secondary" asp-controller="Categories" asp-action="CategoryDetails" asp-route-id="@category.CategoryId">
                             Подкатегории
                         </a>
-                    </div>
-                    <p>
-  
-                    </p>
-                    <div class="collapse" id="cardMenu_@category.CategoryId">
-                        <div class="list-group">
-                            @foreach (var subCategory in category.SubCategories)
-                            {
-                                <a asp-controller="SubCategory" asp-action="SubCategoryItems" asp-route-subCategoryId="@subCategory.SubCategoryId" asp- class="list-group-item list-group-item-action">@subCategory.SubCategoryName</a>
-                            }
-                        </div>
                     </div>
                 </div>
             </div>

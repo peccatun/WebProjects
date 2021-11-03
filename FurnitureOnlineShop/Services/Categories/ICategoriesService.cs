@@ -25,5 +25,7 @@ namespace FurnitureOnlineShop.Services.Categories
         IEnumerable<CategoryDropDownMenuItemViewModel> GetCategoryDropDownItems();
 
         List<SubCategoryDropDownMenuViewModel> GetSubCategoryDropDownItems(int categoryId);
+
+        CategorySubCategoryDetails CategoryDetails(int categoryId);
     }
 }

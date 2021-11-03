@@ -4,6 +4,8 @@ using FurnitureOnlineShop.Data;
 using FurnitureOnlineShop.Models;
 using FurnitureOnlineShop.Services.Images;
 using FurnitureOnlineShop.ViewModels.Categories;
+using FurnitureOnlineShop.ViewModels.Products;
+using FurnitureOnlineShop.ViewModels.SubCategories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -198,6 +200,37 @@ namespace FurnitureOnlineShop.Services.Categories
 
             return subCategoryItems;
                 
+        }
+
+        public CategorySubCategoryDetails CategoryDetails(int categoryId)
+        {
+            CategorySubCategoryDetails model = dbContext
+                .Categories
+                .Where(c => !c.IsDeleted && c.Id == categoryId)
+                .Select(c => new CategorySubCategoryDetails 
+                {
+                    CategoryName = c.CategoryName,
+                    SubCategoryItems = c.SubCategories
+                                        .Where(sb => !sb.IsDel && sb.CategoryId == c.Id)
+                                        .Select(sb => new SubCategoryItemsViewModel 
+                                         { 
+                                             SubCategoryName = sb.SubCategoryName,
+                                             Products = sb.Products
+                                                          .Where(p => !p.IsDeleted && p.SubCategoryId == sb.Id)
+                                                          .Select(p => new ProductsViewModel 
+                                                          {
+                                                              Price = p.Price,
+                                                              Color = p.Color.ColorName,
+                                                              Description = p.Description,
+                                                              ImagePath = imageService.GetImagePathByImageId(p.ImageId),
+                                                              ProductId = p.Id,
+                                                              ProductName = p.ProductName
+                                                          }).ToList()
+
+                                         }).ToList()
+                }).FirstOrDefault();
+
+            return model;
         }
     }
 }
