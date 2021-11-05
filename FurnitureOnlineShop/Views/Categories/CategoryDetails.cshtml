@@ -1,1 +1,23 @@
-﻿@model FurnitureOnlineShop.ViewModels.Categories.CategorySubCategoryDetails 
+﻿@model FurnitureOnlineShop.ViewModels.Categories.CategorySubCategoryDetails
+<h1>@Model.CategoryName</h1>
+<br />
+@foreach (var subCategory in Model.SubCategoryItems)
+{
+    <h3>@subCategory.SubCategoryName</h3>
+    <br />
+    <div class="container sub-category-sep box-separator">
+        <div class="row">
+            @foreach (var product in subCategory.Products)
+            {
+                <div class="col col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 box-separator">
+                    <div class="category-details-box">
+                        <h6 class="product-text">@product.ProductName</h6>
+                        <img class="cetegory-details-image" src="@product.ImagePath" alt="Alternate Text" />
+                        <p class="product-text">@product.Description</p>
+                        <p class="product-text">@product.Price</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

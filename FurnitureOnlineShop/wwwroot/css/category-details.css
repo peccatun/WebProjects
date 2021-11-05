@@ -1,0 +1,30 @@
+﻿.sub-category-sep{
+    border-style: double;
+    border-color: maroon;
+}
+
+.box-separator {
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top : 1%;
+    margin-bottom: 1%;
+}
+
+.category-details-box{
+    width: 90%;
+    height: 90%;
+    border-style: groove;
+}
+
+.cetegory-details-image{
+    width: 80%;
+    height: 50%;
+    margin-left:10%
+}
+
+.product-text{
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+}
