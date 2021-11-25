@@ -1,11 +1,11 @@
 ﻿.footer,
 .push {
     height:50px;
-    position:sticky;
+    position:absolute;
 
 }
 
 .footer {
     height: 50px;
-    position: sticky;
+    position: absolute;
 }

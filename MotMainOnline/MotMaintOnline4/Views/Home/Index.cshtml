@@ -1,0 +1,46 @@
+﻿@model MotMaintOnline4.ViewModels.Home.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Поддръжка на мотор</h1>
+    <hr />
+    <br />
+
+    <a style="float:left" class="btn btn-outline-success">Добави нов потребител</a>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Номер потребител</th>
+                <th scope="col">Име на потребител</th>
+            </tr>
+        </thead>  
+        <tbody>
+            @if (Model.ApplicationUsers.Count() < 1)
+            {
+                <tr>
+                    <td>1</td>
+                    <td>Няма потребители</td>
+                </tr>
+            }
+            else
+            {
+                foreach (var user in Model.ApplicationUsers)
+                {
+                    <tr>
+                        <td>user.Id</td>
+                        <td>user.Name</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table> 
+</div>
+
+<form asp-controller="ApplicationUser" asp-action="Create" method="post">
+
+</form>
+
+
