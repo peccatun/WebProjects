@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MotMaintOnline4.InputModels.ApplicationUser;
 using MotMaintOnline4.Models;
 using MotMaintOnline4.Services.ApplicationUser;
 using MotMaintOnline4.ViewModels.Home;
@@ -30,6 +31,21 @@ namespace MotMaintOnline4.Controllers
             };
 
             return View(homeViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser([Bind(Prefix = "UserInputModel")]ApplicationUserInputModel inputModel)
+        {
+            await applicationUserService.Create(inputModel);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await applicationUserService.Delete(id);
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

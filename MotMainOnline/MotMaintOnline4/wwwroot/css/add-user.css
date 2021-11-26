@@ -7,14 +7,15 @@
     box-sizing: border-box;
 }
 
-button {
+.button-add {
     background-color: #04aa6d;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 20%;
+    left: 0;
 }
 
 button:hover{
@@ -27,16 +28,6 @@ button:hover{
     background-color: #f44336;
 }
 
-.imgcontainer{
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
 
 .cont{
     padding: 16px;

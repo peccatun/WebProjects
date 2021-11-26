@@ -7,40 +7,71 @@
     <h1 class="display-4">Поддръжка на мотор</h1>
     <hr />
     <br />
+    <button class="button-add" onclick="document.getElementById('id01').style.display='block'">Добави потребител</button>
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close modal">$times;</span>
 
-    <a style="float:left" class="btn btn-outline-success">Добави нов потребител</a>
+        <form class="modal-content animate" asp-controller="Home" asp-action="AddUser" method="post">
+            <div class="cont">
+                <label>Потребител</label>
+                <input asp-for="@Model.UserInputModel.Name" />
+                <button class="button-add" type="submit">Добави</button>
+            </div>
+            <div class="cont" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="canselbtn button-add">Отказ</button>
+            </div>
+        </form>
+
+    </div>
+
     <br />
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Номер потребител</th>
                 <th scope="col">Име на потребител</th>
+                <td scope="col">Детайли</td>
+                <td scope="col">Редактирай</td>
+                <td scope="col">Изтрий</td>
             </tr>
-        </thead>  
+        </thead>
         <tbody>
             @if (Model.ApplicationUsers.Count() < 1)
             {
-                <tr>
-                    <td>1</td>
-                    <td>Няма потребители</td>
-                </tr>
+            <tr>
+                <td>-</td>
+                <td>Няма потребители</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
             }
             else
             {
                 foreach (var user in Model.ApplicationUsers)
                 {
                     <tr>
-                        <td>user.Id</td>
-                        <td>user.Name</td>
+                        <td>@user.Id</td>
+                        <td>@user.Name</td>
+                        <td><a href="#" class="btn btn-outline-success">Детайли</a></td>
+                        <td><a href="#" class="btn btn-outline-warning">Редактирай</a></td>
+                        <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-outline-danger">Изтрий </a></td>
                     </tr>
                 }
             }
         </tbody>
-    </table> 
+    </table>
 </div>
 
-<form asp-controller="ApplicationUser" asp-action="Create" method="post">
+<script>
+    var modal = document.getElementById('id01');
 
-</form>
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+</script>
 
 
