@@ -41,6 +41,13 @@ namespace MotMaintOnline4.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> EditUser([Bind(Prefix = "UserInputModel")] ApplicationUserInputModel inputModel) 
+        {
+            await applicationUserService.Edit(inputModel);
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             await applicationUserService.Delete(id);

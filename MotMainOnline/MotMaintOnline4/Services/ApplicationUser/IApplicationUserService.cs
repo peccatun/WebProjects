@@ -11,6 +11,8 @@ namespace MotMaintOnline4.Services.ApplicationUser
 
         Task Create(ApplicationUserInputModel inputModel);
 
+        Task Edit(ApplicationUserInputModel inputModel);
+
         Task Delete(int id);
     }
 }

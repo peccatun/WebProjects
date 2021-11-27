@@ -39,6 +39,17 @@ namespace MotMaintOnline4.Services.ApplicationUser
             await dbContext.SaveChangesAsync(); 
         }
 
+        public async Task Edit(ApplicationUserInputModel inputModel)
+        {
+            Models.ApplicationUser applicationUser = dbContext
+                                                        .ApplicationUsers
+                                                        .Where(au => au.Id == inputModel.Id)
+                                                        .FirstOrDefault();
+
+            applicationUser.Name = inputModel.Name;
+            await dbContext.SaveChangesAsync();
+        }
+
         public IEnumerable<ApplicationUserViewModel> GetApplicationUsers()
         {
             IEnumerable<ApplicationUserViewModel> appUsers = dbContext
