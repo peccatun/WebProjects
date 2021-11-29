@@ -67,9 +67,9 @@
                 foreach (var user in Model.ApplicationUsers)
                 {
                     <tr id="user-data-row-@user.Id">
-                        <td>@user.Id</td>
-                        <td>@user.Name</td>
-                        <td><a href="#" class="btn btn-outline-success">Детайли</a></td>
+                        <td><a asp-controller="Users" asp-action="UserDetails" asp-route-id="@user.Id">@user.Id</a></td>
+                        <td><a asp-controller="Users" asp-action="UserDetails" asp-route-id="@user.Id" id="user-name-@user.Id">@user.Name</a></td>
+                        <td><a asp-controller="Users" asp-action="UserDetails" asp-route-id="@user.Id" class="btn btn-outline-success">Детайли</a></td>
                         <td><a href="#" onclick="openEditUser(@user.Id)" class="btn btn-outline-warning">Редактирай</a></td>
                         <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-outline-danger">Изтрий </a></td>
                     </tr>
@@ -96,12 +96,11 @@
 
     function openEditUser(userId) {
         const USER_TABLE_ROW_ID = 'user-data-row-';
-
+        const USER_NAME_ID = 'user-name-';
         var editForm = document.getElementById(EDIT_FORM_ID);
         editForm.style.display = 'block';
 
-        var tableRow = document.getElementById(USER_TABLE_ROW_ID + userId);
-        var userName = tableRow.cells[1].innerHTML;
+        var userName = document.getElementById(USER_NAME_ID + userId).innerHTML;
         var userNameTextField = document.getElementById(USER_EDIT_NAME_ID);
         userNameTextField.value = userName;
         var userEditId = document.getElementById(USER_EDIT_ID_ID);

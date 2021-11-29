@@ -14,5 +14,7 @@ namespace MotMaintOnline4.Services.ApplicationUser
         Task Edit(ApplicationUserInputModel inputModel);
 
         Task Delete(int id);
+
+        UserDetailsViewModel UserDetails(int id);
     }
 }

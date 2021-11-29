@@ -1,0 +1,55 @@
+﻿@model MotMaintOnline4.ViewModels.ApplicationUser.UserDetailsViewModel
+
+<h1>Подробна информация за @Model.Name</h1>
+<br />
+<div class="modal" id="create" style="display: none;">
+    <form  method="post" class="modal-content animate">
+        <label>Марка</label>
+        <input type="text" name="name" value="" />
+        <label>Модел</label>
+        <input type="text" name="name" value="" />
+        <label>Година</label>
+        <input type="date" name="name" value="" />
+        <label>Текущи километри</label>
+        <input type="number" name="name" value="" />
+    </form>
+</div>
+
+<a class="btn btn-success" onclick="openCreate()">Добави мотор</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Номер на мотор</th>
+            <th scope="col">Марка</th>
+            <th scope="col">Модел</th>
+            <th scope="col">Година</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Motorcycles.Count() < 1)
+        {
+            <tr>
+                <td>Няма</td>
+                <td>Няма</td>
+                <td>Няма</td>
+                <td>Няма</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>Номер на мотор</td>
+                <td>Марка</td>
+                <td>Модел</td>
+                <td>Година</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function openCreate() {
+        var form = document.getElementById('create');
+        form.style.display = 'block';
+    }
+</script>

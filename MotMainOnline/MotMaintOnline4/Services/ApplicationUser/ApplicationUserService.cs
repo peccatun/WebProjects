@@ -63,5 +63,21 @@ namespace MotMaintOnline4.Services.ApplicationUser
 
             return appUsers;
         }
+
+        public UserDetailsViewModel UserDetails(int id)
+        {
+            UserDetailsViewModel viewModel = dbContext
+                .ApplicationUsers
+                .Where(au => au.Id == id)
+                .Select(au => new UserDetailsViewModel 
+                {
+                    Id = au.Id,
+                    Name = au.Name
+                })
+                .FirstOrDefault();
+
+            return viewModel;
+                                            
+        }
     }
 }
