@@ -3,15 +3,30 @@
 <h1>Подробна информация за @Model.Name</h1>
 <br />
 <div class="modal" id="create" style="display: none;">
-    <form  method="post" class="modal-content animate">
-        <label>Марка</label>
-        <input type="text" name="name" value="" />
-        <label>Модел</label>
-        <input type="text" name="name" value="" />
-        <label>Година</label>
-        <input type="date" name="name" value="" />
-        <label>Текущи километри</label>
-        <input type="number" name="name" value="" />
+    <form asp-controller="Motorcycles" asp-action="Create" method="post" class="modal-content animate">
+        <div class="cont">
+            <label asp-for="@Model.InputModel.Make"></label>
+            <input asp-for="@Model.InputModel.Make" />
+        </div>
+        <div class="cont">
+            <label asp-for="@Model.InputModel.Model"></label>
+            <input asp-for="@Model.InputModel.Model" />
+        </div>
+        <div class="cont">
+            <label asp-for="@Model.InputModel.ProductionDate">Година</label>
+            <input asp-for="@Model.InputModel.ProductionDate" />
+        </div>
+        <div class="cont">
+            <label asp-for="@Model.InputModel.StartKilometers"></label>
+            <input asp-for="@Model.InputModel.StartKilometers" />
+        </div>
+        <input type="hidden" asp-for="@Model.InputModel.ApplicationUserId" value="@Model.Id" />
+        <div class="text-center">
+            <button type="submit" class="button-add">Добави</button>
+            <div class="cont" style="background-color: lightgray">
+                <button class="canselbtn button-add" onclick="closeCreate()">Отказ</button>
+            </div>
+        </div>
     </form>
 </div>
 
@@ -23,6 +38,9 @@
             <th scope="col">Марка</th>
             <th scope="col">Модел</th>
             <th scope="col">Година</th>
+            <th scope="col">Детайли</th>
+            <th scope="col">Редактирай</th>
+            <th scope="col">Изтрий</th>
         </tr>
     </thead>
     <tbody>
@@ -33,23 +51,37 @@
                 <td>Няма</td>
                 <td>Няма</td>
                 <td>Няма</td>
+                <td>Няма</td>
             </tr>
         }
         else
         {
-            <tr>
-                <td>Номер на мотор</td>
-                <td>Марка</td>
-                <td>Модел</td>
-                <td>Година</td>
-            </tr>
+            @foreach (var motorcycle in Model.Motorcycles)
+            {
+
+                <tr>
+                    <td>@motorcycle.Id</td>
+                    <td>@motorcycle.Make</td>
+                    <td>@motorcycle.Model</td>
+                    <td>@motorcycle.ProductionYear</td>
+                    <td><a class="btn btn-outline-success">Детайли</a></td>
+                    <td><a class="btn btn-outline-warning">Редактирай</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Motorcycles" asp-action="Delete" asp-route-id="@motorcycle.Id" asp-route-userId="@Model.Id">Изтрий</a></td>
+                </tr>
+            }
         }
     </tbody>
 </table>
 
 <script>
+    const CREATE_FORM_ID = 'create'
+
     function openCreate() {
-        var form = document.getElementById('create');
+        var form = document.getElementById(CREATE_FORM_ID);
         form.style.display = 'block';
+    }
+    function closeCreate() {
+        var form = document.getElementById(CREATE_FORM_ID);
+        form.style.display = 'none';
     }
 </script>

@@ -1,7 +1,10 @@
 ﻿using MotMaintOnline4.Data;
+using MotMaintOnline4.InputModels.Motorcycles;
+using MotMaintOnline4.Models;
 using MotMaintOnline4.ViewModels.Motorcycles;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MotMaintOnline4.Services.Motorcycles
 {
@@ -12,6 +15,33 @@ namespace MotMaintOnline4.Services.Motorcycles
         public MotorcycleService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task Create(MotorcycleInputModel inputModel)
+        {
+            Motorcycle motorcycle = new Motorcycle
+            {
+                ApplicationUserId = inputModel.ApplicationUserId,
+                IsDel = false,
+                Make = inputModel.Make,
+                ProductionDate = inputModel.ProductionDate,
+                Model = inputModel.Model,
+                StartKilometers = inputModel.StartKilometers,
+            };
+
+            await dbContext.Motorcycles.AddAsync(motorcycle);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            Motorcycle motorcycle = dbContext
+                        .Motorcycles
+                        .Where(m => m.Id == id)
+                        .FirstOrDefault();
+
+            motorcycle.IsDel = true;
+            await dbContext.SaveChangesAsync();
         }
 
         public IEnumerable<MotorcycleViewModel> UserMotorcycles(int userId)

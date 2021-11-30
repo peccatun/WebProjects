@@ -1,4 +1,5 @@
-﻿using MotMaintOnline4.ViewModels.Motorcycles;
+﻿using MotMaintOnline4.InputModels.Motorcycles;
+using MotMaintOnline4.ViewModels.Motorcycles;
 using System.Collections.Generic;
 
 namespace MotMaintOnline4.ViewModels.ApplicationUser
@@ -10,5 +11,7 @@ namespace MotMaintOnline4.ViewModels.ApplicationUser
         public string Name { get; set; }
 
         public IEnumerable<MotorcycleViewModel> Motorcycles { get; set; }
+
+        public MotorcycleInputModel InputModel { get; set; }
     }
 }
