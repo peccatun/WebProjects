@@ -14,7 +14,7 @@
         </div>
         <div class="cont">
             <label asp-for="@Model.InputModel.ProductionDate">Година</label>
-            <input asp-for="@Model.InputModel.ProductionDate" />
+            <input type="date" asp-for="@Model.InputModel.ProductionDate" />
         </div>
         <div class="cont">
             <label asp-for="@Model.InputModel.StartKilometers"></label>
@@ -30,6 +30,35 @@
     </form>
 </div>
 
+<div class="modal" id="edit" style="display: none;">
+    <form asp-controller="Motorcycles" asp-action="Edit" method="post" class="modal-content animate">
+        <div class="cont">
+            <label asp-for="@Model.InputModel.Make"></label>
+            <input asp-for="@Model.InputModel.Make" id="edit-make" />
+        </div>
+        <div class="cont">
+            <label asp-for="@Model.InputModel.Model"></label>
+            <input asp-for="@Model.InputModel.Model" id="edit-model" />
+        </div>
+        <div class="cont">
+            <label asp-for="@Model.InputModel.ProductionDate">Година</label>
+            <input type="date" asp-for="@Model.InputModel.ProductionDate" id="edit-production" />
+        </div>
+        <div class="cont">
+            <label asp-for="@Model.InputModel.StartKilometers"></label>
+            <input asp-for="@Model.InputModel.StartKilometers" id="edit-kilometers" />
+        </div>
+        <input type="hidden" asp-for="@Model.InputModel.ApplicationUserId" value="@Model.Id" />
+        <input type="hidden" asp-for="@Model.InputModel.Id"  value="" id="edit-motorcycle-id" />
+        <div class="text-center">
+            <button type="submit" class="button-add">Редактирай</button>
+            <div class="cont" style="background-color: lightgray">
+                <button class="canselbtn button-add" onclick="closeCreate()">Отказ</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <a class="btn btn-success" onclick="openCreate()">Добави мотор</a>
 <table class="table table-striped">
     <thead>
@@ -38,6 +67,7 @@
             <th scope="col">Марка</th>
             <th scope="col">Модел</th>
             <th scope="col">Година</th>
+            <th scope="col">Километри</th>
             <th scope="col">Детайли</th>
             <th scope="col">Редактирай</th>
             <th scope="col">Изтрий</th>
@@ -60,12 +90,13 @@
             {
 
                 <tr>
-                    <td>@motorcycle.Id</td>
-                    <td>@motorcycle.Make</td>
-                    <td>@motorcycle.Model</td>
-                    <td>@motorcycle.ProductionYear</td>
-                    <td><a class="btn btn-outline-success">Детайли</a></td>
-                    <td><a class="btn btn-outline-warning">Редактирай</a></td>
+                    <td id="motorcycle-id-@motorcycle.Id">@motorcycle.Id</td>
+                    <td id="motorcycle-make-@motorcycle.Id">@motorcycle.Make</td>
+                    <td id="motorcycle-model-@motorcycle.Id">@motorcycle.Model</td>
+                    <td id="motorcycle-year-@motorcycle.Id">@motorcycle.ProductionYear.ToString("yyyy-MM-dd")</td>
+                    <td id="motorcycle-kilometers-@motorcycle.Id">@motorcycle.Kilometers</td>
+                    <td><a href="#" class="btn btn-outline-success">Детайли</a></td>
+                    <td><a href="#" class="btn btn-outline-warning" onclick="openEdit(@motorcycle.Id)">Редактирай</a></td>
                     <td><a class="btn btn-outline-danger" asp-controller="Motorcycles" asp-action="Delete" asp-route-id="@motorcycle.Id" asp-route-userId="@Model.Id">Изтрий</a></td>
                 </tr>
             }
@@ -83,5 +114,41 @@
     function closeCreate() {
         var form = document.getElementById(CREATE_FORM_ID);
         form.style.display = 'none';
+    }
+
+    function openEdit(id) {
+        const ID_ROW = 'motorcycle-id-';
+        const MAKE_ROW = 'motorcycle-make-';
+        const MODEL_ROW = 'motorcycle-model-';
+        const YEAR_ROW = 'motorcycle-year-';
+        const KM_ROW = 'motorcycle-kilometers-';
+
+        const INPUT_MAKE = 'edit-make';
+        const INPUT_MODEL = 'edit-model';
+        const INPUT_YEAR = 'edit-production';
+        const INPUT_KM = 'edit-kilometers';
+        const INPUT_ID = 'edit-motorcycle-id';
+
+        const EDIT_FORM = 'edit';
+
+        var form = document.getElementById(EDIT_FORM);
+        form.style.display = 'block';
+
+        let make = document.getElementById(MAKE_ROW + id).innerHTML;
+        let model = document.getElementById(MODEL_ROW + id).innerHTML;
+        let year = document.getElementById(YEAR_ROW + id).innerHTML;
+        let kilometers = document.getElementById(KM_ROW + id).innerHTML;
+        let motorcycleId = document.getElementById(ID_ROW + id).innerHTML;
+
+        let inputMake = document.getElementById(INPUT_MAKE);
+        inputMake.value = make;
+        let inputModel = document.getElementById(INPUT_MODEL);
+        inputModel.value = model;
+        let inputYear = document.getElementById(INPUT_YEAR);
+        inputYear.value = year;
+        let inputKm = document.getElementById(INPUT_KM);
+        inputKm.value = kilometers;
+        let inputId = document.getElementById(INPUT_ID);
+        inputId.value = motorcycleId;
     }
 </script>

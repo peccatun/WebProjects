@@ -11,5 +11,7 @@ namespace MotMaintOnline4.ViewModels.Motorcycles
         public string Model { get; set; }
 
         public DateTime ProductionYear { get; set; }
+
+        public int Kilometers { get; set; }
     }
 }

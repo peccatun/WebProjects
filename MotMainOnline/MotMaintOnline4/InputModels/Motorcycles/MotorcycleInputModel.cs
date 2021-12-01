@@ -5,6 +5,8 @@ namespace MotMaintOnline4.InputModels.Motorcycles
 {
     public class MotorcycleInputModel
     {
+        public int Id { get; set; }
+
         [Required]
         [Display(Name = "Марка")]
         public string Make { get; set; }

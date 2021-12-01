@@ -11,6 +11,9 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         Task Create(MotorcycleInputModel inputModel);
 
+        Task Edit(MotorcycleInputModel inputModel);
+
         Task Delete(int id);
+
     }
 }

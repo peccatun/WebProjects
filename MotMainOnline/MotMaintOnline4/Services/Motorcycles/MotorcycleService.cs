@@ -44,6 +44,21 @@ namespace MotMaintOnline4.Services.Motorcycles
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task Edit(MotorcycleInputModel inputModel)
+        {
+            Motorcycle motorcycle = dbContext
+                                    .Motorcycles
+                                    .Where(m => m.Id == inputModel.Id)
+                                    .FirstOrDefault();
+
+            motorcycle.Make = inputModel.Make;
+            motorcycle.Model = inputModel.Model;
+            motorcycle.ProductionDate = inputModel.ProductionDate;
+            motorcycle.StartKilometers = inputModel.StartKilometers;
+
+            await dbContext.SaveChangesAsync(); 
+        }
+
         public IEnumerable<MotorcycleViewModel> UserMotorcycles(int userId)
         {
             IEnumerable<MotorcycleViewModel> motorcycles = dbContext
@@ -54,7 +69,8 @@ namespace MotMaintOnline4.Services.Motorcycles
                                                     Id = m.Id,
                                                     Make = m.Make,
                                                     Model = m.Model,
-                                                    ProductionYear = m.ProductionDate
+                                                    ProductionYear = m.ProductionDate,
+                                                    Kilometers = m.StartKilometers,
                                                 })
                                                 .ToList();
 

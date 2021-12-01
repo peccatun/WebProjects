@@ -28,6 +28,20 @@ namespace MotMaintOnline4.Controllers
             return RedirectToAction("UserDetails" , "Users", new { id = userId });
         }
 
+        public async Task<IActionResult> Edit([Bind(Prefix = "InputModel")]MotorcycleInputModel inputModel)
+        {
+            int userId = inputModel.ApplicationUserId;
+
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("UserDetails", "Users", new { id = userId });
+            }
+
+            await motorcycleService.Edit(inputModel);
+
+            return RedirectToAction("UserDetails", "Users", new { id = userId });
+        }
+
         public async Task<IActionResult> Delete(int id, int userId)
         {
             await motorcycleService.Delete(id);
