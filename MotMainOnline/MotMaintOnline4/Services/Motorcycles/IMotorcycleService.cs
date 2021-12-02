@@ -15,5 +15,7 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         Task Delete(int id);
 
+        DetailsViewModel Details(int id);
+
     }
 }

@@ -44,6 +44,24 @@ namespace MotMaintOnline4.Services.Motorcycles
             await dbContext.SaveChangesAsync();
         }
 
+        public DetailsViewModel Details(int id)
+        {
+            DetailsViewModel details = dbContext
+                                        .Motorcycles
+                                        .Where(m => m.Id == id)
+                                        .Select(m => new DetailsViewModel 
+                                        {
+                                            Id = m.Id,
+                                            Kilometers = m.StartKilometers,
+                                            Make = m.Make,
+                                            Model = m.Model,
+                                            ProductionDate = m.ProductionDate.ToString("dd-MM-yyyy")
+                                        })
+                                        .FirstOrDefault();
+
+            return details;
+        }
+
         public async Task Edit(MotorcycleInputModel inputModel)
         {
             Motorcycle motorcycle = dbContext

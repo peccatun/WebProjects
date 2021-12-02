@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotMaintOnline4.InputModels.Motorcycles;
 using MotMaintOnline4.Services.Motorcycles;
+using MotMaintOnline4.ViewModels.Motorcycles;
 using System.Threading.Tasks;
 
 namespace MotMaintOnline4.Controllers
@@ -47,6 +48,13 @@ namespace MotMaintOnline4.Controllers
             await motorcycleService.Delete(id);
 
             return RedirectToAction("UserDetails", "Users", new { id = userId});
+        }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            DetailsViewModel details = motorcycleService.Details(id);
+            return View(details);
         }
     }
 }

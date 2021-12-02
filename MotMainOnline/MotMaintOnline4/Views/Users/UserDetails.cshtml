@@ -95,7 +95,7 @@
                     <td id="motorcycle-model-@motorcycle.Id">@motorcycle.Model</td>
                     <td id="motorcycle-year-@motorcycle.Id">@motorcycle.ProductionYear.ToString("yyyy-MM-dd")</td>
                     <td id="motorcycle-kilometers-@motorcycle.Id">@motorcycle.Kilometers</td>
-                    <td><a href="#" class="btn btn-outline-success">Детайли</a></td>
+                    <td><a asp-controller="Motorcycles" asp-action="Details" asp-route-id="@motorcycle.Id" class="btn btn-outline-success">Детайли</a></td>
                     <td><a href="#" class="btn btn-outline-warning" onclick="openEdit(@motorcycle.Id)">Редактирай</a></td>
                     <td><a class="btn btn-outline-danger" asp-controller="Motorcycles" asp-action="Delete" asp-route-id="@motorcycle.Id" asp-route-userId="@Model.Id">Изтрий</a></td>
                 </tr>
