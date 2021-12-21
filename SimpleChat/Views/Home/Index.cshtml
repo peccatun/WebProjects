@@ -36,8 +36,16 @@
         .withUrl("/chat")
         .build();
 
+
+
     connection.on("NewMessage",
         function (message) {
+            let unsendButton = document.createElement("button");
+            unsendButton.innerHTML = 'Unsend';
+            unsendButton.addEventListener('click', ev => {
+                let id = ev.target.parentNode.id;
+                connection.invoke("Unsend", id);
+            });
             let username = document.createElement("label");
             username.innerHTML = 'Username: ' + message.user;
             let content = document.createElement("p");
@@ -45,13 +53,31 @@
             let container = document.createElement("div");
             container.appendChild(username);
             container.appendChild(content);
+            container.appendChild(unsendButton);
+            container.id = Date.now().toString();
             document.getElementById(CHAT_BOX).appendChild(container);
         });
+
+    connection.on("Unsend", function (id) {
+        let chatBox = document.getElementById(CHAT_BOX);
+        let targetId = id.substring(0, id.length - 1);
+        for (let i = 0; chatBox.childNodes.length; i++) {
+            let currentChild = chatBox.childNodes[i];
+            if (currentChild.id == undefined) { continue; }
+            let findId = currentChild.id.substring(0, currentChild.id.length - 1);
+            if (findId == targetId) {
+                currentChild.remove();
+                //chatBox.childNodes.remove(i);
+            }
+        }
+    });
 
     function submit() {
         let message = $("#input").val();
         connection.invoke("Send", message);
     }
+
+    
 
     connection.start().catch(function (err) {
         return console.log(err.toString());

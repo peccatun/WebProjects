@@ -17,5 +17,11 @@ namespace ChatApplication.Hubs
                 { User = this.Context.User.Identity.Name, Text = message  }
                 );   
         }
+
+        public async Task Unsend(string id)
+        {
+            await Clients.All.SendAsync("Unsend", id);
+                 
+        }
     }
 }
