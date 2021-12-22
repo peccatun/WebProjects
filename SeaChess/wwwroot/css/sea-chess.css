@@ -1,0 +1,16 @@
+﻿.cell-style {
+    width: 150px;
+    height: 150px;
+    border-style: groove;
+    border-color: lightgray;
+}
+
+.board {
+    width: 450px;
+    position:absolute;
+    vertical-align:central;
+}
+
+.board-rows {
+    width: 450px;
+}
