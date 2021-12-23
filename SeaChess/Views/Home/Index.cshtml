@@ -1,6 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div style="display: none;" id="start-game-info">
+    <p>Looking for opponent...</p>
+</div>
+
+<div style="align-content:center; margin-bottom: 3%;">
+    <button type="button" style="height: 50px;" onclick="startGame()">Start game</button>
+</div>
 
 <div class="text-center" style="vertical-align: central;">
     <table class="board">
@@ -19,7 +26,15 @@
                 <td class="cell-style">x</td>
                 <td class="cell-style">x</td>
                 <td class="cell-style">x</td>
-            </tr>   
+            </tr>
         </tbody>
     </table>
 </div>
+
+<script>
+    const GAME_INFO = 'start-game-info';
+    function startGame() {
+        let gameInfo = document.getElementById(GAME_INFO);
+        gameInfo.style.display = 'block';
+    }
+</script>
