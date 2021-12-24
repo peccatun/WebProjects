@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaChess.Data;
 using SeaChess.Hubs;
+using SeaChess.Services;
+using SeaChess.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +44,7 @@ namespace SeaChess
                 options.Password.RequiredLength = 4;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<IGameRequestService, GameRequestService>();
             services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();

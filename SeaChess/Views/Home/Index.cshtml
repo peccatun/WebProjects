@@ -50,16 +50,7 @@
 
     function startGame() {
         let currentUserId = $('#' + USER_ID).val();
-        $.ajax({
-            url: 'Home/StartGame?userId=' + currentUserId,
-            type: 'get',
-            success: function (data) {
-
-            },
-            error: function (error) {
-                console.log(error.toString());
-            }
-        });
+        connection.invoke('StartGame', currentUserId);
     }
 
 

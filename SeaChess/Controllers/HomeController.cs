@@ -15,41 +15,14 @@ namespace SeaChess.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IHubContext<GameHub> gameHub;
-        private readonly Queue<string> playerQueue;
-
-
         public HomeController(IHubContext<GameHub> gameHub)
         {
-            this.gameHub = gameHub;
-            playerQueue = new Queue<string>();
+
         }
 
         public IActionResult Index()
         {
             return View();
-        }
-
-        public async Task<IActionResult> StartGame(string userId)
-        {
-            if (playerQueue.Contains(userId))
-            {
-                return StatusCode(202);
-            }
-
-            playerQueue.Enqueue(userId);
-
-            if (playerQueue.Count >= 2)
-            {
-                // start Game
-            }
-            else
-            {
-                await gameHub.Clients.User(userId).SendAsync("lookingForOponent");
-            }
-
-
-            return Ok();
         }
     }
 }
