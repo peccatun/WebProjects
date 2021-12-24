@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<head>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+</head>
+<input type="hidden" value="@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" id="current-user-id" />
 <div style="display: none;" id="start-game-info">
     <p>Looking for opponent...</p>
 </div>
@@ -33,8 +37,37 @@
 
 <script>
     const GAME_INFO = 'start-game-info';
+    const USER_ID = 'current-user-id';
+
+
+    var connection = new signalR.HubConnectionBuilder()
+        .withUrl('/game')
+        .build();
+
+    connection.start().catch(function (err) {
+        return console.log(err.toString());
+    });
+
     function startGame() {
+        let currentUserId = $('#' + USER_ID).val();
+        $.ajax({
+            url: 'Home/StartGame?userId=' + currentUserId,
+            type: 'get',
+            success: function (data) {
+
+            },
+            error: function (error) {
+                console.log(error.toString());
+            }
+        });
+    }
+
+
+    connection.on("lookingForOponent", function () {
         let gameInfo = document.getElementById(GAME_INFO);
         gameInfo.style.display = 'block';
-    }
+    });
+
+
+
 </script>

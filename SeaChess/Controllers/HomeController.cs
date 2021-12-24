@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using SeaChess.Hubs;
 using SeaChess.Models;
 using System;
 using System.Collections.Generic;
@@ -9,13 +12,17 @@ using System.Threading.Tasks;
 
 namespace SeaChess.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHubContext<GameHub> gameHub;
+        private readonly Queue<string> playerQueue;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(IHubContext<GameHub> gameHub)
         {
-            _logger = logger;
+            this.gameHub = gameHub;
+            playerQueue = new Queue<string>();
         }
 
         public IActionResult Index()
@@ -23,15 +30,26 @@ namespace SeaChess.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> StartGame(string userId)
         {
-            return View();
-        }
+            if (playerQueue.Contains(userId))
+            {
+                return StatusCode(202);
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            playerQueue.Enqueue(userId);
+
+            if (playerQueue.Count >= 2)
+            {
+                // start Game
+            }
+            else
+            {
+                await gameHub.Clients.User(userId).SendAsync("lookingForOponent");
+            }
+
+
+            return Ok();
         }
     }
 }
