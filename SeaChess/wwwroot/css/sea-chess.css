@@ -14,3 +14,7 @@
 .board-rows {
     width: 450px;
 }
+
+.sign-hov:hover {
+    background-color: lightgray;
+}

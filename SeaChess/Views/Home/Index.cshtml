@@ -35,9 +35,25 @@
     </table>
 </div>
 
+<div class="text-center" style="display:none; position: absolute; right: 400px;" id="sign-area">>
+        <h3>Choose sign</h3>
+        <table>
+            <tbody class="board-rows">
+                <tr class="board-rows">
+                    <td class="cell-style sign-hov">X</td>
+                    <td class="cell-style sign-hov">/</td>
+                </tr>
+                <tr>
+                    <td class="cell-style sign-hov">O</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+
 <script>
     const GAME_INFO = 'start-game-info';
     const USER_ID = 'current-user-id';
+    const SIGN_AREA = 'sign-area';
 
 
     var connection = new signalR.HubConnectionBuilder()
@@ -59,6 +75,7 @@
         gameInfo.style.display = 'block';
     });
 
-
-
+    function chooseSign() {
+        $('#' + SIGN_AREA).css('display', 'block');
+    }
 </script>
