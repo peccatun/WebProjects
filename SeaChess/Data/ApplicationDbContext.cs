@@ -11,6 +11,8 @@ namespace SeaChess.Data
     {
         public DbSet<GameRequest> GameRequests { get; set; }
 
+        public DbSet<GameState> GameStates { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

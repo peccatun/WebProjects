@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaChess.Data;
 using SeaChess.Hubs;
+using SeaChess.Seeder;
 using SeaChess.Services;
 using SeaChess.Services.Contracts;
 using System;
@@ -53,6 +54,14 @@ namespace SeaChess
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var scopedService = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = scopedService.ServiceProvider.GetService<ApplicationDbContext>();
+
+
+                new Seed(dbContext).SeedData();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
