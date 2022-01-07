@@ -10,11 +10,13 @@ namespace SeaChess.Hubs
     public class GameHub : Hub
     {
         private readonly IGameRequestService requestService;
+        private readonly IGameService gameService;
         private Queue<GameRequestDto> requestQueue;
 
-        public GameHub(IGameRequestService gameRequestService)
+        public GameHub(IGameRequestService gameRequestService, IGameService gameService)
         {
             this.requestService = gameRequestService;
+            this.gameService = gameService;
             requestQueue = gameRequestService.GetGameRequests();
         }
 
@@ -32,7 +34,11 @@ namespace SeaChess.Hubs
 
             if (requestQueue.Count >= 2)
             {
-                //start game
+                GameRequestDto playerOne = requestQueue.Dequeue();
+                GameRequestDto playerTwo = requestQueue.Dequeue();
+                await gameService.StartGameAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
+                await requestService.SetHasPlayedAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
+                //Call choose sign method in the view!!!
             }
             else
             {

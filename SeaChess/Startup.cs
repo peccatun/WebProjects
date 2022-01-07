@@ -46,6 +46,8 @@ namespace SeaChess
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IGameRequestService, GameRequestService>();
+            services.AddTransient<IGameStateService, GameStateService>();
+            services.AddTransient<IGameService, GameService>();
             services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();

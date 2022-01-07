@@ -55,6 +55,22 @@ namespace SeaChess.Services
             
         }
 
+        public async Task SetHasPlayedAsync(string playerOneId, string playerTwoId)
+        {
+            GameRequest playerOneRequest = dbContext
+                              .GameRequests
+                              .Where(gr => !gr.IsDeleted && !gr.HasPlayed && gr.ApplicationUserId == playerOneId)
+                              .FirstOrDefault();
+            GameRequest playerTwoRequest = dbContext
+                              .GameRequests
+                              .Where(gr => !gr.IsDeleted && !gr.HasPlayed && gr.ApplicationUserId == playerTwoId)
+                              .FirstOrDefault();
+
+            playerOneRequest.HasPlayed = true;
+            playerTwoRequest.HasPlayed = true;
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task UpdateUserRequestDateAsync(string userId)
         {
             GameRequest request = dbContext
