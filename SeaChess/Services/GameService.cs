@@ -29,7 +29,7 @@ namespace SeaChess.Services
                 GameStateId = gameStateId,
             };
 
-            await dbContext.Games.AddAsync(game);
+            await dbContext.Game.AddAsync(game);
             await dbContext.SaveChangesAsync();
         }
     }

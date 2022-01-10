@@ -13,11 +13,11 @@ namespace SeaChess.Hubs
         private readonly IGameService gameService;
         private Queue<GameRequestDto> requestQueue;
 
-        public GameHub(IGameRequestService gameRequestService, IGameService gameService)
+        public GameHub(IGameRequestService requestService, IGameService gameService)
         {
-            this.requestService = gameRequestService;
+            this.requestService = requestService;
             this.gameService = gameService;
-            requestQueue = gameRequestService.GetGameRequests();
+            requestQueue = requestService.GetGameRequests();
         }
 
         public async Task StartGame(string userId)
@@ -25,6 +25,14 @@ namespace SeaChess.Hubs
             if (requestQueue.Any(rq => rq.ApplicationUserId == userId))
             {
                 await requestService.UpdateUserRequestDateAsync(userId);
+                requestQueue = requestService.GetGameRequests();
+
+                if (requestQueue.Count >= 2)
+                {
+                    await CallChooseSign();
+                    return;
+                }
+
                 await Clients.Caller.SendAsync("lookingForOponent");
                 return;
             }
@@ -34,16 +42,23 @@ namespace SeaChess.Hubs
 
             if (requestQueue.Count >= 2)
             {
-                GameRequestDto playerOne = requestQueue.Dequeue();
-                GameRequestDto playerTwo = requestQueue.Dequeue();
-                await gameService.StartGameAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
-                await requestService.SetHasPlayedAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
-                //Call choose sign method in the view!!!
+                await CallChooseSign();
+
             }
             else
             {
                 await Clients.Caller.SendAsync("lookingForOponent");
             }
+        }
+
+        private async Task CallChooseSign()
+        {
+            GameRequestDto playerOne = requestQueue.Dequeue();
+            GameRequestDto playerTwo = requestQueue.Dequeue();
+            await gameService.StartGameAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
+            await requestService.SetHasPlayedAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
+            await Clients.User(playerOne.ApplicationUserId).SendAsync("chooseSign");
+            await Clients.User(playerTwo.ApplicationUserId).SendAsync("chooseSign");
         }
     }
 }

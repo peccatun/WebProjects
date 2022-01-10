@@ -75,7 +75,8 @@
         gameInfo.style.display = 'block';
     });
 
-    function chooseSign() {
+    connection.on("chooseSign", function () {
         $('#' + SIGN_AREA).css('display', 'block');
-    }
+    });
+
 </script>
