@@ -17,7 +17,7 @@ namespace SeaChess.Services
             this.dbContext = dbContext;
         }
 
-        public async Task StartGameAsync(string playerOneId, string playerTwoId)
+        public async Task<long> StartGameAsync(string playerOneId, string playerTwoId)
         {
             int gameStateId = gameStateService.GetIdByName(Globals.GameState.CHOOSE_SIGN);
 
@@ -31,6 +31,7 @@ namespace SeaChess.Services
 
             await dbContext.Game.AddAsync(game);
             await dbContext.SaveChangesAsync();
+            return game.Id;
         }
     }
 }

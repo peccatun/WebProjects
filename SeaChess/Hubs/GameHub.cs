@@ -4,6 +4,8 @@ using SeaChess.Services.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using SeaChess.InputModels.SaveSign;
+using System;
 
 namespace SeaChess.Hubs
 {
@@ -51,14 +53,21 @@ namespace SeaChess.Hubs
             }
         }
 
+        public async Task SaveSign(SignInfo sign) 
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task CallChooseSign()
         {
             GameRequestDto playerOne = requestQueue.Dequeue();
             GameRequestDto playerTwo = requestQueue.Dequeue();
-            await gameService.StartGameAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
+            long gameId = await gameService
+                .StartGameAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
             await requestService.SetHasPlayedAsync(playerOne.ApplicationUserId, playerTwo.ApplicationUserId);
-            await Clients.User(playerOne.ApplicationUserId).SendAsync("chooseSign");
-            await Clients.User(playerTwo.ApplicationUserId).SendAsync("chooseSign");
+            GameInfoDto gameInfo = new GameInfoDto { GameId = gameId };
+            await Clients.User(playerOne.ApplicationUserId).SendAsync("chooseSign", gameInfo);
+            await Clients.User(playerTwo.ApplicationUserId).SendAsync("chooseSign", gameInfo);
         }
     }
 }

@@ -40,11 +40,11 @@
         <table>
             <tbody class="board-rows">
                 <tr class="board-rows">
-                    <td class="cell-style sign-hov">X</td>
-                    <td class="cell-style sign-hov">/</td>
+                    <td class="cell-style sign-hov" onclick="choseSign('X')">X</td>
+                    <td class="cell-style sign-hov" onclick="choseSign('/')">/</td>
                 </tr>
                 <tr>
-                    <td class="cell-style sign-hov">O</td>
+                    <td class="cell-style sign-hov" onclick="choseSign('O')">O</td>
                 </tr>
             </tbody>
         </table>    
@@ -55,6 +55,7 @@
     const USER_ID = 'current-user-id';
     const SIGN_AREA = 'sign-area';
 
+    let currentGameId;
 
     var connection = new signalR.HubConnectionBuilder()
         .withUrl('/game')
@@ -75,8 +76,18 @@
         gameInfo.style.display = 'block';
     });
 
-    connection.on("chooseSign", function () {
+    connection.on("chooseSign", function (gameInfo) {
+        currentGameId = gameInfo.gameId;
         $('#' + SIGN_AREA).css('display', 'block');
     });
+
+    function choseSign(sign) {
+        let signInfo = {
+            gameId: currentGameId,
+            sign: sign
+        };
+
+        connection.invoke('SaveSign', signInfo);
+    }
 
 </script>
