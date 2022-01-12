@@ -11,8 +11,12 @@ namespace SeaChess.Models
         [Required]
         public string PlayerOneId { get; set; }
 
+        //public virtual ApplicationUser ApplicationUserOne { get; set; }
+
         [Required]
         public string PlayerTwoId { get; set; }
+
+        //public  virtual ApplicationUser ApplicatonUserTwo { get; set; }
 
         public int GameStateId { get; set; }
 

@@ -12,6 +12,8 @@ namespace SeaChess.Models
 
         public string ApplicationUserId { get; set; }
 
+        //public virtual ApplicationUser ApplicationUser { get; set; }
+
         public DateTime RequestDate { get; set; }
     }
 }

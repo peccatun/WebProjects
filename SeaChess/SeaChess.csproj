@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20220112054343_gameSign.cs" />
+    <Compile Remove="Data\Migrations\20220112054343_gameSign.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220112060329_GameSignEntity.cs" />
+    <Compile Remove="Data\Migrations\20220112060329_GameSignEntity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220112060516_GameSignEntity.cs" />
+    <Compile Remove="Data\Migrations\20220112060516_GameSignEntity.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />

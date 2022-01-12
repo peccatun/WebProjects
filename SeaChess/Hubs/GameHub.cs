@@ -53,7 +53,7 @@ namespace SeaChess.Hubs
             }
         }
 
-        public async Task SaveSign(SignInfo sign) 
+        public async Task SavePlayerSign(SignInfo sign) 
         {
             throw new NotImplementedException();
         }

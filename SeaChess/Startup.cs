@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SeaChess.Data;
 using SeaChess.Hubs;
+using SeaChess.Models;
 using SeaChess.Seeder;
 using SeaChess.Services;
 using SeaChess.Services.Contracts;
@@ -34,7 +35,7 @@ namespace SeaChess
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
