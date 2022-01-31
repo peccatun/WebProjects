@@ -12,6 +12,12 @@
     <Compile Remove="Data\Migrations\20220112060329_GameSignEntity.Designer.cs" />
     <Compile Remove="Data\Migrations\20220112060516_GameSignEntity.cs" />
     <Compile Remove="Data\Migrations\20220112060516_GameSignEntity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220131192216_GameSignPlayersRdyColumn.cs" />
+    <Compile Remove="Data\Migrations\20220131192216_GameSignPlayersRdyColumn.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220131192431_GameSignPlayersRdyColumn.cs" />
+    <Compile Remove="Data\Migrations\20220131192431_GameSignPlayersRdyColumn.Designer.cs" />
+    <Compile Remove="Data\Migrations\20220131192602_alterColumnIsPlayerTwoRdy.cs" />
+    <Compile Remove="Data\Migrations\20220131192602_alterColumnIsPlayerTwoRdy.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

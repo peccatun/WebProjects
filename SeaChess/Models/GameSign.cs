@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SeaChess.Models
 {
     public class GameSign
     {
         public long Id { get; set; }
+
+        public bool IsDel { get; set; }
 
         public long GameId { get; set; }
 
@@ -13,13 +16,15 @@ namespace SeaChess.Models
 
         public string PlayerOneId { get; set; }
 
-        //public virtual ApplicationUser ApplicationUserOne { get; set; }
+        [NotMapped]
+        public virtual ApplicationUser ApplicationUserOne { get; set; }
 
         [StringLength(10)]
         public string PlayerTwoSign { get; set; }
 
         public string PlayerTwoId { get; set; }
 
-        //public virtual ApplicationUser ApplicationUserTwo { get; set; }
+        [NotMapped]
+        public virtual ApplicationUser ApplicationUserTwo { get; set; }
     } 
 }

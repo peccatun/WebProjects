@@ -1,8 +1,10 @@
 ﻿using SeaChess.Data;
+using SeaChess.Dto.Game;
 using SeaChess.GlobalConstants;
 using SeaChess.Models;
 using SeaChess.Services.Contracts;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace SeaChess.Services
 {
@@ -15,6 +17,21 @@ namespace SeaChess.Services
         {
             this.gameStateService = gameStateService;
             this.dbContext = dbContext;
+        }
+
+        public GamePlayersInfoDto GetPlayerIds(long gameId)
+        {
+            GamePlayersInfoDto dto = dbContext
+                .Game
+                .Where(g => !g.IsDel && g.Id == gameId)
+                .Select(g => new GamePlayersInfoDto
+                {
+                    PlayerOneId = g.PlayerOneId,
+                    PlayerTwoId = g.PlayerTwoId,
+                })
+                .FirstOrDefault();
+
+            return dto;
         }
 
         public async Task<long> StartGameAsync(string playerOneId, string playerTwoId)

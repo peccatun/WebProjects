@@ -6,7 +6,7 @@
 </head>
 <input type="hidden" value="@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" id="current-user-id" />
 <div style="display: none;" id="start-game-info">
-    <p>Looking for opponent...</p>
+    <p id="info">Looking for opponent...</p>
 </div>
 
 <div style="align-content:center; margin-bottom: 3%;">
@@ -72,9 +72,13 @@
 
 
     connection.on("lookingForOponent", function () {
+        showInfoPanel();
+    });
+
+    function showInfoPanel() {
         let gameInfo = document.getElementById(GAME_INFO);
         gameInfo.style.display = 'block';
-    });
+    }
 
     connection.on("chooseSign", function (gameInfo) {
         currentGameId = gameInfo.gameId;
@@ -82,12 +86,29 @@
     });
 
     function choseSign(sign) {
+        let currentUserId = $('#' + USER_ID).val();
         let signInfo = {
             gameId: currentGameId,
-            sign: sign
+            sign: sign,
+            userId: currentUserId
         };
 
         connection.invoke('SavePlayerSign', signInfo);
     }
+
+    connection.on("waitingForYou", function () {
+        showInfoPanel();
+        $('#info').html('waiting for you');
+    });
+
+    connection.on("waitingForSecondPlayer", function () {
+        showInfoPanel();
+        $('#info').html('waiting for other player');
+    });
+
+    connection.on("startGame", function () {
+        showInfoPanel();
+        $('#info').html('The game has started');
+    });
 
 </script>
