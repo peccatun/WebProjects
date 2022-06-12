@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<string>
-<ul>
+<ol>
     @foreach (var url in Model) 
     {
         <li>url <a asp-controller="Images" asp-action="Original" asp-route-id="@url">Original</a><a asp-controller="Images" asp-action="Fullscreen" asp-route-id="@url">Fullscreen</a><a asp-controller="Images" asp-action="Thumbnail" asp-route-id="@url">Thumbnail</a></li>
     }
-</ul>
+</ol>
 
 @foreach (var image in Model) 
 {

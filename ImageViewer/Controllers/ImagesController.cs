@@ -2,8 +2,9 @@
 using ImageViewer.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -60,17 +61,32 @@ namespace ImageViewer.Controllers
 
         public async Task<IActionResult> Thumbnail(string id) 
         {
-            return File(await imageService.GetThumbnail(id), "image/jpeg");
+            return ReturnImage(await imageService.GetThumbnail(id));
         }
 
         public async Task<IActionResult> Fullscreen(string id)
         {
-            return File(await imageService.GetFullscreen(id), "image/jpeg");
+            return ReturnImage(await imageService.GetFullscreen(id));
+        }
+
+        private IActionResult ReturnImage(Stream image) 
+        {
+            var headers = Response.GetTypedHeaders();
+
+            headers.CacheControl = new CacheControlHeaderValue
+            {
+                Public = true,
+                MaxAge = TimeSpan.FromDays(30),
+            };
+
+            headers.Expires = new DateTimeOffset(DateTime.UtcNow.AddDays(30));
+
+            return File(image, "image/jpeg");
         }
 
         public async Task<IActionResult> Original(string id)
         {
-            return File(await imageService.GetOriginal(id), "image/jpeg");
+            return ReturnImage(await imageService.GetOriginal(id));
         }
     }
 }
