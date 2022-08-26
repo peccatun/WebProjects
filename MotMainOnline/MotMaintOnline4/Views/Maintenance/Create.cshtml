@@ -1,8 +1,83 @@
-﻿
+﻿@model MotMaintOnline4.InputModels.Maintenances.MaintenanceInputModel
+
 <h1>Add maintenance</h1>
 
-<form action="/" method="post">
+<form asp-controller="Maintenance" asp-action="Create" method="post">
     <div class="form-group">
-        <label></label>
+        <label asp-for="@Model.MaintenanceTypeId"></label>
+        <select class="form-control" asp-for="MaintenanceTypeId" id="maintenanceTypes">
+            @foreach (var item in Model.MaintenanceTypes)
+            {
+                <option value="@item.Id">@item.Type</option>
+            }
+        </select>
+
+        <div id="addition-form">
+            <button type="button" onclick="showAddMaintenanceType()" style="margin: 1%;">Show/Hide Add MaintenanceType</button>
+            <div style="display: none; width: 100%; border-style: ridge; border-width: 2px; border-radius: 7px; padding: 1%;" id="add-form">
+                <label>add maintenance type menu</label>
+                <div class="row">
+                    <div class="col-9">
+                        <input type="text" id="type" class="form-control" />
+                    </div>
+                    <div class="col-3">
+                        <button type="button" onclick="add()" class="btn btn-success">Add</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <label asp-for="@Model.Kilometers"></label>
+        <input asp-for="@Model.Kilometers" />
+        <label asp-for="@Model.Description"></label>
+        <input asp-for="@Model.Description" />
+        <label asp-for="@Model.DateDone"></label>
+        <input asp-for="@Model.DateDone" />
+        <input type="hidden" asp-for="@Model.ApplicationUserId" />
+        <input type="hidden" asp-for="@Model.MotorcycleId" />
+
+        <button type="submit">Add</button>
     </div>
 </form>
+
+<script>
+    function showAddMaintenanceType() {
+        let addForm = $("#add-form")[0];
+
+        if (addForm.style.display == "none") {
+            addForm.style.display = 'block';
+        } else {
+            addForm.style.display = 'none';
+        }
+    }
+
+    function add() {
+        let type = $("#type").val();
+
+        $.ajax({
+            url: '/MaintenanceType/Create',
+            method: 'POST',
+            data: { "type": type },
+            success: function (data) {
+                $("#maintenanceTypes").empty();
+
+                let select = $("#maintenanceTypes")[0];
+
+                for (let i = 0; i < data.length; i++) {
+                    let type = data[i].type;
+                    let id = data[i].id;
+
+                    let option = document.createElement('option');
+                    option.value = id;
+                    option.innerHTML = type;
+                    select.appendChild(option);
+                    $("#type").val("")
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+</script>

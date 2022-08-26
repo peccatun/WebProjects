@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MotMaintOnline4.Data;
 using MotMaintOnline4.Services.ApplicationUser;
+using MotMaintOnline4.Services.MaintenanceServ;
+using MotMaintOnline4.Services.MaintenanceTypeServ;
 using MotMaintOnline4.Services.Motorcycles;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,8 @@ namespace MotMaintOnline4
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            services.AddTransient<IMaintenanceTypeService, MaintenanceTypeService>();
+            services.AddTransient<IMaintenanceService, MaintenanceService>();
             services.AddTransient<IMotorcycleService, MotorcycleService>();
             services.AddControllersWithViews();
             services.AddRazorPages();

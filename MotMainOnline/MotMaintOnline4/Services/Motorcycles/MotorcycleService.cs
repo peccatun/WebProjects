@@ -77,6 +77,11 @@ namespace MotMaintOnline4.Services.Motorcycles
             await dbContext.SaveChangesAsync(); 
         }
 
+        public int GetMotorcycleUserId(int motorcycleId)
+        {
+            return dbContext.Motorcycles.Where(m => m.Id == motorcycleId).Select(m => m.ApplicationUserId).FirstOrDefault();
+        }
+
         public IEnumerable<MotorcycleViewModel> UserMotorcycles(int userId)
         {
             IEnumerable<MotorcycleViewModel> motorcycles = dbContext

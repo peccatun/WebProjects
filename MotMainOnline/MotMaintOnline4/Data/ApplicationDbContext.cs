@@ -28,19 +28,23 @@ namespace MotMaintOnline4.Data
 
             builder.Entity<ApplicationUser>()
                 .HasMany(ap => ap.Motorcycles)
-                .WithOne(m => m.ApplicationUser);
+                .WithOne(m => m.ApplicationUser)
+                .HasForeignKey(m => m.ApplicationUserId);
 
             builder.Entity<ApplicationUser>()
                 .HasMany(ap => ap.Maintenances)
-                .WithOne(m => m.ApplicationUser);
+                .WithOne(m => m.ApplicationUser)
+                .HasForeignKey(m => m.ApplicationUserId);
 
             builder.Entity<Motorcycle>()
                 .HasMany(m => m.Maintenances)
-                .WithOne(m => m.Motorcycle);
+                .WithOne(m => m.Motorcycle)
+                .HasForeignKey(m => m.MaintenanceTypeId);
 
             builder.Entity<Maintenance>()
                 .HasOne(m => m.MaintenanceType)
-                .WithOne(mt => mt.Maintenance);
+                .WithMany(mt => mt.Maintenances)
+                .HasForeignKey(m => m.MaintenanceTypeId);
                 
                 
         }

@@ -10,5 +10,5 @@
 
         <img src="~/images/491-4913791_motorcycle-cartoon-harley-davidson-drawing-clip-art-free.png" alt="Motorcycle image" class="mot-info-image" />
     </div>
-    <a style="position:relative;" asp-controller="Maintenance" asp-action="Create">add maintenance</a>
+    <a style="position:relative;" asp-controller="Maintenance" asp-action="Create" asp-route-motorcycleId="@Model.Id">add maintenance</a>
     <!--Create table with maintenances here-->
