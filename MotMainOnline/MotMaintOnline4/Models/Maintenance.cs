@@ -10,6 +10,8 @@ namespace MotMaintOnline4.Models
 
         public DateTime DateDone { get; set; }
 
+        public decimal Price { get; set; }
+
         public int Kilometers { get; set; }
 
         public string Description { get; set; }

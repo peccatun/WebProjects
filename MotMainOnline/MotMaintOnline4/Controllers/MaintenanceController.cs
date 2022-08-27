@@ -39,7 +39,7 @@ namespace MotMaintOnline4.Controllers
         {
             await maintenanceService.Create(inputModel);
 
-            throw new NotImplementedException();
+            return RedirectToAction("Details", "Motorcycles", new { id = inputModel.MotorcycleId });
         }
     }
 }

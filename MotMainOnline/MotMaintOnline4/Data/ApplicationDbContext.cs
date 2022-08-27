@@ -39,7 +39,7 @@ namespace MotMaintOnline4.Data
             builder.Entity<Motorcycle>()
                 .HasMany(m => m.Maintenances)
                 .WithOne(m => m.Motorcycle)
-                .HasForeignKey(m => m.MaintenanceTypeId);
+                .HasForeignKey(m => m.MotorcycleId);
 
             builder.Entity<Maintenance>()
                 .HasOne(m => m.MaintenanceType)

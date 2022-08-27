@@ -1,14 +1,68 @@
 ﻿@model MotMaintOnline4.ViewModels.Motorcycles.DetailsViewModel
 
-    <div style="vertical-align:middle;">
-        <div class="mot-info">
-            <h3><span>@Model.Make</span></h3>
-            <h4><span>@Model.Model</span></h4>
-            <h5><span>@Model.ProductionDate</span></h5>
-            <h6><span>@Model.Kilometers</span></h6>
+<div style="display: grid; grid-template-columns: 50% 50%; height: 10%;">
+    <div class="mot-info">
+        <h3><span>@Model.Make</span></h3>
+        <h4><span>@Model.Model</span></h4>
+        <h5><span>@Model.ProductionDate</span></h5>
+        <h6><span>@Model.Kilometers</span></h6>
+    </div>
+
+    <img src="~/images/491-4913791_motorcycle-cartoon-harley-davidson-drawing-clip-art-free.png" alt="Motorcycle image" class="mot-info-image" />
+</div>
+
+
+    
+
+<a class="btn btn-primary btn-lg" style="margin: 1%;" asp-controller="Maintenance" asp-action="Create" asp-route-motorcycleId="@Model.Id">add maintenance</a>
+
+<form asp-controller="Motorcycles" asp-action="Details" method="get" style="border-style: ridge; border-width: 2px; border-radius: 3px;">
+    <div class="row" style="margin: 1%;">
+        <div class="col-2">
+            <label>Group by</label>
+        </div>
+        <div class="col-4">
+
+            <select id="maintenanceTypeId" name="maintenanceTypeId" class="form-control">
+                @foreach (var maintenance in Model.MaintenanceTypes)
+                {
+                    <option value="@maintenance.Id">@maintenance.Type</option>
+                }
+            </select>
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-primary">Filter</button>
         </div>
 
-        <img src="~/images/491-4913791_motorcycle-cartoon-harley-davidson-drawing-clip-art-free.png" alt="Motorcycle image" class="mot-info-image" />
+        <div class="col-3">
+
+            <a asp-controller="Motorcycles" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning">Reload</a>
+        </div>
     </div>
-    <a style="position:relative;" asp-controller="Maintenance" asp-action="Create" asp-route-motorcycleId="@Model.Id">add maintenance</a>
-    <!--Create table with maintenances here-->
+
+
+    <input type="hidden" name="id" id="id" value="@Model.Id" />
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>MaintenanceType</td>
+            <td>Price</td>
+            <td>Date done</td>
+            <td>Kilometers</td>
+            <td>Description</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var maintenance in Model.Maintenances)
+        {
+            <tr>
+                <td>@maintenance.MaintenanceType</td>
+                <td>@maintenance.Price</td>
+                <td>@maintenance.DateDone</td>
+                <td>@maintenance.KilometersOnChange</td>
+                <td>@maintenance.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>

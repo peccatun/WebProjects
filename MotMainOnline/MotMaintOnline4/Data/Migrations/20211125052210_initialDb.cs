@@ -78,18 +78,6 @@ namespace MotMaintOnline4.Data.Migrations
                         principalTable: "ApplicationUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Maintenance_MaintenanceType_MaintenanceTypeId",
-                        column: x => x.MaintenanceTypeId,
-                        principalTable: "MaintenanceType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Maintenance_Motorcycle_MotorcycleId",
-                        column: x => x.MotorcycleId,
-                        principalTable: "Motorcycle",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
