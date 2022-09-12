@@ -1,6 +1,8 @@
 ﻿.sub-category-sep{
-    border-style: double;
-    border-color: maroon;
+    border-style: outset;
+    border-color: lightgray;
+    border-width: 1rem;
+    border-radius: 10px;
 }
 
 .box-separator {
@@ -14,6 +16,8 @@
     width: 90%;
     height: 90%;
     border-style: groove;
+    border-radius: 7px;
+    background-color: white;
 }
 
 .cetegory-details-image{

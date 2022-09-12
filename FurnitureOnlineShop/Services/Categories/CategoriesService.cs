@@ -153,7 +153,7 @@ namespace FurnitureOnlineShop.Services.Categories
                 })
                 .ToList();
 
-                return categoryDropDownMenuItems;
+            return categoryDropDownMenuItems;
         }
 
         public EditCategoryViewModel GetEditCategoryInfo(int categoryId)
@@ -199,7 +199,7 @@ namespace FurnitureOnlineShop.Services.Categories
                 .ToList();
 
             return subCategoryItems;
-                
+
         }
 
         public CategorySubCategoryDetails CategoryDetails(int categoryId)
@@ -207,17 +207,18 @@ namespace FurnitureOnlineShop.Services.Categories
             CategorySubCategoryDetails model = dbContext
                 .Categories
                 .Where(c => !c.IsDeleted && c.Id == categoryId)
-                .Select(c => new CategorySubCategoryDetails 
+                .Select(c => new CategorySubCategoryDetails
                 {
                     CategoryName = c.CategoryName,
                     SubCategoryItems = c.SubCategories
                                         .Where(sb => !sb.IsDel && sb.CategoryId == c.Id)
-                                        .Select(sb => new SubCategoryItemsViewModel 
-                                         { 
-                                             SubCategoryName = sb.SubCategoryName,
-                                             Products = sb.Products
+                                        .Select(sb => new SubCategoryItemsViewModel
+                                        {
+                                            SubCategoryId = sb.Id,
+                                            SubCategoryName = sb.SubCategoryName,
+                                            Products = sb.Products
                                                           .Where(p => !p.IsDeleted && p.SubCategoryId == sb.Id)
-                                                          .Select(p => new ProductsViewModel 
+                                                          .Select(p => new ProductsViewModel
                                                           {
                                                               Price = p.Price,
                                                               Color = p.Color.ColorName,
@@ -227,7 +228,7 @@ namespace FurnitureOnlineShop.Services.Categories
                                                               ProductName = p.ProductName
                                                           }).ToList()
 
-                                         }).ToList()
+                                        }).ToList()
                 }).FirstOrDefault();
 
             return model;

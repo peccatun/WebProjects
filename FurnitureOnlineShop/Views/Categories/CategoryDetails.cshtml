@@ -1,9 +1,9 @@
 ﻿@model FurnitureOnlineShop.ViewModels.Categories.CategorySubCategoryDetails
-<h1>@Model.CategoryName</h1>
-<br />
+
+
 @foreach (var subCategory in Model.SubCategoryItems)
 {
-    <h3>@subCategory.SubCategoryName</h3>
+    <h3><a href="https://google.com">@Model.CategoryName</a><span style="font-size: 2rem">/</span><a asp-controller="SubCategory" asp-action="SubCategoryItems" asp-route-subCategoryId="@subCategory.SubCategoryId">@subCategory.SubCategoryName</a></h3>
     <br />
     <div class="container sub-category-sep box-separator">
         <div class="row">
@@ -16,6 +16,7 @@
                         <p class="product-text">@product.Description</p>
                         <p class="product-text">@product.Price</p>
                     </div>
+                    <a ></a>
                 </div>
             }
         </div>

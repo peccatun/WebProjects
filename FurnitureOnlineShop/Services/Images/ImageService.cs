@@ -28,6 +28,14 @@ namespace FurnitureOnlineShop.Services.Images
             }
         }
 
+        public byte[] GetImageBytes(int imageId)
+        {
+            return dbContext
+                .Images
+                .Where(i => i.Id == imageId).Select(i => i.ImageBytes)
+                .FirstOrDefault();
+        }
+
         public string GetImagePathByImageId(int categoryImageId)
         {
             byte[] imageBytes = dbContext
