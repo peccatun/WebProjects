@@ -19,7 +19,7 @@ namespace MotMaintOnline4.Services.ApplicationUser
 
         public async Task Create(ApplicationUserInputModel inputModel)
         {
-            Models.ApplicationUser applicationUser = new Models.ApplicationUser
+            var applicationUser = new Models.ApplicationUser
             {
                 IsDel = false,
                 Name = inputModel.Name,
@@ -31,43 +31,46 @@ namespace MotMaintOnline4.Services.ApplicationUser
 
         public async Task Delete(int id)
         {
-            Models.ApplicationUser user = dbContext
+            var user = dbContext
                 .ApplicationUsers
                 .Where(ap => ap.Id == id)
                 .FirstOrDefault();
 
             user.IsDel = true;
+
             await dbContext.SaveChangesAsync(); 
         }
 
         public async Task Edit(ApplicationUserInputModel inputModel)
         {
-            Models.ApplicationUser applicationUser = dbContext
-                                                        .ApplicationUsers
-                                                        .Where(au => au.Id == inputModel.Id)
-                                                        .FirstOrDefault();
+            var applicationUser = dbContext
+                .ApplicationUsers
+                .Where(au => au.Id == inputModel.Id)
+                .FirstOrDefault();
 
             applicationUser.Name = inputModel.Name;
+
             await dbContext.SaveChangesAsync();
         }
 
         public IEnumerable<ApplicationUserViewModel> GetApplicationUsers()
         {
-            IEnumerable<ApplicationUserViewModel> appUsers = dbContext
+            var appUsers = dbContext
                 .ApplicationUsers
                 .Where(ap => !ap.IsDel)
                 .Select(ap => new ApplicationUserViewModel
                 {
                     Id = ap.Id,
                     Name = ap.Name,
-                });
+                })
+                .ToArray();
 
             return appUsers;
         }
 
         public UserDetailsViewModel UserDetails(int id)
         {
-            UserDetailsViewModel viewModel = dbContext
+            var viewModel = dbContext
                 .ApplicationUsers
                 .Where(au => au.Id == id)
                 .Select(au => new UserDetailsViewModel 

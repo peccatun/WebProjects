@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MotMaintOnline4.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MotMaintOnline4.Data
 {
@@ -45,8 +42,6 @@ namespace MotMaintOnline4.Data
                 .HasOne(m => m.MaintenanceType)
                 .WithMany(mt => mt.Maintenances)
                 .HasForeignKey(m => m.MaintenanceTypeId);
-                
-                
         }
     }
 }

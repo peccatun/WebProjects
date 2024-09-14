@@ -9,7 +9,5 @@ namespace MotMaintOnline4.Services.MaintenanceTypeServ
         Task Create(string type);
 
         IEnumerable<MaintenanceTypeDto> GetAll();
-
-
     }
 }

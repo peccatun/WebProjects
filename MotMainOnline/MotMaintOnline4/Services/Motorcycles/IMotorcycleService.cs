@@ -18,6 +18,5 @@ namespace MotMaintOnline4.Services.Motorcycles
         DetailsViewModel Details(int id);
 
         int GetMotorcycleUserId(int motorcycleId);
-
     }
 }

@@ -2,7 +2,6 @@
 using MotMaintOnline4.InputModels.Maintenances;
 using MotMaintOnline4.Models;
 using MotMaintOnline4.ViewModels.Maintenance;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace MotMaintOnline4.Services.MaintenanceServ
 
         public async Task Create(MaintenanceInputModel inputModel)
         {
-            Maintenance maintenance = new Maintenance
+            var maintenance = new Maintenance
             {
                 MaintenanceTypeId = inputModel.MaintenanceTypeId,
                 ApplicationUserId = inputModel.ApplicationUserId,
@@ -38,7 +37,9 @@ namespace MotMaintOnline4.Services.MaintenanceServ
 
         public IEnumerable<MaintenanceViewModel> GetMaintenances(int motorcycleId)
         {
-            var maintenances = dbContext.Maintenances.Where(m => m.MotorcycleId == motorcycleId)
+            var maintenances = dbContext
+                .Maintenances
+                .Where(m => m.MotorcycleId == motorcycleId)
                 .Select(m => new MaintenanceViewModel
                 {
                     DateDone = m.DateDone.ToString("dd.MM.yyyy"),

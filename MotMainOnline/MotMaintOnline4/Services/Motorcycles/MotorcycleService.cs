@@ -19,7 +19,7 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         public async Task Create(MotorcycleInputModel inputModel)
         {
-            Motorcycle motorcycle = new Motorcycle
+            var motorcycle = new Motorcycle
             {
                 ApplicationUserId = inputModel.ApplicationUserId,
                 IsDel = false,
@@ -35,39 +35,40 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         public async Task Delete(int id)
         {
-            Motorcycle motorcycle = dbContext
-                        .Motorcycles
-                        .Where(m => m.Id == id)
-                        .FirstOrDefault();
+            var motorcycle = dbContext
+                .Motorcycles
+                .Where(m => m.Id == id)
+                .FirstOrDefault();
 
             motorcycle.IsDel = true;
+
             await dbContext.SaveChangesAsync();
         }
 
         public DetailsViewModel Details(int id)
         {
-            DetailsViewModel details = dbContext
-                                        .Motorcycles
-                                        .Where(m => m.Id == id)
-                                        .Select(m => new DetailsViewModel 
-                                        {
-                                            Id = m.Id,
-                                            Kilometers = m.StartKilometers,
-                                            Make = m.Make,
-                                            Model = m.Model,
-                                            ProductionDate = m.ProductionDate.ToString("dd-MM-yyyy")
-                                        })
-                                        .FirstOrDefault();
+            var details = dbContext
+                .Motorcycles
+                .Where(m => m.Id == id)
+                .Select(m => new DetailsViewModel 
+                {
+                    Id = m.Id,
+                    Kilometers = m.StartKilometers,
+                    Make = m.Make,
+                    Model = m.Model,
+                    ProductionDate = m.ProductionDate.ToString("dd-MM-yyyy")
+                })
+                .FirstOrDefault();
 
             return details;
         }
 
         public async Task Edit(MotorcycleInputModel inputModel)
         {
-            Motorcycle motorcycle = dbContext
-                                    .Motorcycles
-                                    .Where(m => m.Id == inputModel.Id)
-                                    .FirstOrDefault();
+            var motorcycle = dbContext
+                .Motorcycles
+                .Where(m => m.Id == inputModel.Id)
+                .FirstOrDefault();
 
             motorcycle.Make = inputModel.Make;
             motorcycle.Model = inputModel.Model;
@@ -79,7 +80,11 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         public int GetMotorcycleUserId(int motorcycleId)
         {
-            return dbContext.Motorcycles.Where(m => m.Id == motorcycleId).Select(m => m.ApplicationUserId).FirstOrDefault();
+            return dbContext
+                .Motorcycles
+                .Where(m => m.Id == motorcycleId)
+                .Select(m => m.ApplicationUserId)
+                .FirstOrDefault();
         }
 
         public IEnumerable<MotorcycleViewModel> UserMotorcycles(int userId)
