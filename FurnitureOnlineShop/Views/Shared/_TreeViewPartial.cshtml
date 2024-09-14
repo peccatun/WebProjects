@@ -6,14 +6,14 @@
         <table style="width:30%;display:inline-block;vertical-align:top" class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col"><a href="#" class="">@category.CategoryName</a></th>
+                    <th scope="col"><a href="#" class="category-menu-item">@category.CategoryName</a></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var subCategory in category.SubCategories)
                 {
                     <tr>
-                        <td><a href="#">@subCategory.SubCategoryName</a></td>
+                        <td><a href="#" class="category-menu-item">@subCategory.SubCategoryName</a></td>
                     </tr>
                 }
             </tbody>

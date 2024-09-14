@@ -9,6 +9,8 @@ namespace FurnitureOnlineShop.Services.Images
 
         string GetImagePathByImageId(int imageId);
 
+        byte[] GetImageBytes(int imageId);
+
         Task DeleteImageByIdAsync(int imageId);
     }
 }

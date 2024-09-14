@@ -59,8 +59,11 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 150px;
+    background-image: url("https://localhost:44397/Image/GetImage/11");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 .footer {
   position: relative;

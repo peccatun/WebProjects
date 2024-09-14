@@ -53,8 +53,8 @@ namespace FurnitureOnlineShop.Data
 
             builder.Entity<Product>()
                 .HasOne(p => p.Color)
-                .WithOne(c => c.Product)
-                .HasForeignKey<Product>(p => p.ColorId);
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.ColorId);
         }
     }
 }
