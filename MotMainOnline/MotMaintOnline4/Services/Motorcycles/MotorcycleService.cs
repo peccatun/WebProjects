@@ -1,8 +1,9 @@
 ﻿using MotMaintOnline4.Data;
+using MotMaintOnline4.Dtos.MaintenanceTypes;
 using MotMaintOnline4.InputModels.Motorcycles;
 using MotMaintOnline4.Models;
+using MotMaintOnline4.ViewModels.Maintenance;
 using MotMaintOnline4.ViewModels.Motorcycles;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,6 +48,8 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         public DetailsViewModel Details(int id)
         {
+            const string DateTimeFormat = "dd.MM.yyyy";
+
             var details = dbContext
                 .Motorcycles
                 .Where(m => m.Id == id)
@@ -56,7 +59,30 @@ namespace MotMaintOnline4.Services.Motorcycles
                     Kilometers = m.StartKilometers,
                     Make = m.Make,
                     Model = m.Model,
-                    ProductionDate = m.ProductionDate.ToString("dd-MM-yyyy")
+                    ProductionDate = m.ProductionDate.ToString(DateTimeFormat),
+                    Maintenances = m.Maintenances
+                        .Where(maintenance => !maintenance.IsDel)
+                        .Select(maintenance => new MaintenanceViewModel
+                        {
+                            DateDone = maintenance.DateDone.ToString(DateTimeFormat),
+                            Description = maintenance.Description,
+                            Id = maintenance.Id,
+                            KilometersOnChange = maintenance.Kilometers,
+                            MaintenanceType = maintenance.MaintenanceType.Type,
+                            MaintenanceTypeId = maintenance.MaintenanceTypeId,
+                            MotorcycleId = maintenance.MotorcycleId,
+                            Price = maintenance.Price,
+                        })
+                        .ToArray(),
+                    MaintenanceTypes = dbContext
+                        .MaintenanceTypes
+                        .Where(mt => !mt.IsDel)
+                        .Select(mt => new MaintenanceTypeDto 
+                        {
+                            Id = mt.Id,
+                            Type = mt.Type,
+                        })
+                        .ToArray(),
                 })
                 .FirstOrDefault();
 
@@ -85,24 +111,6 @@ namespace MotMaintOnline4.Services.Motorcycles
                 .Where(m => m.Id == motorcycleId)
                 .Select(m => m.ApplicationUserId)
                 .FirstOrDefault();
-        }
-
-        public IEnumerable<MotorcycleViewModel> UserMotorcycles(int userId)
-        {
-            var motorcycles = dbContext
-                .Motorcycles
-                .Where(m => !m.IsDel && m.ApplicationUserId == userId)
-                .Select(m => new MotorcycleViewModel
-                {
-                    Id = m.Id,
-                    Make = m.Make,
-                    Model = m.Model,
-                    ProductionYear = m.ProductionDate,
-                    Kilometers = m.StartKilometers,
-                })
-                .ToList();
-
-            return motorcycles;
         }
     }
 }

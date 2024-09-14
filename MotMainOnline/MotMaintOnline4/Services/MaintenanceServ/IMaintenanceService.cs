@@ -8,7 +8,5 @@ namespace MotMaintOnline4.Services.MaintenanceServ
     public interface IMaintenanceService
     {
         Task Create(MaintenanceInputModel inputModel);
-
-        IEnumerable<MaintenanceViewModel> GetMaintenances(int motorcycleId);
     }
 }

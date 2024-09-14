@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MotMaintOnline4.Dtos.MaintenanceTypes;
 using MotMaintOnline4.Services.MaintenanceTypeServ;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MotMaintOnline4.Controllers

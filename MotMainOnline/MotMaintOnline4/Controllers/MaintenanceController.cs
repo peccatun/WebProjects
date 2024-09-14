@@ -3,7 +3,6 @@ using MotMaintOnline4.InputModels.Maintenances;
 using MotMaintOnline4.Services.MaintenanceServ;
 using MotMaintOnline4.Services.MaintenanceTypeServ;
 using MotMaintOnline4.Services.Motorcycles;
-using System;
 using System.Threading.Tasks;
 
 namespace MotMaintOnline4.Controllers
@@ -27,7 +26,7 @@ namespace MotMaintOnline4.Controllers
         [HttpGet]
         public IActionResult Create(int motorcycleId)
         {
-            MaintenanceInputModel inputModel = new MaintenanceInputModel
+            var inputModel = new MaintenanceInputModel
             {
                 MaintenanceTypes = maintenanceTypeService.GetAll(),
                 ApplicationUserId = motorcycleService.GetMotorcycleUserId(motorcycleId),
