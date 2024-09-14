@@ -15,7 +15,10 @@ namespace MotMaintOnline4.Controllers
         private readonly IMaintenanceService maintenanceService;
         private readonly IMaintenanceTypeService maintenanceTypeService;
 
-        public MotorcyclesController(IMotorcycleService motorcycleService, IMaintenanceService maintenanceService, IMaintenanceTypeService maintenanceTypeService)
+        public MotorcyclesController(
+            IMotorcycleService motorcycleService, 
+            IMaintenanceService maintenanceService, 
+            IMaintenanceTypeService maintenanceTypeService)
         {
             this.motorcycleService = motorcycleService;
             this.maintenanceService = maintenanceService;
@@ -66,7 +69,10 @@ namespace MotMaintOnline4.Controllers
 
             if (maintenanceTypeId > 0)
             {
-                details.Maintenances = details.Maintenances.Where(m => m.MaintenanceTypeId == maintenanceTypeId).ToList();
+                details.Maintenances = details
+                    .Maintenances
+                    .Where(m => m.MaintenanceTypeId == maintenanceTypeId)
+                    .ToList();
             }
 
 

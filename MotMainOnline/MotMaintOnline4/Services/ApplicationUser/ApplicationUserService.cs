@@ -4,6 +4,7 @@ using MotMaintOnline4.InputModels.ApplicationUser;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MotMaintOnline4.ViewModels.Motorcycles;
 
 namespace MotMaintOnline4.Services.ApplicationUser
 {
@@ -72,7 +73,18 @@ namespace MotMaintOnline4.Services.ApplicationUser
                 .Select(au => new UserDetailsViewModel 
                 {
                     Id = au.Id,
-                    Name = au.Name
+                    Name = au.Name,
+                    Motorcycles = au.Motorcycles
+                        .Where(m => !m.IsDel)
+                        .Select(m => new MotorcycleViewModel 
+                        {
+                            Id = m.Id,
+                            Make = m.Make,
+                            Model = m.Model,
+                            ProductionYear = m.ProductionDate,
+                            Kilometers = m.StartKilometers,
+                        })
+                        .ToArray(),
                 })
                 .FirstOrDefault();
 

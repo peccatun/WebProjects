@@ -84,18 +84,18 @@ namespace MotMaintOnline4.Services.Motorcycles
 
         public IEnumerable<MotorcycleViewModel> UserMotorcycles(int userId)
         {
-            IEnumerable<MotorcycleViewModel> motorcycles = dbContext
-                                                .Motorcycles
-                                                .Where(m => !m.IsDel && m.ApplicationUserId == userId)
-                                                .Select(m => new MotorcycleViewModel
-                                                {
-                                                    Id = m.Id,
-                                                    Make = m.Make,
-                                                    Model = m.Model,
-                                                    ProductionYear = m.ProductionDate,
-                                                    Kilometers = m.StartKilometers,
-                                                })
-                                                .ToList();
+            var motorcycles = dbContext
+                .Motorcycles
+                .Where(m => !m.IsDel && m.ApplicationUserId == userId)
+                .Select(m => new MotorcycleViewModel
+                {
+                    Id = m.Id,
+                    Make = m.Make,
+                    Model = m.Model,
+                    ProductionYear = m.ProductionDate,
+                    Kilometers = m.StartKilometers,
+                })
+                .ToList();
 
             return motorcycles;
         }

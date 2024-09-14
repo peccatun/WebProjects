@@ -14,7 +14,10 @@ namespace MotMaintOnline4.Controllers
         private readonly IMaintenanceService maintenanceService;
         private readonly IMotorcycleService motorcycleService;
 
-        public MaintenanceController(IMaintenanceTypeService maintenanceTypeService, IMotorcycleService motorcycleService, IMaintenanceService maintenanceService)
+        public MaintenanceController(
+            IMaintenanceTypeService maintenanceTypeService, 
+            IMotorcycleService motorcycleService, 
+            IMaintenanceService maintenanceService)
         {
             this.maintenanceTypeService = maintenanceTypeService;
             this.maintenanceService = maintenanceService;

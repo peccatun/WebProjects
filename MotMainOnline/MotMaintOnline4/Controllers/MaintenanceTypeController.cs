@@ -24,7 +24,9 @@ namespace MotMaintOnline4.Controllers
             }
 
             await maintenanceTypeService.Create(type);
-            IEnumerable<MaintenanceTypeDto> maintenanceTypes = maintenanceTypeService.GetAll();
+
+            var maintenanceTypes = maintenanceTypeService.GetAll();
+
             return Ok(maintenanceTypes);
         }
     }

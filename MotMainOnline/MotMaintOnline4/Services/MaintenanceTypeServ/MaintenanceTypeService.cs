@@ -18,7 +18,7 @@ namespace MotMaintOnline4.Services.MaintenanceTypeServ
 
         public async Task Create(string type)
         {
-            MaintenanceType maintenanceType = new MaintenanceType
+            var maintenanceType = new MaintenanceType
             {
                 IsDel = false,
                 Type = type,
